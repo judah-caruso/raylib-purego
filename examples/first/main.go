@@ -16,8 +16,8 @@ func main() {
 		pos.Y += 100 * delta
 
 		rl.BeginDrawing()
-		rl.ClearBackground(rl.Color{})
-		rl.DrawRectangleV(pos, rl.Vector2{50, 50}, rl.Color{255, 100, 100, 255})
+		rl.ClearBackground(rl.Black)
+		rl.DrawRectangleV(pos, rl.Vector2{X: 50, Y: 50}, rl.Red)
 		rl.EndDrawing()
 	}
 }

@@ -12,6 +12,37 @@ const (
 	VERSION       = "5.5.0"
 )
 
+// Some Basic Colors
+// NOTE: Custom raylib color palette for amazing visuals on WHITE background
+var (
+	LightGray  = Color{200, 200, 200, 255} // Light Gray
+	Gray       = Color{130, 130, 130, 255} // Gray
+	DarkGray   = Color{80, 80, 80, 255}    // Dark Gray
+	Yellow     = Color{253, 249, 0, 255}   // Yellow
+	Gold       = Color{255, 203, 0, 255}   // Gold
+	Orange     = Color{255, 161, 0, 255}   // Orange
+	Pink       = Color{255, 109, 194, 255} // Pink
+	Red        = Color{230, 41, 55, 255}   // Red
+	Maroon     = Color{190, 33, 55, 255}   // Maroon
+	Green      = Color{0, 228, 48, 255}    // Green
+	Lime       = Color{0, 158, 47, 255}    // Lime
+	DarkGreen  = Color{0, 117, 44, 255}    // Dark Green
+	SkyBlue    = Color{102, 191, 255, 255} // Sky Blue
+	Blue       = Color{0, 121, 241, 255}   // Blue
+	DarkBlue   = Color{0, 82, 172, 255}    // Dark Blue
+	Purple     = Color{200, 122, 255, 255} // Purple
+	Violet     = Color{135, 60, 190, 255}  // Violet
+	DarkPurple = Color{112, 31, 126, 255}  // Dark Purple
+	Beige      = Color{211, 176, 131, 255} // Beige
+	Brown      = Color{127, 106, 79, 255}  // Brown
+	DarkBrown  = Color{76, 63, 47, 255}    // Dark Brown
+	White      = Color{255, 255, 255, 255} // White
+	Black      = Color{0, 0, 0, 255}       // Black
+	Blank      = Color{0, 0, 0, 0}         // Blank (Transparent)
+	Magenta    = Color{255, 0, 255, 255}   // Magenta
+	RayWhite   = Color{245, 245, 245, 255} // My own White (raylib logo)
+)
+
 // System/Window config flags
 // NOTE: Every bit registers one state (use it with bit masks)
 // By default all flags are set to 0
