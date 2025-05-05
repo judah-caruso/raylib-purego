@@ -47,4 +47,36 @@ var (
 	drawPolyLines               = prep(&void, "DrawPolyLines", &tVector2, &cint, &float, &float, &tColor)                 // center, sides, radius, rotation, color :: Draw a polygon outline of n sides
 	drawPolyLinesEx             = prep(&void, "DrawPolyLinesEx", &tVector2, &cint, &float, &float, &float, &tColor)       // center, sides, radius, rotation, lineThick, color :: Draw a polygon outline of n sides with extended parameters
 
+	// Splines drawing functions
+	drawSplineLinear                 = prep(&void, "DrawSplineLinear", &tVector2Ptr, &cint, &float, &tColor)                                    // points, pointCount, thick, color :: Draw spline: Linear, minimum 2 points
+	drawSplineBasis                  = prep(&void, "DrawSplineBasis", &tVector2Ptr, &cint, &float, &tColor)                                     // points, pointCount, thick, color :: Draw spline: B-Spline, minimum 4 points
+	drawSplineCatmullRom             = prep(&void, "DrawSplineCatmullRom", &tVector2Ptr, &cint, &float, &tColor)                                // points, pointCount, thick, color :: Draw spline: Catmull-Rom, minimum 4 points
+	drawSplineBezierQuadratic        = prep(&void, "DrawSplineBezierQuadratic", &tVector2Ptr, &cint, &float, &tColor)                           // points, pointCount, thick, color :: Draw spline: Quadratic Bezier, minimum 3 points (1 control point): [p1, c2, p3, c4...]
+	drawSplineBezierCubic            = prep(&void, "DrawSplineBezierCubic", &tVector2Ptr, &cint, &float, &tColor)                               // points, pointCount, thick, color :: Draw spline: Cubic Bezier, minimum 4 points (2 control points): [p1, c2, c3, p4, c5, c6...]
+	drawSplineSegmentLinear          = prep(&void, "DrawSplineSegmentLinear", &tVector2, &tVector2, &float, &tColor)                            // p1, p2, thick, color :: Draw spline segment: Linear, 2 points
+	drawSplineSegmentBasis           = prep(&void, "DrawSplineSegmentBasis", &tVector2, &tVector2, &tVector2, &tVector2, &float, &tColor)       // p1, p2, p3, p4, thick, color :: Draw spline segment: B-Spline, 4 points
+	drawSplineSegmentCatmullRom      = prep(&void, "DrawSplineSegmentCatmullRom", &tVector2, &tVector2, &tVector2, &tVector2, &float, &tColor)  // p1, p2, p3, p4, thick, color :: Draw spline segment: Catmull-Rom, 4 points
+	drawSplineSegmentBezierQuadratic = prep(&void, "DrawSplineSegmentBezierQuadratic", &tVector2, &tVector2, &tVector2, &float, &tColor)        // p1, c2, p3, thick, color :: Draw spline segment: Quadratic Bezier, 2 points, 1 control point
+	drawSplineSegmentBezierCubic     = prep(&void, "DrawSplineSegmentBezierCubic", &tVector2, &tVector2, &tVector2, &tVector2, &float, &tColor) // p1, c2, c3, p4, thick, color :: Draw spline segment: Cubic Bezier, 2 points, 2 control points
+
+	// Spline segment point evaluation functions, for a given t [0.0f .. 1.0f]
+	getSplinePointLinear      = prep(&tVector2, "GetSplinePointLinear", &tVector2, &tVector2, &float)                            // startPos, endPos, t :: Get (evaluate) spline point: Linear
+	getSplinePointBasis       = prep(&tVector2, "GetSplinePointBasis", &tVector2, &tVector2, &tVector2, &tVector2, &float)       // p1, p2, p3, p4, t :: Get (evaluate) spline point: B-Spline
+	getSplinePointCatmullRom  = prep(&tVector2, "GetSplinePointCatmullRom", &tVector2, &tVector2, &tVector2, &tVector2, &float)  // p1, p2, p3, p4, t :: Get (evaluate) spline point: Catmull-Rom
+	getSplinePointBezierQuad  = prep(&tVector2, "GetSplinePointBezierQuad", &tVector2, &tVector2, &tVector2, &float)             // p1, c2, p3, t :: Get (evaluate) spline point: Quadratic Bezier
+	getSplinePointBezierCubic = prep(&tVector2, "GetSplinePointBezierCubic", &tVector2, &tVector2, &tVector2, &tVector2, &float) // p1, c2, c3, p4, t :: Get (evaluate) spline point: Cubic Bezier
+
+	// Basic shapes collision detection functions
+	checkCollisionRecs          = prep(&cbool, "CheckCollisionRecs", &tRectangle, &tRectangle)                                  // rec1, rec2 :: Check collision between two rectangles
+	checkCollisionCircles       = prep(&cbool, "CheckCollisionCircles", &tVector2, &float, &tVector2, &float)                   // center1, radius1, center2, radius2 :: Check collision between two circles
+	checkCollisionCircleRec     = prep(&cbool, "CheckCollisionCircleRec", &tVector2, &float, &tRectangle)                       // center, radius, rec :: Check collision between circle and rectangle
+	checkCollisionCircleLine    = prep(&cbool, "CheckCollisionCircleLine", &tVector2, &float, &tVector2, &tVector2)             // center, radius, p1, p2 :: Check if circle collides with a line created betweeen two points [p1] and [p2]
+	checkCollisionPointRec      = prep(&cbool, "CheckCollisionPointRec", &tVector2, &tRectangle)                                // point, rec :: Check if point is inside rectangle
+	checkCollisionPointCircle   = prep(&cbool, "CheckCollisionPointCircle", &tVector2, &tVector2, &float)                       // point, center, radius :: Check if point is inside circle
+	checkCollisionPointTriangle = prep(&cbool, "CheckCollisionPointTriangle", &tVector2, &tVector2, &tVector2, &tVector2)       // point, p1, p2, p3 :: Check if point is inside a triangle
+	checkCollisionPointLine     = prep(&cbool, "CheckCollisionPointLine", &tVector2, &tVector2, &tVector2, &cint)               // point, p1, p2, threshold :: Check if point belongs to line created between two points [p1] and [p2] with defined margin in pixels [threshold]
+	checkCollisionPointPoly     = prep(&cbool, "CheckCollisionPointPoly", &tVector2, &tVector2Ptr, &cint)                       // point, points, pointCount :: Check if point is within a polygon described by array of vertices
+	checkCollisionLines         = prep(&cbool, "CheckCollisionLines", &tVector2, &tVector2, &tVector2, &tVector2, &tVector2Ptr) // startPos1, endPos1, startPos2, endPos2, collisionPoint :: Check the collision between two lines defined by two points each, returns collision point by reference
+	getCollisionRec             = prep(&tRectangle, "GetCollisionRec", &tRectangle, &tRectangle)                                // rec1, rec2 :: Get collision rectangle for two rectangles collision
+
 )

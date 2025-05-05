@@ -368,3 +368,254 @@ func DrawPolyLinesEx(center Vector2, sides int, radius float32, rotation float32
 	a5 := Color(color)
 	drawPolyLinesEx.void(unsafe.Pointer(&a0), unsafe.Pointer(&a1), unsafe.Pointer(&a2), unsafe.Pointer(&a3), unsafe.Pointer(&a4), unsafe.Pointer(&a5))
 }
+
+// Draw spline: Linear, minimum 2 points
+func DrawSplineLinear(points *Vector2, pointCount int, thick float32, color Color) {
+	a0 := (*Vector2)(points)
+	a1 := int64(pointCount)
+	a2 := float32(thick)
+	a3 := Color(color)
+	drawSplineLinear.void(unsafe.Pointer(&a0), unsafe.Pointer(&a1), unsafe.Pointer(&a2), unsafe.Pointer(&a3))
+}
+
+// Draw spline: B-Spline, minimum 4 points
+func DrawSplineBasis(points *Vector2, pointCount int, thick float32, color Color) {
+	a0 := (*Vector2)(points)
+	a1 := int64(pointCount)
+	a2 := float32(thick)
+	a3 := Color(color)
+	drawSplineBasis.void(unsafe.Pointer(&a0), unsafe.Pointer(&a1), unsafe.Pointer(&a2), unsafe.Pointer(&a3))
+}
+
+// Draw spline: Catmull-Rom, minimum 4 points
+func DrawSplineCatmullRom(points *Vector2, pointCount int, thick float32, color Color) {
+	a0 := (*Vector2)(points)
+	a1 := int64(pointCount)
+	a2 := float32(thick)
+	a3 := Color(color)
+	drawSplineCatmullRom.void(unsafe.Pointer(&a0), unsafe.Pointer(&a1), unsafe.Pointer(&a2), unsafe.Pointer(&a3))
+}
+
+// Draw spline: Quadratic Bezier, minimum 3 points (1 control point): [p1, c2, p3, c4...]
+func DrawSplineBezierQuadratic(points *Vector2, pointCount int, thick float32, color Color) {
+	a0 := (*Vector2)(points)
+	a1 := int64(pointCount)
+	a2 := float32(thick)
+	a3 := Color(color)
+	drawSplineBezierQuadratic.void(unsafe.Pointer(&a0), unsafe.Pointer(&a1), unsafe.Pointer(&a2), unsafe.Pointer(&a3))
+}
+
+// Draw spline: Cubic Bezier, minimum 4 points (2 control points): [p1, c2, c3, p4, c5, c6...]
+func DrawSplineBezierCubic(points *Vector2, pointCount int, thick float32, color Color) {
+	a0 := (*Vector2)(points)
+	a1 := int64(pointCount)
+	a2 := float32(thick)
+	a3 := Color(color)
+	drawSplineBezierCubic.void(unsafe.Pointer(&a0), unsafe.Pointer(&a1), unsafe.Pointer(&a2), unsafe.Pointer(&a3))
+}
+
+// Draw spline segment: Linear, 2 points
+func DrawSplineSegmentLinear(p1 Vector2, p2 Vector2, thick float32, color Color) {
+	a0 := Vector2(p1)
+	a1 := Vector2(p2)
+	a2 := float32(thick)
+	a3 := Color(color)
+	drawSplineSegmentLinear.void(unsafe.Pointer(&a0), unsafe.Pointer(&a1), unsafe.Pointer(&a2), unsafe.Pointer(&a3))
+}
+
+// Draw spline segment: B-Spline, 4 points
+func DrawSplineSegmentBasis(p1 Vector2, p2 Vector2, p3 Vector2, p4 Vector2, thick float32, color Color) {
+	a0 := Vector2(p1)
+	a1 := Vector2(p2)
+	a2 := Vector2(p3)
+	a3 := Vector2(p4)
+	a4 := float32(thick)
+	a5 := Color(color)
+	drawSplineSegmentBasis.void(unsafe.Pointer(&a0), unsafe.Pointer(&a1), unsafe.Pointer(&a2), unsafe.Pointer(&a3), unsafe.Pointer(&a4), unsafe.Pointer(&a5))
+}
+
+// Draw spline segment: Catmull-Rom, 4 points
+func DrawSplineSegmentCatmullRom(p1 Vector2, p2 Vector2, p3 Vector2, p4 Vector2, thick float32, color Color) {
+	a0 := Vector2(p1)
+	a1 := Vector2(p2)
+	a2 := Vector2(p3)
+	a3 := Vector2(p4)
+	a4 := float32(thick)
+	a5 := Color(color)
+	drawSplineSegmentCatmullRom.void(unsafe.Pointer(&a0), unsafe.Pointer(&a1), unsafe.Pointer(&a2), unsafe.Pointer(&a3), unsafe.Pointer(&a4), unsafe.Pointer(&a5))
+}
+
+// Draw spline segment: Quadratic Bezier, 2 points, 1 control point
+func DrawSplineSegmentBezierQuadratic(p1 Vector2, c2 Vector2, p3 Vector2, thick float32, color Color) {
+	a0 := Vector2(p1)
+	a1 := Vector2(c2)
+	a2 := Vector2(p3)
+	a3 := float32(thick)
+	a4 := Color(color)
+	drawSplineSegmentBezierQuadratic.void(unsafe.Pointer(&a0), unsafe.Pointer(&a1), unsafe.Pointer(&a2), unsafe.Pointer(&a3), unsafe.Pointer(&a4))
+}
+
+// Draw spline segment: Cubic Bezier, 2 points, 2 control points
+func DrawSplineSegmentBezierCubic(p1 Vector2, c2 Vector2, c3 Vector2, p4 Vector2, thick float32, color Color) {
+	a0 := Vector2(p1)
+	a1 := Vector2(c2)
+	a2 := Vector2(c3)
+	a3 := Vector2(p4)
+	a4 := float32(thick)
+	a5 := Color(color)
+	drawSplineSegmentBezierCubic.void(unsafe.Pointer(&a0), unsafe.Pointer(&a1), unsafe.Pointer(&a2), unsafe.Pointer(&a3), unsafe.Pointer(&a4), unsafe.Pointer(&a5))
+}
+
+// Get (evaluate) spline point: Linear
+func GetSplinePointLinear(startPos Vector2, endPos Vector2, t float32) (res Vector2) {
+	a0 := Vector2(startPos)
+	a1 := Vector2(endPos)
+	a2 := float32(t)
+	getSplinePointLinear.call(unsafe.Pointer(&res), unsafe.Pointer(&a0), unsafe.Pointer(&a1), unsafe.Pointer(&a2))
+	return res
+}
+
+// Get (evaluate) spline point: B-Spline
+func GetSplinePointBasis(p1 Vector2, p2 Vector2, p3 Vector2, p4 Vector2, t float32) (res Vector2) {
+	a0 := Vector2(p1)
+	a1 := Vector2(p2)
+	a2 := Vector2(p3)
+	a3 := Vector2(p4)
+	a4 := float32(t)
+	getSplinePointBasis.call(unsafe.Pointer(&res), unsafe.Pointer(&a0), unsafe.Pointer(&a1), unsafe.Pointer(&a2), unsafe.Pointer(&a3), unsafe.Pointer(&a4))
+	return res
+}
+
+// Get (evaluate) spline point: Catmull-Rom
+func GetSplinePointCatmullRom(p1 Vector2, p2 Vector2, p3 Vector2, p4 Vector2, t float32) (res Vector2) {
+	a0 := Vector2(p1)
+	a1 := Vector2(p2)
+	a2 := Vector2(p3)
+	a3 := Vector2(p4)
+	a4 := float32(t)
+	getSplinePointCatmullRom.call(unsafe.Pointer(&res), unsafe.Pointer(&a0), unsafe.Pointer(&a1), unsafe.Pointer(&a2), unsafe.Pointer(&a3), unsafe.Pointer(&a4))
+	return res
+}
+
+// Get (evaluate) spline point: Quadratic Bezier
+func GetSplinePointBezierQuad(p1 Vector2, c2 Vector2, p3 Vector2, t float32) (res Vector2) {
+	a0 := Vector2(p1)
+	a1 := Vector2(c2)
+	a2 := Vector2(p3)
+	a3 := float32(t)
+	getSplinePointBezierQuad.call(unsafe.Pointer(&res), unsafe.Pointer(&a0), unsafe.Pointer(&a1), unsafe.Pointer(&a2), unsafe.Pointer(&a3))
+	return res
+}
+
+// Get (evaluate) spline point: Cubic Bezier
+func GetSplinePointBezierCubic(p1 Vector2, c2 Vector2, c3 Vector2, p4 Vector2, t float32) (res Vector2) {
+	a0 := Vector2(p1)
+	a1 := Vector2(c2)
+	a2 := Vector2(c3)
+	a3 := Vector2(p4)
+	a4 := float32(t)
+	getSplinePointBezierCubic.call(unsafe.Pointer(&res), unsafe.Pointer(&a0), unsafe.Pointer(&a1), unsafe.Pointer(&a2), unsafe.Pointer(&a3), unsafe.Pointer(&a4))
+	return res
+}
+
+// Check collision between two rectangles
+func CheckCollisionRecs(rec1 Rectangle, rec2 Rectangle) (res bool) {
+	a0 := Rectangle(rec1)
+	a1 := Rectangle(rec2)
+	res = checkCollisionRecs.bool(unsafe.Pointer(&a0), unsafe.Pointer(&a1))
+	return res
+}
+
+// Check collision between two circles
+func CheckCollisionCircles(center1 Vector2, radius1 float32, center2 Vector2, radius2 float32) (res bool) {
+	a0 := Vector2(center1)
+	a1 := float32(radius1)
+	a2 := Vector2(center2)
+	a3 := float32(radius2)
+	res = checkCollisionCircles.bool(unsafe.Pointer(&a0), unsafe.Pointer(&a1), unsafe.Pointer(&a2), unsafe.Pointer(&a3))
+	return res
+}
+
+// Check collision between circle and rectangle
+func CheckCollisionCircleRec(center Vector2, radius float32, rec Rectangle) (res bool) {
+	a0 := Vector2(center)
+	a1 := float32(radius)
+	a2 := Rectangle(rec)
+	res = checkCollisionCircleRec.bool(unsafe.Pointer(&a0), unsafe.Pointer(&a1), unsafe.Pointer(&a2))
+	return res
+}
+
+// Check if circle collides with a line created betweeen two points [p1] and [p2]
+func CheckCollisionCircleLine(center Vector2, radius float32, p1 Vector2, p2 Vector2) (res bool) {
+	a0 := Vector2(center)
+	a1 := float32(radius)
+	a2 := Vector2(p1)
+	a3 := Vector2(p2)
+	res = checkCollisionCircleLine.bool(unsafe.Pointer(&a0), unsafe.Pointer(&a1), unsafe.Pointer(&a2), unsafe.Pointer(&a3))
+	return res
+}
+
+// Check if point is inside rectangle
+func CheckCollisionPointRec(point Vector2, rec Rectangle) (res bool) {
+	a0 := Vector2(point)
+	a1 := Rectangle(rec)
+	res = checkCollisionPointRec.bool(unsafe.Pointer(&a0), unsafe.Pointer(&a1))
+	return res
+}
+
+// Check if point is inside circle
+func CheckCollisionPointCircle(point Vector2, center Vector2, radius float32) (res bool) {
+	a0 := Vector2(point)
+	a1 := Vector2(center)
+	a2 := float32(radius)
+	res = checkCollisionPointCircle.bool(unsafe.Pointer(&a0), unsafe.Pointer(&a1), unsafe.Pointer(&a2))
+	return res
+}
+
+// Check if point is inside a triangle
+func CheckCollisionPointTriangle(point Vector2, p1 Vector2, p2 Vector2, p3 Vector2) (res bool) {
+	a0 := Vector2(point)
+	a1 := Vector2(p1)
+	a2 := Vector2(p2)
+	a3 := Vector2(p3)
+	res = checkCollisionPointTriangle.bool(unsafe.Pointer(&a0), unsafe.Pointer(&a1), unsafe.Pointer(&a2), unsafe.Pointer(&a3))
+	return res
+}
+
+// Check if point belongs to line created between two points [p1] and [p2] with defined margin in pixels [threshold]
+func CheckCollisionPointLine(point Vector2, p1 Vector2, p2 Vector2, threshold int) (res bool) {
+	a0 := Vector2(point)
+	a1 := Vector2(p1)
+	a2 := Vector2(p2)
+	a3 := int64(threshold)
+	res = checkCollisionPointLine.bool(unsafe.Pointer(&a0), unsafe.Pointer(&a1), unsafe.Pointer(&a2), unsafe.Pointer(&a3))
+	return res
+}
+
+// Check if point is within a polygon described by array of vertices
+func CheckCollisionPointPoly(point Vector2, points *Vector2, pointCount int) (res bool) {
+	a0 := Vector2(point)
+	a1 := (*Vector2)(points)
+	a2 := int64(pointCount)
+	res = checkCollisionPointPoly.bool(unsafe.Pointer(&a0), unsafe.Pointer(&a1), unsafe.Pointer(&a2))
+	return res
+}
+
+// Check the collision between two lines defined by two points each, returns collision point by reference
+func CheckCollisionLines(startPos1 Vector2, endPos1 Vector2, startPos2 Vector2, endPos2 Vector2, collisionPoint *Vector2) (res bool) {
+	a0 := Vector2(startPos1)
+	a1 := Vector2(endPos1)
+	a2 := Vector2(startPos2)
+	a3 := Vector2(endPos2)
+	a4 := (*Vector2)(collisionPoint)
+	res = checkCollisionLines.bool(unsafe.Pointer(&a0), unsafe.Pointer(&a1), unsafe.Pointer(&a2), unsafe.Pointer(&a3), unsafe.Pointer(&a4))
+	return res
+}
+
+// Get collision rectangle for two rectangles collision
+func GetCollisionRec(rec1 Rectangle, rec2 Rectangle) (res Rectangle) {
+	a0 := Rectangle(rec1)
+	a1 := Rectangle(rec2)
+	getCollisionRec.call(unsafe.Pointer(&res), unsafe.Pointer(&a0), unsafe.Pointer(&a1))
+	return res
+}
