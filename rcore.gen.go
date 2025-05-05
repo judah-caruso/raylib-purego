@@ -66,21 +66,21 @@ func IsWindowResized() (res bool) {
 }
 
 // Check if one specific window flag is enabled
-func IsWindowState(flag uint) (res bool) {
-	a0 := uint64(flag)
+func IsWindowState(flag ConfigFlags) (res bool) {
+	a0 := ConfigFlags(flag)
 	res = isWindowState.bool(unsafe.Pointer(&a0))
 	return res
 }
 
 // Set window configuration state using flags
-func SetWindowState(flags uint) {
-	a0 := uint64(flags)
+func SetWindowState(flags ConfigFlags) {
+	a0 := ConfigFlags(flags)
 	setWindowState.void(unsafe.Pointer(&a0))
 }
 
 // Clear window configuration state flags
-func ClearWindowState(flags uint) {
-	a0 := uint64(flags)
+func ClearWindowState(flags ConfigFlags) {
+	a0 := ConfigFlags(flags)
 	clearWindowState.void(unsafe.Pointer(&a0))
 }
 
@@ -613,4 +613,67 @@ func GetTime() (res float64) {
 func GetFPS() (res int32) {
 	res = getFPS.int32()
 	return res
+}
+
+// Swap back buffer with front buffer (screen drawing)
+func SwapScreenBuffer() {
+	swapScreenBuffer.void()
+}
+
+// Register all input events
+func PollInputEvents() {
+	pollInputEvents.void()
+}
+
+// Wait for some time (halt program execution)
+func WaitTime(seconds float64) {
+	a0 := float64(seconds)
+	waitTime.void(unsafe.Pointer(&a0))
+}
+
+// Set the seed for the random number generator
+func SetRandomSeed(seed uint) {
+	a0 := uint64(seed)
+	setRandomSeed.void(unsafe.Pointer(&a0))
+}
+
+// Get a random value between min and max (both included)
+func GetRandomValue(min int, max int) (res int32) {
+	a0 := int64(min)
+	a1 := int64(max)
+	res = getRandomValue.int32(unsafe.Pointer(&a0), unsafe.Pointer(&a1))
+	return res
+}
+
+// Load random values sequence, no values repeated
+func LoadRandomSequence(count uint, min int, max int) (res int32) {
+	a0 := uint64(count)
+	a1 := int64(min)
+	a2 := int64(max)
+	res = loadRandomSequence.int32(unsafe.Pointer(&a0), unsafe.Pointer(&a1), unsafe.Pointer(&a2))
+	return res
+}
+
+// Unload random values sequence
+func UnloadRandomSequence(sequence unsafe.Pointer) {
+	a0 := unsafe.Pointer(sequence)
+	unloadRandomSequence.void(unsafe.Pointer(&a0))
+}
+
+// Takes a screenshot of current screen (filename extension defines format)
+func TakeScreenshot(fileName string) {
+	a0 := tocstring(fileName)
+	takeScreenshot.void(unsafe.Pointer(&a0))
+}
+
+// Setup init configuration flags (view FLAGS)
+func SetConfigFlags(flags ConfigFlags) {
+	a0 := ConfigFlags(flags)
+	setConfigFlags.void(unsafe.Pointer(&a0))
+}
+
+// Open URL with default system browser (if available)
+func OpenURL(url string) {
+	a0 := tocstring(url)
+	openURL.void(unsafe.Pointer(&a0))
 }

@@ -12,9 +12,9 @@ var (
 	isWindowMaximized        = prep(&cbool, "IsWindowMaximized")                // Check if window is currently maximized
 	isWindowFocused          = prep(&cbool, "IsWindowFocused")                  // Check if window is currently focused
 	isWindowResized          = prep(&cbool, "IsWindowResized")                  // Check if window has been resized last frame
-	isWindowState            = prep(&cbool, "IsWindowState", &ucint)            // flag :: Check if one specific window flag is enabled
-	setWindowState           = prep(&void, "SetWindowState", &ucint)            // flags :: Set window configuration state using flags
-	clearWindowState         = prep(&void, "ClearWindowState", &ucint)          // flags :: Clear window configuration state flags
+	isWindowState            = prep(&cbool, "IsWindowState", &tConfigFlags)     // flag :: Check if one specific window flag is enabled
+	setWindowState           = prep(&void, "SetWindowState", &tConfigFlags)     // flags :: Set window configuration state using flags
+	clearWindowState         = prep(&void, "ClearWindowState", &tConfigFlags)   // flags :: Clear window configuration state flags
 	toggleFullscreen         = prep(&void, "ToggleFullscreen")                  // Toggle window state: fullscreen/windowed, resizes monitor to match window resolution
 	toggleBorderlessWindowed = prep(&void, "ToggleBorderlessWindowed")          // Toggle window state: borderless windowed, resizes window to match monitor resolution
 	maximizeWindow           = prep(&void, "MaximizeWindow")                    // Set window state: maximized, if resizable
@@ -112,4 +112,23 @@ var (
 	getFrameTime = prep(&float, "GetFrameTime")       // Get time in seconds for last frame drawn (delta time)
 	getTime      = prep(&double, "GetTime")           // Get elapsed time in seconds since InitWindow()
 	getFPS       = prep(&cint, "GetFPS")              // Get current FPS
+
+	// Custom frame control functions
+	// NOTE: Those functions are intended for advanced users that want full control over the frame processing
+	// By default EndDrawing() does this job: draws everything + SwapScreenBuffer() + manage frame timing + PollInputEvents()
+	// To avoid that behaviour and control frame processes manually, enable in config.h: SUPPORT_CUSTOM_FRAME_CONTROL
+	swapScreenBuffer = prep(&void, "SwapScreenBuffer")  // Swap back buffer with front buffer (screen drawing)
+	pollInputEvents  = prep(&void, "PollInputEvents")   // Register all input events
+	waitTime         = prep(&void, "WaitTime", &double) // seconds :: Wait for some time (halt program execution)
+
+	// Random values generation functions
+	setRandomSeed        = prep(&void, "SetRandomSeed", &ucint)                    // seed :: Set the seed for the random number generator
+	getRandomValue       = prep(&cint, "GetRandomValue", &cint, &cint)             // min, max :: Get a random value between min and max (both included)
+	loadRandomSequence   = prep(&cint, "LoadRandomSequence", &ucint, &cint, &cint) // count, min, max :: Load random values sequence, no values repeated
+	unloadRandomSequence = prep(&void, "UnloadRandomSequence", &ptr)               // sequence :: Unload random values sequence
+
+	// Misc. functions
+	takeScreenshot = prep(&void, "TakeScreenshot", &cstr)         // fileName :: Takes a screenshot of current screen (filename extension defines format)
+	setConfigFlags = prep(&void, "SetConfigFlags", &tConfigFlags) // flags :: Setup init configuration flags (view FLAGS)
+	openURL        = prep(&void, "OpenURL", &cstr)                // url :: Open URL with default system browser (if available)
 )

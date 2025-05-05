@@ -5,6 +5,8 @@ package raylib
 import "github.com/judah-caruso/ffi-embeded"
 
 var (
+	tConfigFlags         = ucint
+	tConfigFlagsPtr      = ptr
 	tPixelFormat         = cint
 	tPixelFormatPtr      = ptr
 	tCameraProjection    = cint
