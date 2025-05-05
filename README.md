@@ -4,9 +4,27 @@ Partially handwritten [purego](https://github.com/ebitengine/purego) bindings fo
 
 ## Getting Started
 
-Download the [raylib 5.5.0 release](https://github.com/raysan5/raylib/releases/tag/5.5) for your target platform, then place the raylib `.dll`, `.dylib`, or `.so` in the root of your project.
+Run `go get github.com/judah-caruso/raylib-purego` and have fun.
 
-Note: This is only required for building your project. `raylib-purego` embeds the raylib library, so it does not need to be shipped alongside your executable.
+```go
+package main
+
+import (
+	rl "github.com/judah-caruso/raylib-purego"
+)
+
+func main() {
+	rl.InitWindow(960, 540, "Hello, World")
+	defer rl.CloseWindow()
+
+	pos := rl.Vector2{}
+	for !rl.WindowShouldClose() {
+		rl.BeginDrawing()
+		rl.ClearBackground(rl.Color{ 0, 0, 0, 255 })
+		rl.EndDrawing()
+	}
+}
+```
 
 ## Why
 
