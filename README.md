@@ -31,13 +31,13 @@ I'd like to use Raylib in Go without having to fiddle with globally installed li
 
 ## How
 
-At initialzation time raylib is loaded[1], then each procedure is bound using libffi which allows us to call it without going through CGo. It additionally allows us to pass/return structs by value which is [not (easily) possible](https://github.com/ebitengine/purego/issues/237) with purego.
+At initialzation time raylib is loaded[1], then each procedure is bound using libffi which allows us to call them without going through CGo. It additionally allows us to pass/return structs by value which is [not (easily) possible](https://github.com/ebitengine/purego/issues/237) with purego.
 
 Because we're using libffi, we need to describe each procedure and type in raylib before we're able to call into it. This is where `bindings/generate.go` comes in. It simply parses the files that describe the procedures and types within raylib, and generates ffi types and Go wrappers (`*.gen.go` files).
 
 Note: This is mostly a proof of concept to see how feasible my idea was. Because of that, most of raylib isn't bound and the binding generation code is just bad. However, with the current systme in place, it shouldn't be very difficult to complete this library.
 
-[1] The library for the current target is embeded in the executable. This means you don't need to grab the exact version of raylib (5.5.0) or ship the raylib `.dll`, `.dylib`, or `.so` alongside your executable.
+[1] The library for the current target is embeded in the executable. This means you don't need to find the exact version of raylib for this library (5.5.0), or ship the raylib `.dll`, `.dylib`, or `.so` alongside your executable. The resulting executables will be larger, of course (`examples/first` is 6.3 MB when built on Mac) as we're bundling both `libffi` and `raylib`. The plus side is that this library "just works."
 
 ## Q&A
 
