@@ -70,7 +70,8 @@ func prep(retType *ffi.Type, name string, argTypes ...*ffi.Type) cproc {
 
 		path := file.Name()
 
-		if _, err = file.Write(libData); err != nil {
+		libBytes := unsafe.Slice(unsafe.StringData(libData), len(libData))
+		if _, err = file.Write(libBytes); err != nil {
 			panic(err)
 		}
 

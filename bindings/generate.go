@@ -413,16 +413,14 @@ func generateInitFile(filename string, libpath string, gobuild string) {
 	fmt.Fprintf(&code, "const libName = %q\n\n", libpath)
 
 	fmt.Fprintf(&code, "// The data of %s\n", libpath)
-	code.WriteString("var libData = []byte{")
+	code.WriteString("const libData = \"")
 
-	for i, byte := range b {
-		fmt.Fprintf(&code, "%#02x", byte)
-		if i < len(b)-1 {
-			code.WriteString(", ")
-		}
+	for _, byt := range b {
+		bstr := fmt.Sprintf("%#02x", byt)
+		fmt.Fprintf(&code, "\\x%s", bstr[2:])
 	}
 
-	code.WriteString("}\n")
+	code.WriteString("\"\n")
 
 	if err := os.WriteFile(filename, []byte(code.String()), 0664); err != nil {
 		panic(err)
