@@ -6,10 +6,10 @@ import (
 )
 
 const (
-	VERSION_MAJOR = 5
-	VERSION_MINOR = 5
-	VERSION_PATCH = 0
-	VERSION       = "5.5.0"
+	VersionMajor = 5
+	VersionMinor = 5
+	VersionPatch = 0
+	Version      = "5.5.0"
 )
 
 // Some Basic Colors
