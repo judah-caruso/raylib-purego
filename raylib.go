@@ -9,7 +9,7 @@ const (
 	VersionMajor = 5
 	VersionMinor = 5
 	VersionPatch = 0
-	Version      = "5.5.0"
+	Version      = "5.5"
 )
 
 // Some Basic Colors
@@ -41,78 +41,6 @@ var (
 	Blank      = Color{0, 0, 0, 0}         // Blank (Transparent)
 	Magenta    = Color{255, 0, 255, 255}   // Magenta
 	RayWhite   = Color{245, 245, 245, 255} // My own White (raylib logo)
-)
-
-// System/Window config flags
-// NOTE: Every bit registers one state (use it with bit masks)
-// By default all flags are set to 0
-type ConfigFlags uint32
-
-const (
-	FlagVsyncHint              = ConfigFlags(0x00000040) // Set to try enabling V-Sync on GPU
-	FlagFullscreenMode         = ConfigFlags(0x00000002) // Set to run program in fullscreen
-	FlagWindowResizable        = ConfigFlags(0x00000004) // Set to allow resizable window
-	FlagWindowUndecorated      = ConfigFlags(0x00000008) // Set to disable window decoration (frame and buttons)
-	FlagWindowHidden           = ConfigFlags(0x00000080) // Set to hide window
-	FlagWindowMinimized        = ConfigFlags(0x00000200) // Set to minimize window (iconify)
-	FlagWindowMaximized        = ConfigFlags(0x00000400) // Set to maximize window (expanded to monitor)
-	FlagWindowUnfocused        = ConfigFlags(0x00000800) // Set to window non focused
-	FlagWindowTopmost          = ConfigFlags(0x00001000) // Set to window always on top
-	FlagWindowAlwaysRun        = ConfigFlags(0x00000100) // Set to allow windows running while minimized
-	FlagWindowTransparent      = ConfigFlags(0x00000010) // Set to allow transparent framebuffer
-	FlagWindowHighdpi          = ConfigFlags(0x00002000) // Set to support HighDPI
-	FlagWindowMousePassthrough = ConfigFlags(0x00004000) // Set to support mouse passthrough, only supported when FLAG_WINDOW_UNDECORATED
-	FlagBorderlessWindowedMode = ConfigFlags(0x00008000) // Set to run program in borderless windowed mode
-	FlagMsaa4xHint             = ConfigFlags(0x00000020) // Set to try enabling MSAA 4X
-	LagInterlacedHint          = ConfigFlags(0x00010000) // Set to try enabling interlaced video format (for V3D)
-)
-
-// Pixel formats
-// NOTE: Support depends on OpenGL version and platform
-type PixelFormat uint32
-
-const (
-	PixelFormatUncompressedGrayscale    PixelFormat = 1 + iota // 8 bit per pixel (no alpha)
-	PixelFormatUncompressedGrayAlpha                           // 8*2 bpp (2 channels)
-	PixelFormatUncompressedR5g6b5                              // 16 bpp
-	PixelFormatUncompressedR8g8b8                              // 24 bpp
-	PixelFormatUncompressedR5g5b5a1                            // 16 bpp (1 bit alpha)
-	PixelFormatUncompressedR4g4b4a4                            // 16 bpp (4 bit alpha)
-	PixelFormatUncompressedR8g8b8a8                            // 32 bpp
-	PixelFormatUncompressedR32                                 // 32 bpp (1 channel - float)
-	PixelFormatUncompressedR32g32b32                           // 32*3 bpp (3 channels - float)
-	PixelFormatUncompressedR32g32b32a32                        // 32*4 bpp (4 channels - float)
-	PixelFormatUncompressedR16                                 // 16 bpp (1 channel - half float)
-	PixelFormatUncompressedR16g16b16                           // 16*3 bpp (3 channels - half float)
-	PixelFormatUncompressedR16g16b16a16                        // 16*4 bpp (4 channels - half float)
-	PixelFormatCompressedDxt1Rgb                               // 4 bpp (no alpha)
-	PixelFormatCompressedDxt1Rgba                              // 4 bpp (1 bit alpha)
-	PixelFormatCompressedDxt3Rgba                              // 8 bpp
-	PixelFormatCompressedDxt5Rgba                              // 8 bpp
-	PixelFormatCompressedEtc1Rgb                               // 4 bpp
-	PixelFormatCompressedEtc2Rgb                               // 4 bpp
-	PixelFormatCompressedEtc2EacRgba                           // 8 bpp
-	PixelFormatCompressedPvrtRgb                               // 4 bpp
-	PixelFormatCompressedPvrtRgba                              // 4 bpp
-	PixelFormatCompressedAstc4x4Rgba                           // 8 bpp
-	PixelFormatCompressedAstc8x8Rgba                           // 2 bpp
-)
-
-// Camera projection
-type CameraProjection uint32
-
-const (
-	CameraPerspective CameraProjection = iota
-	CameraOrthographic
-)
-
-// N-patch layout
-type NPatchLayout uint32
-
-const (
-	NPatchNinePatch           NPatchLayout = iota // Npatch layout: 3x3 tiles
-	NPatchThreePatchVertical                      // Npatch layout: 1x3 tiles
-	NPatchThreePatchHoizontal                     // Npatch layout: 3x1 tiles
 )
 
 type (
@@ -367,6 +295,45 @@ type (
 		Normal   Vector3 // Surface normal of hit
 	}
 
+	// BoundingBox
+	BoundingBox struct {
+		Min Vector3 // Minimum vertex box-corner
+		Max Vector3 // Maximum vertex box-corner
+	}
+
+	// Wave, audio wave data
+	Wave struct {
+		FrameCount uint32         // Total number of frames (considering channels)
+		SampleRate uint32         // Frequency (samples per second)
+		SampleSize uint32         // Bit depth (bits per sample): 8, 16, 32 (24 not supported)
+		Channels   uint32         // Number of channels (1-mono, 2-stereo, ...)
+		Data       unsafe.Pointer // Buffer data pointer
+	}
+
+	// AudioStream, custom audio stream
+	AudioStream struct {
+		Buffer     unsafe.Pointer // Pointer to internal data used by the audio system
+		Processor  unsafe.Pointer // Pointer to internal data processor, useful for audio effects
+		SampleRate uint32         // Frequency (samples per second)
+		SampleSize uint32         // Bit depth (bits per sample): 8, 16, 32 (24 not supported)
+		Channels   uint32         // Number of channels (1-mono, 2-stereo, ...)
+	}
+
+	// Sound
+	Sound struct {
+		Stream     AudioStream // Audio stream
+		FrameCount uint32      // Total number of frames (considering channels)
+	}
+
+	// Music, audio stream, anything longer than ~10 seconds should be streamed
+	Music struct {
+		Stream     AudioStream    // Audio stream
+		FrameCount uint32         // Total number of frames (considering channels)
+		Looping    bool           // Music looping enable
+		CtxType    int32          // Type of music context (audio filetype)
+		CtxData    unsafe.Pointer // Audio context data, depends on type
+	}
+
 	// VrDeviceInfo, Head-Mounted-Display device parameters
 	VrDeviceInfo struct {
 		HResolution            int32      // Horizontal resolution in pixels
@@ -391,4 +358,97 @@ type (
 		Scale             [2]float32 // VR distortion scale
 		ScaleIn           [2]float32 // VR distortion scale in
 	}
+
+	// File path list
+	FilePathList struct {
+		Capacity uint32 // Filepaths max entries
+		Count    uint32 // Filepaths entries count
+		Paths    **byte // Filepaths entries
+	}
+
+	// Automation event
+	AutomationEvent struct {
+		Frame  uint32   // Event frame
+		Type   uint32   // Event type (AutomationEventType)
+		Params [4]int32 // Event parameters (if required)
+	}
+
+	// Automation event list
+	AutomationEventList struct {
+		Capacity uint32           // Events max entries (MAX_AUTOMATION_EVENTS)
+		Count    uint32           // Events entries count
+		Events   *AutomationEvent // Events entries
+	}
+)
+
+// System/Window config flags
+// NOTE: Every bit registers one state (use it with bit masks)
+// By default all flags are set to 0
+type ConfigFlags uint32
+
+const (
+	FlagVsyncHint              = ConfigFlags(0x00000040) // Set to try enabling V-Sync on GPU
+	FlagFullscreenMode         = ConfigFlags(0x00000002) // Set to run program in fullscreen
+	FlagWindowResizable        = ConfigFlags(0x00000004) // Set to allow resizable window
+	FlagWindowUndecorated      = ConfigFlags(0x00000008) // Set to disable window decoration (frame and buttons)
+	FlagWindowHidden           = ConfigFlags(0x00000080) // Set to hide window
+	FlagWindowMinimized        = ConfigFlags(0x00000200) // Set to minimize window (iconify)
+	FlagWindowMaximized        = ConfigFlags(0x00000400) // Set to maximize window (expanded to monitor)
+	FlagWindowUnfocused        = ConfigFlags(0x00000800) // Set to window non focused
+	FlagWindowTopmost          = ConfigFlags(0x00001000) // Set to window always on top
+	FlagWindowAlwaysRun        = ConfigFlags(0x00000100) // Set to allow windows running while minimized
+	FlagWindowTransparent      = ConfigFlags(0x00000010) // Set to allow transparent framebuffer
+	FlagWindowHighdpi          = ConfigFlags(0x00002000) // Set to support HighDPI
+	FlagWindowMousePassthrough = ConfigFlags(0x00004000) // Set to support mouse passthrough, only supported when FLAG_WINDOW_UNDECORATED
+	FlagBorderlessWindowedMode = ConfigFlags(0x00008000) // Set to run program in borderless windowed mode
+	FlagMsaa4xHint             = ConfigFlags(0x00000020) // Set to try enabling MSAA 4X
+	LagInterlacedHint          = ConfigFlags(0x00010000) // Set to try enabling interlaced video format (for V3D)
+)
+
+// Pixel formats
+// NOTE: Support depends on OpenGL version and platform
+type PixelFormat uint32
+
+const (
+	PixelFormatUncompressedGrayscale    PixelFormat = 1 + iota // 8 bit per pixel (no alpha)
+	PixelFormatUncompressedGrayAlpha                           // 8*2 bpp (2 channels)
+	PixelFormatUncompressedR5g6b5                              // 16 bpp
+	PixelFormatUncompressedR8g8b8                              // 24 bpp
+	PixelFormatUncompressedR5g5b5a1                            // 16 bpp (1 bit alpha)
+	PixelFormatUncompressedR4g4b4a4                            // 16 bpp (4 bit alpha)
+	PixelFormatUncompressedR8g8b8a8                            // 32 bpp
+	PixelFormatUncompressedR32                                 // 32 bpp (1 channel - float)
+	PixelFormatUncompressedR32g32b32                           // 32*3 bpp (3 channels - float)
+	PixelFormatUncompressedR32g32b32a32                        // 32*4 bpp (4 channels - float)
+	PixelFormatUncompressedR16                                 // 16 bpp (1 channel - half float)
+	PixelFormatUncompressedR16g16b16                           // 16*3 bpp (3 channels - half float)
+	PixelFormatUncompressedR16g16b16a16                        // 16*4 bpp (4 channels - half float)
+	PixelFormatCompressedDxt1Rgb                               // 4 bpp (no alpha)
+	PixelFormatCompressedDxt1Rgba                              // 4 bpp (1 bit alpha)
+	PixelFormatCompressedDxt3Rgba                              // 8 bpp
+	PixelFormatCompressedDxt5Rgba                              // 8 bpp
+	PixelFormatCompressedEtc1Rgb                               // 4 bpp
+	PixelFormatCompressedEtc2Rgb                               // 4 bpp
+	PixelFormatCompressedEtc2EacRgba                           // 8 bpp
+	PixelFormatCompressedPvrtRgb                               // 4 bpp
+	PixelFormatCompressedPvrtRgba                              // 4 bpp
+	PixelFormatCompressedAstc4x4Rgba                           // 8 bpp
+	PixelFormatCompressedAstc8x8Rgba                           // 2 bpp
+)
+
+// Camera projection
+type CameraProjection uint32
+
+const (
+	CameraPerspective CameraProjection = iota
+	CameraOrthographic
+)
+
+// N-patch layout
+type NPatchLayout uint32
+
+const (
+	NPatchNinePatch           NPatchLayout = iota // Npatch layout: 3x3 tiles
+	NPatchThreePatchVertical                      // Npatch layout: 1x3 tiles
+	NPatchThreePatchHoizontal                     // Npatch layout: 3x1 tiles
 )
