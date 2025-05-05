@@ -1,6 +1,6 @@
 github.com/ebitengine/purego v0.8.2 h1:jPPGWs2sZ1UgOSgD2bClL0MJIqu58nOmIcBuXr62z1I=
 github.com/ebitengine/purego v0.8.2/go.mod h1:iIjxzd6CiRiOG0UyXP+V1+jWqUXVjPKLAI0mRfJZTmQ=
-github.com/judah-caruso/ffi-embeded v0.0.0-20250504072625-6d10cd054b4b h1:zwVXumTU26Iihw6eypQ0YGg0djgvObsiBIhrNcZ9DU4=
-github.com/judah-caruso/ffi-embeded v0.0.0-20250504072625-6d10cd054b4b/go.mod h1:dWRoI78d+9SPykEPBIXDxa7nL6I0vKwtTY4xX7zN+Lk=
 github.com/judah-caruso/ffi-embeded v0.0.0-20250504080109-eddffff0518f h1:8f5D0mI5W19TUQPAr5rwBKPjgxcT/tKkz64Fp4/MQo0=
 github.com/judah-caruso/ffi-embeded v0.0.0-20250504080109-eddffff0518f/go.mod h1:Md6bFYgD9XUm5zZYO9TLL5WDnvDcXZk23Ayddt9EFVo=
+github.com/judah-caruso/ffi-embeded v0.0.0-20250505073838-6e1a33bb1565 h1:YHhpK4EU0RNwVDsXwxYm4BTxGCQwL9gogLoeDJUCrto=
+github.com/judah-caruso/ffi-embeded v0.0.0-20250505073838-6e1a33bb1565/go.mod h1:Md6bFYgD9XUm5zZYO9TLL5WDnvDcXZk23Ayddt9EFVo=
