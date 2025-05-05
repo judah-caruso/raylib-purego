@@ -399,10 +399,297 @@ const (
 	FlagWindowAlwaysRun        = ConfigFlags(0x00000100) // Set to allow windows running while minimized
 	FlagWindowTransparent      = ConfigFlags(0x00000010) // Set to allow transparent framebuffer
 	FlagWindowHighdpi          = ConfigFlags(0x00002000) // Set to support HighDPI
-	FlagWindowMousePassthrough = ConfigFlags(0x00004000) // Set to support mouse passthrough, only supported when FLAG_WINDOW_UNDECORATED
+	FlagWindowMousePassthrough = ConfigFlags(0x00004000) // Set to support mouse passthrough, only supported when FlagWindowUndecorated
 	FlagBorderlessWindowedMode = ConfigFlags(0x00008000) // Set to run program in borderless windowed mode
 	FlagMsaa4xHint             = ConfigFlags(0x00000020) // Set to try enabling MSAA 4X
-	LagInterlacedHint          = ConfigFlags(0x00010000) // Set to try enabling interlaced video format (for V3D)
+	FlagInterlacedHint         = ConfigFlags(0x00010000) // Set to try enabling interlaced video format (for V3D)
+)
+
+// Trace log level
+type TraceLogLevel uint32
+
+const (
+	LogAll     TraceLogLevel = iota // Display all logs
+	LogTrace                        // Trace logging, intended for internal use only
+	LogDebug                        // Debug logging, used for internal debugging, it should be disabled on release builds
+	LogInfo                         // Info logging, used for program execution info
+	LogWarning                      // Warning logging, used on recoverable failures
+	LogError                        // Error logging, used on unrecoverable failures
+	LogFatal                        // Fatal logging, used to abort program: exit(EXIT_FAILURE)
+	LogNone                         // Disable logging
+)
+
+// Keyboard keys (US keyboard layout)
+type KeyboardKey uint32
+
+const (
+	KeyNull = KeyboardKey(0) // Key: NULL, used for no key pressed
+
+	// Alphanumeric keys
+	KeyApostrophe   = KeyboardKey(39) // Key: '
+	KeyComma        = KeyboardKey(44) // Key: ,
+	KeyMinus        = KeyboardKey(45) // Key: -
+	KeyPeriod       = KeyboardKey(46) // Key: .
+	KeySlash        = KeyboardKey(47) // Key: /
+	KeyZero         = KeyboardKey(48) // Key: 0
+	KeyOne          = KeyboardKey(49) // Key: 1
+	KeyTwo          = KeyboardKey(50) // Key: 2
+	KeyThree        = KeyboardKey(51) // Key: 3
+	KeyFour         = KeyboardKey(52) // Key: 4
+	KeyFive         = KeyboardKey(53) // Key: 5
+	KeySix          = KeyboardKey(54) // Key: 6
+	KeySeven        = KeyboardKey(55) // Key: 7
+	KeyEight        = KeyboardKey(56) // Key: 8
+	KeyNine         = KeyboardKey(57) // Key: 9
+	KeySemicolon    = KeyboardKey(59) // Key: ;
+	KeyEqual        = KeyboardKey(61) // Key: =
+	KeyA            = KeyboardKey(65) // Key: A | a
+	KeyB            = KeyboardKey(66) // Key: B | b
+	KeyC            = KeyboardKey(67) // Key: C | c
+	KeyD            = KeyboardKey(68) // Key: D | d
+	KeyE            = KeyboardKey(69) // Key: E | e
+	KeyF            = KeyboardKey(70) // Key: F | f
+	KeyG            = KeyboardKey(71) // Key: G | g
+	KeyH            = KeyboardKey(72) // Key: H | h
+	KeyI            = KeyboardKey(73) // Key: I | i
+	KeyJ            = KeyboardKey(74) // Key: J | j
+	KeyK            = KeyboardKey(75) // Key: K | k
+	KeyL            = KeyboardKey(76) // Key: L | l
+	KeyM            = KeyboardKey(77) // Key: M | m
+	KeyN            = KeyboardKey(78) // Key: N | n
+	KeyO            = KeyboardKey(79) // Key: O | o
+	KeyP            = KeyboardKey(80) // Key: P | p
+	KeyQ            = KeyboardKey(81) // Key: Q | q
+	KeyR            = KeyboardKey(82) // Key: R | r
+	KeyS            = KeyboardKey(83) // Key: S | s
+	KeyT            = KeyboardKey(84) // Key: T | t
+	KeyU            = KeyboardKey(85) // Key: U | u
+	KeyV            = KeyboardKey(86) // Key: V | v
+	KeyW            = KeyboardKey(87) // Key: W | w
+	KeyX            = KeyboardKey(88) // Key: X | x
+	KeyY            = KeyboardKey(89) // Key: Y | y
+	KeyZ            = KeyboardKey(90) // Key: Z | z
+	KeyLeftBracket  = KeyboardKey(91) // Key: [
+	KeyBackslash    = KeyboardKey(92) // Key: '\'
+	KeyRightBracket = KeyboardKey(93) // Key: ]
+	KeyGrave        = KeyboardKey(96) // Key: `
+
+	// Function keys
+	KeySpace        = KeyboardKey(32)  // Key: Space
+	KeyEscape       = KeyboardKey(256) // Key: Esc
+	KeyEnter        = KeyboardKey(257) // Key: Enter
+	KeyTab          = KeyboardKey(258) // Key: Tab
+	KeyBackspace    = KeyboardKey(259) // Key: Backspace
+	KeyInsert       = KeyboardKey(260) // Key: Ins
+	KeyDelete       = KeyboardKey(261) // Key: Del
+	KeyRight        = KeyboardKey(262) // Key: Cursor right
+	KeyLeft         = KeyboardKey(263) // Key: Cursor left
+	KeyDown         = KeyboardKey(264) // Key: Cursor down
+	KeyUp           = KeyboardKey(265) // Key: Cursor up
+	KeyPageUp       = KeyboardKey(266) // Key: Page up
+	KeyPageDown     = KeyboardKey(267) // Key: Page down
+	KeyHome         = KeyboardKey(268) // Key: Home
+	KeyEnd          = KeyboardKey(269) // Key: End
+	KeyCapsLock     = KeyboardKey(280) // Key: Caps lock
+	KeyScrollLock   = KeyboardKey(281) // Key: Scroll down
+	KeyNumLock      = KeyboardKey(282) // Key: Num lock
+	KeyPrintScreen  = KeyboardKey(283) // Key: Print screen
+	KeyPause        = KeyboardKey(284) // Key: Pause
+	KeyF1           = KeyboardKey(290) // Key: F1
+	KeyF2           = KeyboardKey(291) // Key: F2
+	KeyF3           = KeyboardKey(292) // Key: F3
+	KeyF4           = KeyboardKey(293) // Key: F4
+	KeyF5           = KeyboardKey(294) // Key: F5
+	KeyF6           = KeyboardKey(295) // Key: F6
+	KeyF7           = KeyboardKey(296) // Key: F7
+	KeyF8           = KeyboardKey(297) // Key: F8
+	KeyF9           = KeyboardKey(298) // Key: F9
+	KeyF10          = KeyboardKey(299) // Key: F10
+	KeyF11          = KeyboardKey(300) // Key: F11
+	KeyF12          = KeyboardKey(301) // Key: F12
+	KeyLeftShift    = KeyboardKey(340) // Key: Shift left
+	KeyLeftControl  = KeyboardKey(341) // Key: Control left
+	KeyLeftAlt      = KeyboardKey(342) // Key: Alt left
+	KeyLeftSuper    = KeyboardKey(343) // Key: Super left
+	KeyRightShift   = KeyboardKey(344) // Key: Shift right
+	KeyRightControl = KeyboardKey(345) // Key: Control right
+	KeyRightAlt     = KeyboardKey(346) // Key: Alt right
+	KeyRightSuper   = KeyboardKey(347) // Key: Super right
+	KeyKbMenu       = KeyboardKey(348) // Key: KB menu
+
+	// Keypad keys
+	KeyKp0        = KeyboardKey(320) // Key: Keypad 0
+	KeyKp1        = KeyboardKey(321) // Key: Keypad 1
+	KeyKp2        = KeyboardKey(322) // Key: Keypad 2
+	KeyKp3        = KeyboardKey(323) // Key: Keypad 3
+	KeyKp4        = KeyboardKey(324) // Key: Keypad 4
+	KeyKp5        = KeyboardKey(325) // Key: Keypad 5
+	KeyKp6        = KeyboardKey(326) // Key: Keypad 6
+	KeyKp7        = KeyboardKey(327) // Key: Keypad 7
+	KeyKp8        = KeyboardKey(328) // Key: Keypad 8
+	KeyKp9        = KeyboardKey(329) // Key: Keypad 9
+	KeyKpDecimal  = KeyboardKey(330) // Key: Keypad .
+	KeyKpDivide   = KeyboardKey(331) // Key: Keypad /
+	KeyKpMultiply = KeyboardKey(332) // Key: Keypad *
+	KeyKpSubtract = KeyboardKey(333) // Key: Keypad -
+	KeyKpAdd      = KeyboardKey(334) // Key: Keypad +
+	KeyKpEnter    = KeyboardKey(335) // Key: Keypad Enter
+	KeyKpEqual    = KeyboardKey(336) // Key: Keypad =
+
+	// Android key buttons
+	KeyBack       = KeyboardKey(4)  // Key: Android back button
+	KeyMenu       = KeyboardKey(5)  // Key: Android menu button
+	KeyVolumeUp   = KeyboardKey(24) // Key: Android volume up button
+	KeyVolumeDown = KeyboardKey(25) // Key: Android volume down button
+)
+
+// Mouse buttons
+type MouseButton uint32
+
+const (
+	MouseButtonLeft    MouseButton = iota // Mouse button left
+	MouseButtonRight                      // Mouse button right
+	MouseButtonMiddle                     // Mouse button middle (pressed wheel)
+	MouseButtonSide                       // Mouse button side (advanced mouse device)
+	MouseButtonExtra                      // Mouse button extra (advanced mouse device)
+	MouseButtonForward                    // Mouse button forward (advanced mouse device)
+	MouseButtonBack                       // Mouse button back (advanced mouse device)
+)
+
+// Mouse cursor
+type MouseCursor uint32
+
+const (
+	MouseCursorDefault      MouseCursor = iota // Default pointer shape
+	MouseCursorArrow                           // Arrow shape
+	MouseCursorIbeam                           // Text writing cursor shape
+	MouseCursorCrosshair                       // Cross shape
+	MouseCursorPointingHand                    // Pointing hand cursor
+	MouseCursorResizeEw                        // Horizontal resize/move arrow shape
+	MouseCursorResizeNs                        // Vertical resize/move arrow shape
+	MouseCursorResizeNwse                      // Top-left to bottom-right diagonal resize/move arrow shape
+	MouseCursorResizeNesw                      // The top-right to bottom-left diagonal resize/move arrow shape
+	MouseCursorResizeAll                       // The omnidirectional resize/move cursor shape
+	MouseCursorNotAllowed                      // The operation-not-allowed shape
+)
+
+// Gamepad buttons
+type GamepadButton uint32
+
+const (
+	GamepadButtonUnknown        GamepadButton = iota // Unknown button, just for error checking
+	GamepadButtonLeftFaceUp                          // Gamepad left DPAD up button
+	GamepadButtonLeftFaceRight                       // Gamepad left DPAD right button
+	GamepadButtonLeftFaceDown                        // Gamepad left DPAD down button
+	GamepadButtonLeftFaceLeft                        // Gamepad left DPAD left button
+	GamepadButtonRightFaceUp                         // Gamepad right button up (i.e. PS3: Triangle, Xbox: Y)
+	GamepadButtonRightFaceRight                      // Gamepad right button right (i.e. PS3: Circle, Xbox: B)
+	GamepadButtonRightFaceDown                       // Gamepad right button down (i.e. PS3: Cross, Xbox: A)
+	GamepadButtonRightFaceLeft                       // Gamepad right button left (i.e. PS3: Square, Xbox: X)
+	GamepadButtonLeftTrigger1                        // Gamepad top/back trigger left (first), it could be a trailing button
+	GamepadButtonLeftTrigger2                        // Gamepad top/back trigger left (second), it could be a trailing button
+	GamepadButtonRightTrigger1                       // Gamepad top/back trigger right (first), it could be a trailing button
+	GamepadButtonRightTrigger2                       // Gamepad top/back trigger right (second), it could be a trailing button
+	GamepadButtonMiddleLeft                          // Gamepad center buttons, left one (i.e. PS3: Select)
+	GamepadButtonMiddle                              // Gamepad center buttons, middle one (i.e. PS3: PS, Xbox: XBOX)
+	GamepadButtonMiddleRight                         // Gamepad center buttons, right one (i.e. PS3: Start)
+	GamepadButtonLeftThumb                           // Gamepad joystick pressed button left
+	GamepadButtonRightThumb                          // Gamepad joystick pressed button right
+)
+
+// Gamepad axis
+type GamepadAxis uint32
+
+const (
+	GamepadAxisLeftX        GamepadAxis = iota // Gamepad left stick X axis
+	GamepadAxisLeftY                           // Gamepad left stick Y axis
+	GamepadAxisRightX                          // Gamepad right stick X axis
+	GamepadAxisRightY                          // Gamepad right stick Y axis
+	GamepadAxisLeftTrigger                     // Gamepad back trigger left, pressure level: [1..-1]
+	GamepadAxisRightTrigger                    // Gamepad back trigger right, pressure level: [1..-1]
+)
+
+// Material map index
+type MaterialMapIndex uint32
+
+const (
+	MaterialMapAlbedo     MaterialMapIndex = iota // Albedo material (same as: MATERIAL_MAP_DIFFUSE)
+	MaterialMapMetalness                          // Metalness material (same as: MATERIAL_MAP_SPECULAR)
+	MaterialMapNormal                             // Normal material
+	MaterialMapRoughness                          // Roughness material
+	MaterialMapOcclusion                          // Ambient occlusion material
+	MaterialMapEmission                           // Emission material
+	MaterialMapHeight                             // Heightmap material
+	MaterialMapCubemap                            // Cubemap material (NOTE: Uses GL_TEXTURE_CUBE_MAP)
+	MaterialMapIrradiance                         // Irradiance material (NOTE: Uses GL_TEXTURE_CUBE_MAP)
+	MaterialMapPrefilter                          // Prefilter material (NOTE: Uses GL_TEXTURE_CUBE_MAP)
+	MaterialMapBrdf                               // Brdf material
+
+	MaterialMapDiffuse  = MaterialMapAlbedo
+	MaterialMapSpecular = MaterialMapMetalness
+)
+
+// Shader location index
+type ShaderLocationIndex uint32
+
+const (
+	ShaderLocVertexPosition    ShaderLocationIndex = iota // Shader location: vertex attribute: position
+	ShaderLocVertexTexCoord01                             // Shader location: vertex attribute: texcoord01
+	ShaderLocVertexTexCoord02                             // Shader location: vertex attribute: texcoord02
+	ShaderLocVertexNormal                                 // Shader location: vertex attribute: normal
+	ShaderLocVertexTangent                                // Shader location: vertex attribute: tangent
+	ShaderLocVertexColor                                  // Shader location: vertex attribute: color
+	ShaderLocMatrixMvp                                    // Shader location: matrix uniform: model-view-projection
+	ShaderLocMatrixView                                   // Shader location: matrix uniform: view (camera transform)
+	ShaderLocMatrixProjection                             // Shader location: matrix uniform: projection
+	ShaderLocMatrixModel                                  // Shader location: matrix uniform: model (transform)
+	ShaderLocMatrixNormal                                 // Shader location: matrix uniform: normal
+	ShaderLocVectorView                                   // Shader location: vector uniform: view
+	ShaderLocColorDiffuse                                 // Shader location: vector uniform: diffuse color
+	ShaderLocColorSpecular                                // Shader location: vector uniform: specular color
+	ShaderLocColorAmbient                                 // Shader location: vector uniform: ambient color
+	ShaderLocMapAlbedo                                    // Shader location: sampler2d texture: albedo (same as: SHADER_LOC_MAP_DIFFUSE)
+	ShaderLocMapMetalness                                 // Shader location: sampler2d texture: metalness (same as: SHADER_LOC_MAP_SPECULAR)
+	ShaderLocMapNormal                                    // Shader location: sampler2d texture: normal
+	ShaderLocMapRoughness                                 // Shader location: sampler2d texture: roughness
+	ShaderLocMapOcclusion                                 // Shader location: sampler2d texture: occlusion
+	ShaderLocMapEmission                                  // Shader location: sampler2d texture: emission
+	ShaderLocMapHeight                                    // Shader location: sampler2d texture: height
+	ShaderLocMapCubemap                                   // Shader location: samplerCube texture: cubemap
+	ShaderLocMapIrradiance                                // Shader location: samplerCube texture: irradiance
+	ShaderLocMapPrefilter                                 // Shader location: samplerCube texture: prefilter
+	ShaderLocMapBrdf                                      // Shader location: sampler2d texture: brdf
+	ShaderLocVertexBoneids                                // Shader location: vertex attribute: boneIds
+	ShaderLocVertexBoneweights                            // Shader location: vertex attribute: boneWeights
+	ShaderLocBoneMatrices                                 // Shader location: array of matrices uniform: boneMatrices
+
+	ShaderLocMapDiffuse  = ShaderLocMapAlbedo
+	ShaderLocMapSpecular = ShaderLocMapMetalness
+)
+
+// Shader uniform data type
+type ShaderUniformDataType uint32
+
+const (
+	ShaderUniformFloat     ShaderUniformDataType = iota // Shader uniform type: float
+	ShaderUniformVec2                                   // Shader uniform type: vec2 (2 float)
+	ShaderUniformVec3                                   // Shader uniform type: vec3 (3 float)
+	ShaderUniformVec4                                   // Shader uniform type: vec4 (4 float)
+	ShaderUniformInt                                    // Shader uniform type: int
+	ShaderUniformIvec2                                  // Shader uniform type: ivec2 (2 int)
+	ShaderUniformIvec3                                  // Shader uniform type: ivec3 (3 int)
+	ShaderUniformIvec4                                  // Shader uniform type: ivec4 (4 int)
+	ShaderUniformSampler2d                              // Shader uniform type: sampler2d
+)
+
+// Shader attribute data types
+type ShaderAttributeDataType uint32
+
+const (
+	ShaderAttribFloat ShaderAttributeDataType = iota // Shader attribute type: float
+	ShaderAttribVec2                                 // Shader attribute type: vec2 (2 float)
+	ShaderAttribVec3                                 // Shader attribute type: vec3 (3 float)
+	ShaderAttribVec4                                 // Shader attribute type: vec4 (4 float)
 )
 
 // Pixel formats
@@ -434,6 +721,93 @@ const (
 	PixelFormatCompressedPvrtRgba                              // 4 bpp
 	PixelFormatCompressedAstc4x4Rgba                           // 8 bpp
 	PixelFormatCompressedAstc8x8Rgba                           // 2 bpp
+)
+
+// Texture parameters: filter mode
+// NOTE 1: Filtering considers mipmaps if available in the texture
+// NOTE 2: Filter is accordingly set for minification and magnification
+type TextureFilter uint32
+
+const (
+	TextureFilterPoint          TextureFilter = iota // No filter, just pixel approximation
+	TextureFilterBilinear                            // Linear filtering
+	TextureFilterTrilinear                           // Trilinear filtering (linear with mipmaps)
+	TextureFilterAnisotropic4x                       // Anisotropic filtering 4x
+	TextureFilterAnisotropic8x                       // Anisotropic filtering 8x
+	TextureFilterAnisotropic16x                      // Anisotropic filtering 16x
+)
+
+// Texture parameters: wrap mode
+type TextureWrap uint32
+
+const (
+	TextureWrapRepeat       TextureWrap = iota // Repeats texture in tiled mode
+	TextureWrapClamp                           // Clamps texture to edge pixel in tiled mode
+	TextureWrapMirrorRepeat                    // Mirrors and repeats the texture in tiled mode
+	TextureWrapMirrorClamp                     // Mirrors and clamps to border the texture in tiled mode
+)
+
+// Cubemap layouts
+type CubemapLayout uint32
+
+const (
+	CubemapLayoutAutoDetect       CubemapLayout = iota // Automatically detect layout type
+	CubemapLayoutLineVertical                          // Layout is defined by a vertical line with faces
+	CubemapLayoutLineHorizontal                        // Layout is defined by a horizontal line with faces
+	CubemapLayoutCrossThreeByFour                      // Layout is defined by a 3x4 cross with cubemap faces
+	CubemapLayoutCrossFourByThree                      // Layout is defined by a 4x3 cross with cubemap faces
+)
+
+// Font type, defines generation method
+type FontType uint32
+
+const (
+	FontDefault FontType = iota // Default font generation, anti-aliased
+	FontBitmap                  // Bitmap font generation, no anti-aliasing
+	FontSdf                     // SDF font generation, requires external shader
+)
+
+// Color blending modes (pre-defined)
+type BlendMode uint32
+
+const (
+	BlendAlpha            BlendMode = iota // Blend textures considering alpha (default)
+	BlendAdditive                          // Blend textures adding colors
+	BlendMultiplied                        // Blend textures multiplying colors
+	BlendAddColors                         // Blend textures adding colors (alternative)
+	BlendSubtractColors                    // Blend textures subtracting colors (alternative)
+	BlendAlphaPremultiply                  // Blend premultiplied textures considering alpha
+	BlendCustom                            // Blend textures using custom src/dst factors (use rlSetBlendFactors())
+	BlendCustomSeparate                    // Blend textures using custom rgb/alpha separate src/dst factors (use rlSetBlendFactorsSeparate())
+)
+
+// Gesture
+// NOTE: Provided as bit-wise flags to enable only desired gestures
+type Gesture uint32
+
+const (
+	GestureNone       = Gesture(0)   // No gesture
+	GestureTap        = Gesture(1)   // Tap gesture
+	GestureDoubletap  = Gesture(2)   // Double tap gesture
+	GestureHold       = Gesture(4)   // Hold gesture
+	GestureDrag       = Gesture(8)   // Drag gesture
+	GestureSwipeRight = Gesture(16)  // Swipe right gesture
+	GestureSwipeLeft  = Gesture(32)  // Swipe left gesture
+	GestureSwipeUp    = Gesture(64)  // Swipe up gesture
+	GestureSwipeDown  = Gesture(128) // Swipe down gesture
+	GesturePinchIn    = Gesture(256) // Pinch in gesture
+	GesturePinchOut   = Gesture(512) // Pinch out gesture
+)
+
+// Camera system modes
+type CameraMode uint32
+
+const (
+	CameraCustom      CameraMode = iota // Camera custom, controlled by user (UpdateCamera() does nothing)
+	CameraFree                          // Camera free mode
+	CameraOrbital                       // Camera orbital, around target, zoom supported
+	CameraFirstPerson                   // Camera first person
+	CameraThirdPerson                   // Camera third person
 )
 
 // Camera projection

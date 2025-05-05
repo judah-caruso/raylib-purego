@@ -21,7 +21,7 @@ func ToString(cstring *byte) string {
 
 // ToStringN creates a new string from an array of bytes (up to the null terminator if found).
 func ToStringN(cstring []byte) string {
-	if cstring == nil || len(cstring) == 0 || cstring[0] == 0 {
+	if len(cstring) == 0 || cstring[0] == 0 {
 		return ""
 	}
 

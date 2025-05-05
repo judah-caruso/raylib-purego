@@ -224,7 +224,7 @@ func generateGoFunctions(filenames ...string) {
 						procOrCast = "uint64"
 					} else {
 						switch goType {
-						case "PixelFormat", "ConfigFlags", "CameraProjection", "NPatchLayout":
+						case "ConfigFlags", "TraceLogLevel", "KeyboardKey", "MouseButton", "MouseCursor", "GamepadButton", "GamepadAxis", "MaterialMapIndex", "ShaderLocationIndex", "ShaderUniformDataType", "ShaderAttributeDataType", "PixelFormat", "TextureFilter", "TextureWrap", "CubemapLayout", "FontType", "BlendMode", "Gesture", "CameraMode", "CameraProjection", "NPatchLayout":
 							procOrCast = "uint64"
 						}
 					}
