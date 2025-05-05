@@ -4,7 +4,7 @@ Partially handwritten [purego](https://github.com/ebitengine/purego) bindings fo
 
 ## Getting Started
 
-Run `go get github.com/judah-caruso/raylib-purego` and have fun.
+Run `go get github.com/judah-caruso/raylib-purego@latest` and have fun.
 
 ```go
 package main
