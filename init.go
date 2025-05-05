@@ -3,9 +3,7 @@ package raylib
 import (
 	"fmt"
 	"os"
-	"path/filepath"
 	"runtime"
-	"time"
 	"unsafe"
 
 	"github.com/judah-caruso/ffi-embeded"
@@ -65,20 +63,27 @@ var raylib ffi.Lib
 func prep(retType *ffi.Type, name string, argTypes ...*ffi.Type) cproc {
 	// Lazily load the library
 	if raylib.Addr == 0 {
-		name := fmt.Sprintf("%d-%s", time.Now().UnixNano(), libName)
-		path := filepath.Join(os.TempDir(), name)
-
-		var err error
-		if err = os.WriteFile(path, libData, 0644); err != nil {
+		file, err := os.CreateTemp("", "*-"+libName)
+		if err != nil {
 			panic(err)
 		}
 
-		defer os.Remove(path)
+		path := file.Name()
+
+		if _, err = file.Write(libData); err != nil {
+			panic(err)
+		}
+
+		if err = file.Close(); err != nil {
+			panic(err)
+		}
 
 		raylib, err = ffi.Load(path)
 		if err != nil {
 			panic(err)
 		}
+
+		os.Remove(path)
 	}
 
 	var cif ffi.Cif
