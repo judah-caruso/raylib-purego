@@ -77,8 +77,35 @@ var (
 	beginScissorMode = prep(&void, "BeginScissorMode", &cint, &cint, &cint, &cint) // x, y, width, height :: Begin scissor mode (define screen area for following drawing)
 	endScissorMode   = prep(&void, "EndScissorMode")                               // End scissor mode
 
-	// beginVrStereoMode = prep(&void, "BeginVrStereoMode", &tVrStereoConfig)      // config :: Begin stereo rendering (requires VR simulator)
-	// endVrStereoMode = prep(&void, "EndVrStereoMode") // End stereo rendering (requires VR simulator)
+	beginVrStereoMode = prep(&void, "BeginVrStereoMode", &tVrStereoConfig) // config :: Begin stereo rendering (requires VR simulator)
+	endVrStereoMode   = prep(&void, "EndVrStereoMode")                     // End stereo rendering (requires VR simulator)
+
+	// VR stereo config functions for VR simulator
+	loadVrStereoConfig   = prep(&tVrStereoConfig, "LoadVrStereoConfig", &tVrDeviceInfo) // device :: Load VR stereo config for VR simulator device parameters
+	unloadVrStereoConfig = prep(&void, "UnloadVrStereoConfig", &tVrStereoConfig)        // config :: Unload VR stereo config
+
+	// Shader management functions
+	// NOTE: Shader functionality is not available on OpenGL 1.1
+	loadShader              = prep(&tShader, "LoadShader", &cstr, &cstr)                          // vsFileName, fsFileName :: Load shader from files and bind default locations
+	loadShaderFromMemory    = prep(&tShader, "LoadShaderFromMemory", &cstr, &cstr)                // vsCode, fsCode :: Load shader from code strings and bind default locations
+	isShaderValid           = prep(&cbool, "IsShaderValid", &tShader)                             // shader :: Check if a shader is valid (loaded on GPU)
+	getShaderLocation       = prep(&cint, "GetShaderLocation", &tShader, &cstr)                   // shader, uniformName :: Get shader uniform location
+	getShaderLocationAttrib = prep(&cint, "GetShaderLocationAttrib", &tShader, &cstr)             // shader, attribName :: Get shader attribute location
+	setShaderValue          = prep(&void, "SetShaderValue", &tShader, &cint, &ptr, &cint)         // shader, locIndex, value, uniformType :: Set shader uniform value
+	setShaderValueV         = prep(&void, "SetShaderValueV", &tShader, &cint, &ptr, &cint, &cint) // shader, locIndex, value, uniformType, count :: Set shader uniform value vector
+	setShaderValueMatrix    = prep(&void, "SetShaderValueMatrix", &tShader, &cint, &tMatrix)      // shader, locIndex, mat :: Set shader uniform value (matrix 4x4)
+	setShaderValueTexture   = prep(&void, "SetShaderValueTexture", &tShader, &cint, &tTexture2D)  // shader, locIndex, texture :: Set shader uniform value for texture (sampler2d)
+	unloadShader            = prep(&void, "UnloadShader", &tShader)                               // shader :: Unload shader from GPU memory (VRAM)
+
+	// Screen-space-related functions
+	getScreenToWorldRay   = prep(&tRay, "GetScreenToWorldRay", &tVector2, &tCamera)                  // position, camera :: Get a ray trace from screen position (i.e mouse)
+	getScreenToWorldRayEx = prep(&tRay, "GetScreenToWorldRayEx", &tVector2, &tCamera, &cint, &cint)  // position, camera, width, height :: Get a ray trace from screen position (i.e mouse) in a viewport
+	getWorldToScreen      = prep(&tVector2, "GetWorldToScreen", &tVector3, &tCamera)                 // position, camera :: Get the screen space position for a 3d world space position
+	getWorldToScreenEx    = prep(&tVector2, "GetWorldToScreenEx", &tVector3, &tCamera, &cint, &cint) // position, camera, width, height :: Get size position for a 3d world space position
+	getWorldToScreen2D    = prep(&tVector2, "GetWorldToScreen2D", &tVector2, &tCamera2D)             // position, camera :: Get the screen space position for a 2d camera world space position
+	getScreenToWorld2D    = prep(&tVector2, "GetScreenToWorld2D", &tVector2, &tCamera2D)             // position, camera :: Get the world space position for a 2d camera screen space position
+	getCameraMatrix       = prep(&tMatrix, "GetCameraMatrix", &tCamera)                              // camera :: Get camera transform matrix (view matrix)
+	getCameraMatrix2D     = prep(&tMatrix, "GetCameraMatrix2D", &tCamera2D)                          // camera :: Get camera 2d transform matrix
 
 	// Timing-related functions
 	setTargetFPS = prep(&void, "SetTargetFPS", &cint) // fps :: Set target FPS (maximum)

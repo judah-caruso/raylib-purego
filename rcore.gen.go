@@ -421,6 +421,176 @@ func EndScissorMode() {
 	endScissorMode.void()
 }
 
+// Begin stereo rendering (requires VR simulator)
+func BeginVrStereoMode(config VrStereoConfig) {
+	a0 := VrStereoConfig(config)
+	beginVrStereoMode.void(unsafe.Pointer(&a0))
+}
+
+// End stereo rendering (requires VR simulator)
+func EndVrStereoMode() {
+	endVrStereoMode.void()
+}
+
+// Load VR stereo config for VR simulator device parameters
+func LoadVrStereoConfig(device VrDeviceInfo) (res VrStereoConfig) {
+	a0 := VrDeviceInfo(device)
+	loadVrStereoConfig.call(unsafe.Pointer(&res), unsafe.Pointer(&a0))
+	return res
+}
+
+// Unload VR stereo config
+func UnloadVrStereoConfig(config VrStereoConfig) {
+	a0 := VrStereoConfig(config)
+	unloadVrStereoConfig.void(unsafe.Pointer(&a0))
+}
+
+// Load shader from files and bind default locations
+func LoadShader(vsFileName string, fsFileName string) (res Shader) {
+	a0 := tocstring(vsFileName)
+	a1 := tocstring(fsFileName)
+	loadShader.call(unsafe.Pointer(&res), unsafe.Pointer(&a0), unsafe.Pointer(&a1))
+	return res
+}
+
+// Load shader from code strings and bind default locations
+func LoadShaderFromMemory(vsCode string, fsCode string) (res Shader) {
+	a0 := tocstring(vsCode)
+	a1 := tocstring(fsCode)
+	loadShaderFromMemory.call(unsafe.Pointer(&res), unsafe.Pointer(&a0), unsafe.Pointer(&a1))
+	return res
+}
+
+// Check if a shader is valid (loaded on GPU)
+func IsShaderValid(shader Shader) (res bool) {
+	a0 := Shader(shader)
+	res = isShaderValid.bool(unsafe.Pointer(&a0))
+	return res
+}
+
+// Get shader uniform location
+func GetShaderLocation(shader Shader, uniformName string) (res int32) {
+	a0 := Shader(shader)
+	a1 := tocstring(uniformName)
+	res = getShaderLocation.int32(unsafe.Pointer(&a0), unsafe.Pointer(&a1))
+	return res
+}
+
+// Get shader attribute location
+func GetShaderLocationAttrib(shader Shader, attribName string) (res int32) {
+	a0 := Shader(shader)
+	a1 := tocstring(attribName)
+	res = getShaderLocationAttrib.int32(unsafe.Pointer(&a0), unsafe.Pointer(&a1))
+	return res
+}
+
+// Set shader uniform value
+func SetShaderValue(shader Shader, locIndex int, value unsafe.Pointer, uniformType int) {
+	a0 := Shader(shader)
+	a1 := int64(locIndex)
+	a2 := unsafe.Pointer(value)
+	a3 := int64(uniformType)
+	setShaderValue.void(unsafe.Pointer(&a0), unsafe.Pointer(&a1), unsafe.Pointer(&a2), unsafe.Pointer(&a3))
+}
+
+// Set shader uniform value vector
+func SetShaderValueV(shader Shader, locIndex int, value unsafe.Pointer, uniformType int, count int) {
+	a0 := Shader(shader)
+	a1 := int64(locIndex)
+	a2 := unsafe.Pointer(value)
+	a3 := int64(uniformType)
+	a4 := int64(count)
+	setShaderValueV.void(unsafe.Pointer(&a0), unsafe.Pointer(&a1), unsafe.Pointer(&a2), unsafe.Pointer(&a3), unsafe.Pointer(&a4))
+}
+
+// Set shader uniform value (matrix 4x4)
+func SetShaderValueMatrix(shader Shader, locIndex int, mat Matrix) {
+	a0 := Shader(shader)
+	a1 := int64(locIndex)
+	a2 := Matrix(mat)
+	setShaderValueMatrix.void(unsafe.Pointer(&a0), unsafe.Pointer(&a1), unsafe.Pointer(&a2))
+}
+
+// Set shader uniform value for texture (sampler2d)
+func SetShaderValueTexture(shader Shader, locIndex int, texture Texture2D) {
+	a0 := Shader(shader)
+	a1 := int64(locIndex)
+	a2 := Texture2D(texture)
+	setShaderValueTexture.void(unsafe.Pointer(&a0), unsafe.Pointer(&a1), unsafe.Pointer(&a2))
+}
+
+// Unload shader from GPU memory (VRAM)
+func UnloadShader(shader Shader) {
+	a0 := Shader(shader)
+	unloadShader.void(unsafe.Pointer(&a0))
+}
+
+// Get a ray trace from screen position (i.e mouse)
+func GetScreenToWorldRay(position Vector2, camera Camera) (res Ray) {
+	a0 := Vector2(position)
+	a1 := Camera(camera)
+	getScreenToWorldRay.call(unsafe.Pointer(&res), unsafe.Pointer(&a0), unsafe.Pointer(&a1))
+	return res
+}
+
+// Get a ray trace from screen position (i.e mouse) in a viewport
+func GetScreenToWorldRayEx(position Vector2, camera Camera, width int, height int) (res Ray) {
+	a0 := Vector2(position)
+	a1 := Camera(camera)
+	a2 := int64(width)
+	a3 := int64(height)
+	getScreenToWorldRayEx.call(unsafe.Pointer(&res), unsafe.Pointer(&a0), unsafe.Pointer(&a1), unsafe.Pointer(&a2), unsafe.Pointer(&a3))
+	return res
+}
+
+// Get the screen space position for a 3d world space position
+func GetWorldToScreen(position Vector3, camera Camera) (res Vector2) {
+	a0 := Vector3(position)
+	a1 := Camera(camera)
+	getWorldToScreen.call(unsafe.Pointer(&res), unsafe.Pointer(&a0), unsafe.Pointer(&a1))
+	return res
+}
+
+// Get size position for a 3d world space position
+func GetWorldToScreenEx(position Vector3, camera Camera, width int, height int) (res Vector2) {
+	a0 := Vector3(position)
+	a1 := Camera(camera)
+	a2 := int64(width)
+	a3 := int64(height)
+	getWorldToScreenEx.call(unsafe.Pointer(&res), unsafe.Pointer(&a0), unsafe.Pointer(&a1), unsafe.Pointer(&a2), unsafe.Pointer(&a3))
+	return res
+}
+
+// Get the screen space position for a 2d camera world space position
+func GetWorldToScreen2D(position Vector2, camera Camera2D) (res Vector2) {
+	a0 := Vector2(position)
+	a1 := Camera2D(camera)
+	getWorldToScreen2D.call(unsafe.Pointer(&res), unsafe.Pointer(&a0), unsafe.Pointer(&a1))
+	return res
+}
+
+// Get the world space position for a 2d camera screen space position
+func GetScreenToWorld2D(position Vector2, camera Camera2D) (res Vector2) {
+	a0 := Vector2(position)
+	a1 := Camera2D(camera)
+	getScreenToWorld2D.call(unsafe.Pointer(&res), unsafe.Pointer(&a0), unsafe.Pointer(&a1))
+	return res
+}
+
+// Get camera transform matrix (view matrix)
+func GetCameraMatrix(camera Camera) (res Matrix) {
+	a0 := Camera(camera)
+	getCameraMatrix.call(unsafe.Pointer(&res), unsafe.Pointer(&a0))
+	return res
+}
+
+// Get camera 2d transform matrix
+func GetCameraMatrix2D(camera Camera2D) (res Matrix) {
+	a0 := Camera2D(camera)
+	getCameraMatrix2D.call(unsafe.Pointer(&res), unsafe.Pointer(&a0))
+	return res
+}
+
 // Set target FPS (maximum)
 func SetTargetFPS(fps int) {
 	a0 := int64(fps)

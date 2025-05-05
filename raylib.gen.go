@@ -5,10 +5,12 @@ package raylib
 import "github.com/judah-caruso/ffi-embeded"
 
 var (
-	tPixelFormat         = ucint
+	tPixelFormat         = cint
 	tPixelFormatPtr      = ptr
-	tCameraProjection    = ucint
+	tCameraProjection    = cint
 	tCameraProjectionPtr = ptr
+	tNPatchLayout        = cint
+	tNPatchLayoutPtr     = ptr
 	tVector2             = ffi.NewType(&float, &float)
 	tVector2Ptr          = ptr
 	tVector3             = ffi.NewType(&float, &float, &float)
@@ -17,18 +19,14 @@ var (
 	tVector4Ptr          = ptr
 	tQuaternion          = tVector4
 	tQuaternionPtr       = ptr
+	tMatrix              = ffi.NewType(&float, &float, &float, &float, &float, &float, &float, &float, &float, &float, &float, &float, &float, &float, &float, &float)
+	tMatrixPtr           = ptr
 	tColor               = ffi.NewType(&uchar, &uchar, &uchar, &uchar)
 	tColorPtr            = ptr
 	tRectangle           = ffi.NewType(&float, &float, &float, &float)
 	tRectanglePtr        = ptr
 	tImage               = ffi.NewType(&ptr, &cint, &cint, &cint, &tPixelFormat)
 	tImagePtr            = ptr
-	tCamera3D            = ffi.NewType(&tVector3, &tVector3, &tVector3, &float, &tCameraProjection)
-	tCamera3DPtr         = ptr
-	tCamera              = tCamera3D
-	tCameraPtr           = ptr
-	tCamera2D            = ffi.NewType(&tVector2, &tVector2, &float, &float)
-	tCamera2DPtr         = ptr
 	tTexture             = ffi.NewType(&ucint, &cint, &cint, &cint, &cint)
 	tTexturePtr          = ptr
 	tTexture2D           = tTexture
@@ -39,6 +37,40 @@ var (
 	tRenderTexturePtr    = ptr
 	tRenderTexture2D     = tRenderTexture
 	tRenderTexture2DPtr  = ptr
+	tNPatchInfo          = ffi.NewType(&tRectangle, &cint, &cint, &cint, &cint, &tNPatchLayout)
+	tNPatchInfoPtr       = ptr
+	tGlyphInfo           = ffi.NewType(&cint, &cint, &cint, &cint, &tImage)
+	tGlyphInfoPtr        = ptr
+	tFont                = ffi.NewType(&cint, &cint, &cint, &tTexture2D, &ptr, &ptr)
+	tFontPtr             = ptr
+	tCamera3D            = ffi.NewType(&tVector3, &tVector3, &tVector3, &float, &tCameraProjection)
+	tCamera3DPtr         = ptr
+	tCamera              = tCamera3D
+	tCameraPtr           = ptr
+	tCamera2D            = ffi.NewType(&tVector2, &tVector2, &float, &float)
+	tCamera2DPtr         = ptr
+	tMesh                = ffi.NewType(&cint, &cint, &ptr, &ptr, &ptr, &ptr, &ptr, &ptr, &ptr, &ptr, &ptr, &ptr, &ptr, &ptr, &cint, &ucint, &ptr)
+	tMeshPtr             = ptr
 	tShader              = ffi.NewType(&ucint, &ptr)
 	tShaderPtr           = ptr
+	tMaterialMap         = ffi.NewType(&tTexture2D, &tColor, &float)
+	tMaterialMapPtr      = ptr
+	tMaterial            = ffi.NewType(&tShader, &ptr, &ptr)
+	tMaterialPtr         = ptr
+	tTransform           = ffi.NewType(&tVector3, &tQuaternion, &tVector3)
+	tTransformPtr        = ptr
+	tBoneInfo            = ffi.NewType(&ptr, &cint)
+	tBoneInfoPtr         = ptr
+	tModel               = ffi.NewType(&tMatrix, &cint, &cint, &ptr, &ptr, &ptr, &cint, &ptr, &ptr)
+	tModelPtr            = ptr
+	tModelAnimation      = ffi.NewType(&cint, &cint, &ptr, &ptr, &ptr)
+	tModelAnimationPtr   = ptr
+	tRay                 = ffi.NewType(&tVector3, &tVector3)
+	tRayPtr              = ptr
+	tRayCollision        = ffi.NewType(&cbool, &float, &tVector3, &tVector3)
+	tRayCollisionPtr     = ptr
+	tVrDeviceInfo        = ffi.NewType(&cint, &cint, &float, &float, &float, &float, &float, &ptr, &ptr)
+	tVrDeviceInfoPtr     = ptr
+	tVrStereoConfig      = ffi.NewType(&ptr, &ptr, &ptr, &ptr, &ptr, &ptr, &ptr, &ptr)
+	tVrStereoConfigPtr   = ptr
 )

@@ -345,6 +345,7 @@ func generateFFITypes(filenames ...string) {
 					}
 
 					fmt.Fprintf(&code, "\t%s = ffi.NewType(", tName)
+
 					for i, field := range s.Fields.List {
 						var ft string
 
@@ -358,6 +359,8 @@ func generateFFITypes(filenames ...string) {
 
 							ft = "unsafe.Pointer"
 						case *ast.StarExpr:
+							ft = "unsafe.Pointer"
+						case *ast.ArrayType:
 							ft = "unsafe.Pointer"
 
 						default:
