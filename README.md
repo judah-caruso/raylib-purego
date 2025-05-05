@@ -17,7 +17,6 @@ func main() {
 	rl.InitWindow(960, 540, "Hello, World")
 	defer rl.CloseWindow()
 
-	pos := rl.Vector2{}
 	for !rl.WindowShouldClose() {
 		rl.BeginDrawing()
 		rl.ClearBackground(rl.Color{ 0, 0, 0, 255 })
