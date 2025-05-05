@@ -37,7 +37,7 @@ Because we're using libffi, we need to describe each procedure and type in rayli
 
 Note: This is mostly a proof of concept to see how feasible my idea was. Because of that, most of raylib isn't bound and the binding generation code is just bad. However, with the current systme in place, it shouldn't be very difficult to complete this library.
 
-[1] The library for the current target is embeded in the executable. This means you don't need to find the exact version of raylib for this library (5.5.0), or ship the raylib `.dll`, `.dylib`, or `.so` alongside your executable. The resulting executables will be larger, of course (`examples/first` is 6.3 MB when built on Mac) as we're bundling both `libffi` and `raylib`. The plus side is that this library "just works."
+[1] The library for the current target is embeded in the executable. This means you don't need to find the exact version of raylib for this library (5.5.0), or ship the raylib `.dll`, `.dylib`, or `.so` alongside your executable. The resulting executables will be larger, of course (`examples/first` is 4.09 MB when built for Windows), as we're bundling both `libffi` and `raylib`. The plus side is that this library "just works."
 
 ## Q&A
 
@@ -49,3 +49,5 @@ Note: This is mostly a proof of concept to see how feasible my idea was. Because
 - A: If a type is missing, add it to `raylib.go` and re-run `go generate`. If a procedure is missing, add it to the specific raylib module file (`rcore.go`, `rshapes.go`, etc.) and re-run `go generate`. I've made the `prep` procedure take something that looks roughly like a C procedure declaration to make it easier to bind things. The comments after the calls to `prep` are "magic" in that they will be attached to the generated Go wrapper. The comma-separated list at the start of the comment (before `::`) will be used to name the arguments in the Go wrapper. If you add anything, please submit a pull request!
 - **Q: Will WebAssembly be supported?**
 - A: Probably not, but I won't rule it out completely. The library would most likely have to change quite a bit. If WebAssembly is required for your project, you could use `raylib-purego` as a base and do something like [this](https://github.com/gen2brain/raylib-go/issues/356#issuecomment-1967521031). If you end up getting this to work, let me know! It'd be cool to see.
+- **Q: Why embed raylib in the executable?**
+- A: It makes this library much easier to use and simplifies cross-compilation.
