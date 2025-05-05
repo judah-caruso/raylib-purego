@@ -222,6 +222,11 @@ func generateGoFunctions(filenames ...string) {
 						procOrCast = "int64"
 					} else if goType == "uint" {
 						procOrCast = "uint64"
+					} else {
+						switch goType {
+						case "PixelFormat", "ConfigFlags", "CameraProjection", "NPatchLayout":
+							procOrCast = "uint64"
+						}
 					}
 
 					fmt.Fprintf(&body, "\ta%d := %s(%s)\n", i, procOrCast, argName)

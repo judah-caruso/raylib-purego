@@ -7,11 +7,11 @@ import "github.com/judah-caruso/ffi-embeded"
 var (
 	tConfigFlags         = ucint
 	tConfigFlagsPtr      = ptr
-	tPixelFormat         = cint
+	tPixelFormat         = ucint
 	tPixelFormatPtr      = ptr
-	tCameraProjection    = cint
+	tCameraProjection    = ucint
 	tCameraProjectionPtr = ptr
-	tNPatchLayout        = cint
+	tNPatchLayout        = ucint
 	tNPatchLayoutPtr     = ptr
 	tVector2             = ffi.NewType(&float, &float)
 	tVector2Ptr          = ptr

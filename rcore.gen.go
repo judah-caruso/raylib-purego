@@ -67,20 +67,20 @@ func IsWindowResized() (res bool) {
 
 // Check if one specific window flag is enabled
 func IsWindowState(flag ConfigFlags) (res bool) {
-	a0 := ConfigFlags(flag)
+	a0 := uint64(flag)
 	res = isWindowState.bool(unsafe.Pointer(&a0))
 	return res
 }
 
 // Set window configuration state using flags
 func SetWindowState(flags ConfigFlags) {
-	a0 := ConfigFlags(flags)
+	a0 := uint64(flags)
 	setWindowState.void(unsafe.Pointer(&a0))
 }
 
 // Clear window configuration state flags
 func ClearWindowState(flags ConfigFlags) {
-	a0 := ConfigFlags(flags)
+	a0 := uint64(flags)
 	clearWindowState.void(unsafe.Pointer(&a0))
 }
 
@@ -668,7 +668,7 @@ func TakeScreenshot(fileName string) {
 
 // Setup init configuration flags (view FLAGS)
 func SetConfigFlags(flags ConfigFlags) {
-	a0 := ConfigFlags(flags)
+	a0 := uint64(flags)
 	setConfigFlags.void(unsafe.Pointer(&a0))
 }
 

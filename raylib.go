@@ -38,7 +38,7 @@ const (
 
 // Pixel formats
 // NOTE: Support depends on OpenGL version and platform
-type PixelFormat int32
+type PixelFormat uint32
 
 const (
 	PixelFormatUncompressedGrayscale    PixelFormat = 1 + iota // 8 bit per pixel (no alpha)
@@ -68,7 +68,7 @@ const (
 )
 
 // Camera projection
-type CameraProjection int32
+type CameraProjection uint32
 
 const (
 	CameraPerspective CameraProjection = iota
@@ -76,7 +76,7 @@ const (
 )
 
 // N-patch layout
-type NPatchLayout int32
+type NPatchLayout uint32
 
 const (
 	NPatchNinePatch           NPatchLayout = iota // Npatch layout: 3x3 tiles
