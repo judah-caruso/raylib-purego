@@ -1,3 +1,4 @@
+//go:generate go run ./internal/generate
 package raylib
 
 import (
