@@ -22,3 +22,10 @@ func DrawPoint3D(position Vector3, color Color) {
 	a1 := Color(color)
 	internal.DrawPoint3D.Void(unsafe.Pointer(&a0), unsafe.Pointer(&a1))
 }
+
+// Draw a grid (centered at (0, 0, 0))
+func DrawGrid(slices int, spacing float32) {
+	a0 := int64(slices)
+	a1 := float32(spacing)
+	internal.DrawGrid.Void(unsafe.Pointer(&a0), unsafe.Pointer(&a1))
+}

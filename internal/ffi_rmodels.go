@@ -7,6 +7,7 @@ var (
 	// Basic geometric 3D shapes drawing functions
 	DrawLine3D  = bind(&void, "DrawLine3D", &tVector3, &tVector3, &tColor) // startPos, endPos, color :: Draw a line in 3D world space
 	DrawPoint3D = bind(&void, "DrawPoint3D", &tVector3, &tColor)           // position, color :: Draw a point in 3D space, actually a small line
+	DrawGrid    = bind(&void, "DrawGrid", &cint, &float)                   // slices, spacing :: Draw a grid (centered at (0, 0, 0))
 
 /*
 RLAPI void DrawCircle3D(Vector3 center, float radius, Vector3 rotationAxis, float rotationAngle, Color color); // Draw a circle in 3D world space
@@ -27,7 +28,6 @@ RLAPI void DrawCapsule(Vector3 startPos, Vector3 endPos, float radius, int slice
 RLAPI void DrawCapsuleWires(Vector3 startPos, Vector3 endPos, float radius, int slices, int rings, Color color); // Draw capsule wireframe with the center of its sphere caps at startPos and endPos
 RLAPI void DrawPlane(Vector3 centerPos, Vector2 size, Color color);                                      // Draw a plane XZ
 RLAPI void DrawRay(Ray ray, Color color);                                                                // Draw a ray line
-RLAPI void DrawGrid(int slices, float spacing);                                                          // Draw a grid (centered at (0, 0, 0))
 */
 
 //------------------------------------------------------------------------------------

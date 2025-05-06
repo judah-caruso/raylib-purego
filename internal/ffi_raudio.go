@@ -42,46 +42,43 @@ var (
 	LoadWaveSamples   = bind(&floatPtr, "LoadWaveSamples", &tWave)                // wave :: Load samples data from wave as a 32bit float data array
 	UnloadWaveSamples = bind(&void, "UnloadWaveSamples", &floatPtr)               // samples :: Unload samples data loaded with LoadWaveSamples()
 
-/*
-// Music management functions
-RLAPI Music LoadMusicStream(const char *fileName);                    // Load music stream from file
-RLAPI Music LoadMusicStreamFromMemory(const char *fileType, const unsigned char *data, int dataSize); // Load music stream from data
-RLAPI bool IsMusicValid(Music music);                                 // Checks if a music stream is valid (context and buffers initialized)
-RLAPI void UnloadMusicStream(Music music);                            // Unload music stream
-RLAPI void PlayMusicStream(Music music);                              // Start music playing
-RLAPI bool IsMusicStreamPlaying(Music music);                         // Check if music is playing
-RLAPI void UpdateMusicStream(Music music);                            // Updates buffers for music streaming
-RLAPI void StopMusicStream(Music music);                              // Stop music playing
-RLAPI void PauseMusicStream(Music music);                             // Pause music playing
-RLAPI void ResumeMusicStream(Music music);                            // Resume playing paused music
-RLAPI void SeekMusicStream(Music music, float position);              // Seek music to a position (in seconds)
-RLAPI void SetMusicVolume(Music music, float volume);                 // Set volume for music (1.0 is max level)
-RLAPI void SetMusicPitch(Music music, float pitch);                   // Set pitch for a music (1.0 is base level)
-RLAPI void SetMusicPan(Music music, float pan);                       // Set pan for a music (0.5 is center)
-RLAPI float GetMusicTimeLength(Music music);                          // Get music time length (in seconds)
-RLAPI float GetMusicTimePlayed(Music music);                          // Get current music time played (in seconds)
+	// Music management functions
+	LoadMusicStream           = bind(&tMusic, "LoadMusicStream", &cstr)                         // fileName :: Load music stream from file
+	LoadMusicStreamFromMemory = bind(&tMusic, "LoadMusicStreamFromMemory", &cstr, &ustr, &cint) // fileType, data, dataSize :: Load music stream from data
+	IsMusicValid              = bind(&cbool, "IsMusicValid", &tMusic)                           // music :: Checks if a music stream is valid (context and buffers initialized)
+	UnloadMusicStream         = bind(&void, "UnloadMusicStream", &tMusic)                       // music :: Unload music stream
+	PlayMusicStream           = bind(&void, "PlayMusicStream", &tMusic)                         // music :: Start music playing
+	IsMusicStreamPlaying      = bind(&cbool, "IsMusicStreamPlaying", &tMusic)                   // music :: Check if music is playing
+	UpdateMusicStream         = bind(&void, "UpdateMusicStream", &tMusic)                       // music :: Updates buffers for music streaming
+	StopMusicStream           = bind(&void, "StopMusicStream", &tMusic)                         // music :: Stop music playing
+	PauseMusicStream          = bind(&void, "PauseMusicStream", &tMusic)                        // music :: Pause music playing
+	ResumeMusicStream         = bind(&void, "ResumeMusicStream", &tMusic)                       // music :: Resume playing paused music
+	SeekMusicStream           = bind(&void, "SeekMusicStream", &tMusic, &float)                 // music, position :: Seek music to a position (in seconds)
+	SetMusicVolume            = bind(&void, "SetMusicVolume", &tMusic, &float)                  // music, volume :: Set volume for music (1.0 is max level)
+	SetMusicPitch             = bind(&void, "SetMusicPitch", &tMusic, &float)                   // music, pitch :: Set pitch for a music (1.0 is base level)
+	SetMusicPan               = bind(&void, "SetMusicPan", &tMusic, &float)                     // music, pan :: Set pan for a music (0.5 is center)
+	GetMusicTimeLength        = bind(&float, "GetMusicTimeLength", &tMusic)                     // music :: Get music time length (in seconds)
+	GetMusicTimePlayed        = bind(&float, "GetMusicTimePlayed", &tMusic)                     // music :: Get current music time played (in seconds)
 
-// AudioStream management functions
-RLAPI AudioStream LoadAudioStream(unsigned int sampleRate, unsigned int sampleSize, unsigned int channels); // Load audio stream (to stream raw audio pcm data)
-RLAPI bool IsAudioStreamValid(AudioStream stream);                    // Checks if an audio stream is valid (buffers initialized)
-RLAPI void UnloadAudioStream(AudioStream stream);                     // Unload audio stream and free memory
-RLAPI void UpdateAudioStream(AudioStream stream, const void *data, int frameCount); // Update audio stream buffers with data
-RLAPI bool IsAudioStreamProcessed(AudioStream stream);                // Check if any audio stream buffers requires refill
-RLAPI void PlayAudioStream(AudioStream stream);                       // Play audio stream
-RLAPI void PauseAudioStream(AudioStream stream);                      // Pause audio stream
-RLAPI void ResumeAudioStream(AudioStream stream);                     // Resume audio stream
-RLAPI bool IsAudioStreamPlaying(AudioStream stream);                  // Check if audio stream is playing
-RLAPI void StopAudioStream(AudioStream stream);                       // Stop audio stream
-RLAPI void SetAudioStreamVolume(AudioStream stream, float volume);    // Set volume for audio stream (1.0 is max level)
-RLAPI void SetAudioStreamPitch(AudioStream stream, float pitch);      // Set pitch for audio stream (1.0 is base level)
-RLAPI void SetAudioStreamPan(AudioStream stream, float pan);          // Set pan for audio stream (0.5 is centered)
-RLAPI void SetAudioStreamBufferSizeDefault(int size);                 // Default size for new audio streams
-RLAPI void SetAudioStreamCallback(AudioStream stream, AudioCallback callback); // Audio thread callback to request new data
+	// AudioStream management functions
+	LoadAudioStream                 = bind(&tAudioStream, "LoadAudioStream", &ucint, &ucint, &ucint) // sampleRate, sampleSize, channels :: Load audio stream (to stream raw audio pcm data)
+	IsAudioStreamValid              = bind(&cbool, "IsAudioStreamValid", &tAudioStream)              // stream :: Checks if an audio stream is valid (buffers initialized)
+	UnloadAudioStream               = bind(&void, "UnloadAudioStream", &tAudioStream)                // stream :: Unload audio stream and free memory
+	UpdateAudioStream               = bind(&void, "UpdateAudioStream", &tAudioStream, &ptr, &cint)   // stream, data, frameCount :: Update audio stream buffers with data
+	IsAudioStreamProcessed          = bind(&cbool, "IsAudioStreamProcessed", &tAudioStream)          // stream :: Check if any audio stream buffers requires refill
+	PlayAudioStream                 = bind(&void, "PlayAudioStream", &tAudioStream)                  // stream :: Play audio stream
+	PauseAudioStream                = bind(&void, "PauseAudioStream", &tAudioStream)                 // stream :: Pause audio stream
+	ResumeAudioStream               = bind(&void, "ResumeAudioStream", &tAudioStream)                // stream :: Resume audio stream
+	IsAudioStreamPlaying            = bind(&cbool, "IsAudioStreamPlaying", &tAudioStream)            // stream :: Check if audio stream is playing
+	StopAudioStream                 = bind(&void, "StopAudioStream", &tAudioStream)                  // stream :: Stop audio stream
+	SetAudioStreamVolume            = bind(&void, "SetAudioStreamVolume", &tAudioStream, &float)     // stream, volume :: Set volume for audio stream (1.0 is max level)
+	SetAudioStreamPitch             = bind(&void, "SetAudioStreamPitch", &tAudioStream, &float)      // stream, pitch :: Set pitch for audio stream (1.0 is base level)
+	SetAudioStreamPan               = bind(&void, "SetAudioStreamPan", &tAudioStream, &float)        // stream, pan :: Set pan for audio stream (0.5 is centered)
+	SetAudioStreamBufferSizeDefault = bind(&void, "SetAudioStreamBufferSizeDefault", &cint)          // stream, size :: Default size for new audio streams
 
-RLAPI void AttachAudioStreamProcessor(AudioStream stream, AudioCallback processor); // Attach audio stream processor to stream, receives the samples as 'float'
-RLAPI void DetachAudioStreamProcessor(AudioStream stream, AudioCallback processor); // Detach audio stream processor from stream
-
-RLAPI void AttachAudioMixedProcessor(AudioCallback processor); // Attach audio stream processor to the entire audio pipeline, receives the samples as 'float'
-RLAPI void DetachAudioMixedProcessor(AudioCallback processor); // Detach audio stream processor from the entire audio pipeline
-*/
+	// SetAudioStreamCallback     = bind(&void, "SetAudioStreamCallback", &tAudioStream, AudioCallback)     // stream, callback :: Audio thread callback to request new data
+	// AttachAudioStreamProcessor = bind(&void, "AttachAudioStreamProcessor", &tAudioStream, AudioCallback) // stream, processor :: Attach audio stream processor to stream, receives the samples as 'float'
+	// DetachAudioStreamProcessor = bind(&void, "DetachAudioStreamProcessor", &tAudioStream, AudioCallback) // stream, processor :: Detach audio stream processor from stream
+	// AttachAudioMixedProcessor  = bind(&void, "AttachAudioMixedProcessor", AudioCallback)                 // processor :: Attach audio stream processor to the entire audio pipeline, receives the samples as 'float'
+	// DetachAudioMixedProcessor  = bind(&void, "DetachAudioMixedProcessor", AudioCallback)                 // processor :: Detach audio stream processor from the entire audio pipeline
 )

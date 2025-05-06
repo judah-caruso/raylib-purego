@@ -217,3 +217,206 @@ func UnloadWaveSamples(samples *float32) {
 	a0 := (*float32)(samples)
 	internal.UnloadWaveSamples.Void(unsafe.Pointer(&a0))
 }
+
+// Load music stream from file
+func LoadMusicStream(fileName string) (res Music) {
+	a0 := tocstring(fileName)
+	internal.LoadMusicStream.Call(unsafe.Pointer(&res), unsafe.Pointer(&a0))
+	return res
+}
+
+// Load music stream from data
+func LoadMusicStreamFromMemory(fileType string, data string, dataSize int) (res Music) {
+	a0 := tocstring(fileType)
+	a1 := tocstring(data)
+	a2 := int64(dataSize)
+	internal.LoadMusicStreamFromMemory.Call(unsafe.Pointer(&res), unsafe.Pointer(&a0), unsafe.Pointer(&a1), unsafe.Pointer(&a2))
+	return res
+}
+
+// Checks if a music stream is valid (context and buffers initialized)
+func IsMusicValid(music Music) (res bool) {
+	a0 := Music(music)
+	res = internal.IsMusicValid.Bool(unsafe.Pointer(&a0))
+	return res
+}
+
+// Unload music stream
+func UnloadMusicStream(music Music) {
+	a0 := Music(music)
+	internal.UnloadMusicStream.Void(unsafe.Pointer(&a0))
+}
+
+// Start music playing
+func PlayMusicStream(music Music) {
+	a0 := Music(music)
+	internal.PlayMusicStream.Void(unsafe.Pointer(&a0))
+}
+
+// Check if music is playing
+func IsMusicStreamPlaying(music Music) (res bool) {
+	a0 := Music(music)
+	res = internal.IsMusicStreamPlaying.Bool(unsafe.Pointer(&a0))
+	return res
+}
+
+// Updates buffers for music streaming
+func UpdateMusicStream(music Music) {
+	a0 := Music(music)
+	internal.UpdateMusicStream.Void(unsafe.Pointer(&a0))
+}
+
+// Stop music playing
+func StopMusicStream(music Music) {
+	a0 := Music(music)
+	internal.StopMusicStream.Void(unsafe.Pointer(&a0))
+}
+
+// Pause music playing
+func PauseMusicStream(music Music) {
+	a0 := Music(music)
+	internal.PauseMusicStream.Void(unsafe.Pointer(&a0))
+}
+
+// Resume playing paused music
+func ResumeMusicStream(music Music) {
+	a0 := Music(music)
+	internal.ResumeMusicStream.Void(unsafe.Pointer(&a0))
+}
+
+// Seek music to a position (in seconds)
+func SeekMusicStream(music Music, position float32) {
+	a0 := Music(music)
+	a1 := float32(position)
+	internal.SeekMusicStream.Void(unsafe.Pointer(&a0), unsafe.Pointer(&a1))
+}
+
+// Set volume for music (1.0 is max level)
+func SetMusicVolume(music Music, volume float32) {
+	a0 := Music(music)
+	a1 := float32(volume)
+	internal.SetMusicVolume.Void(unsafe.Pointer(&a0), unsafe.Pointer(&a1))
+}
+
+// Set pitch for a music (1.0 is base level)
+func SetMusicPitch(music Music, pitch float32) {
+	a0 := Music(music)
+	a1 := float32(pitch)
+	internal.SetMusicPitch.Void(unsafe.Pointer(&a0), unsafe.Pointer(&a1))
+}
+
+// Set pan for a music (0.5 is center)
+func SetMusicPan(music Music, pan float32) {
+	a0 := Music(music)
+	a1 := float32(pan)
+	internal.SetMusicPan.Void(unsafe.Pointer(&a0), unsafe.Pointer(&a1))
+}
+
+// Get music time length (in seconds)
+func GetMusicTimeLength(music Music) (res float32) {
+	a0 := Music(music)
+	internal.GetMusicTimeLength.Call(unsafe.Pointer(&res), unsafe.Pointer(&a0))
+	return res
+}
+
+// Get current music time played (in seconds)
+func GetMusicTimePlayed(music Music) (res float32) {
+	a0 := Music(music)
+	internal.GetMusicTimePlayed.Call(unsafe.Pointer(&res), unsafe.Pointer(&a0))
+	return res
+}
+
+// Load audio stream (to stream raw audio pcm data)
+func LoadAudioStream(sampleRate uint, sampleSize uint, channels uint) (res AudioStream) {
+	a0 := uint64(sampleRate)
+	a1 := uint64(sampleSize)
+	a2 := uint64(channels)
+	internal.LoadAudioStream.Call(unsafe.Pointer(&res), unsafe.Pointer(&a0), unsafe.Pointer(&a1), unsafe.Pointer(&a2))
+	return res
+}
+
+// Checks if an audio stream is valid (buffers initialized)
+func IsAudioStreamValid(stream AudioStream) (res bool) {
+	a0 := AudioStream(stream)
+	res = internal.IsAudioStreamValid.Bool(unsafe.Pointer(&a0))
+	return res
+}
+
+// Unload audio stream and free memory
+func UnloadAudioStream(stream AudioStream) {
+	a0 := AudioStream(stream)
+	internal.UnloadAudioStream.Void(unsafe.Pointer(&a0))
+}
+
+// Update audio stream buffers with data
+func UpdateAudioStream(stream AudioStream, data unsafe.Pointer, frameCount int) {
+	a0 := AudioStream(stream)
+	a1 := unsafe.Pointer(data)
+	a2 := int64(frameCount)
+	internal.UpdateAudioStream.Void(unsafe.Pointer(&a0), unsafe.Pointer(&a1), unsafe.Pointer(&a2))
+}
+
+// Check if any audio stream buffers requires refill
+func IsAudioStreamProcessed(stream AudioStream) (res bool) {
+	a0 := AudioStream(stream)
+	res = internal.IsAudioStreamProcessed.Bool(unsafe.Pointer(&a0))
+	return res
+}
+
+// Play audio stream
+func PlayAudioStream(stream AudioStream) {
+	a0 := AudioStream(stream)
+	internal.PlayAudioStream.Void(unsafe.Pointer(&a0))
+}
+
+// Pause audio stream
+func PauseAudioStream(stream AudioStream) {
+	a0 := AudioStream(stream)
+	internal.PauseAudioStream.Void(unsafe.Pointer(&a0))
+}
+
+// Resume audio stream
+func ResumeAudioStream(stream AudioStream) {
+	a0 := AudioStream(stream)
+	internal.ResumeAudioStream.Void(unsafe.Pointer(&a0))
+}
+
+// Check if audio stream is playing
+func IsAudioStreamPlaying(stream AudioStream) (res bool) {
+	a0 := AudioStream(stream)
+	res = internal.IsAudioStreamPlaying.Bool(unsafe.Pointer(&a0))
+	return res
+}
+
+// Stop audio stream
+func StopAudioStream(stream AudioStream) {
+	a0 := AudioStream(stream)
+	internal.StopAudioStream.Void(unsafe.Pointer(&a0))
+}
+
+// Set volume for audio stream (1.0 is max level)
+func SetAudioStreamVolume(stream AudioStream, volume float32) {
+	a0 := AudioStream(stream)
+	a1 := float32(volume)
+	internal.SetAudioStreamVolume.Void(unsafe.Pointer(&a0), unsafe.Pointer(&a1))
+}
+
+// Set pitch for audio stream (1.0 is base level)
+func SetAudioStreamPitch(stream AudioStream, pitch float32) {
+	a0 := AudioStream(stream)
+	a1 := float32(pitch)
+	internal.SetAudioStreamPitch.Void(unsafe.Pointer(&a0), unsafe.Pointer(&a1))
+}
+
+// Set pan for audio stream (0.5 is centered)
+func SetAudioStreamPan(stream AudioStream, pan float32) {
+	a0 := AudioStream(stream)
+	a1 := float32(pan)
+	internal.SetAudioStreamPan.Void(unsafe.Pointer(&a0), unsafe.Pointer(&a1))
+}
+
+// Default size for new audio streams
+func SetAudioStreamBufferSizeDefault(stream int) {
+	a0 := int64(stream)
+	internal.SetAudioStreamBufferSizeDefault.Void(unsafe.Pointer(&a0))
+}
