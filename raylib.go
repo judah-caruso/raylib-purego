@@ -1,4 +1,3 @@
-//go:generate go run bindings/generate.go
 package raylib
 
 import (
@@ -825,4 +824,15 @@ const (
 	NPatchNinePatch           NPatchLayout = iota // Npatch layout: 3x3 tiles
 	NPatchThreePatchVertical                      // Npatch layout: 1x3 tiles
 	NPatchThreePatchHoizontal                     // Npatch layout: 3x1 tiles
+)
+
+// Callbacks
+
+type (
+// typedef void (*TraceLogCallback)(int logLevel, const char *text, va_list args)
+// typedef unsigned char *(*LoadFileDataCallback)(const char *fileName, int *dataSize);
+// typedef bool (*SaveFileDataCallback)(const char *fileName, void *data, int dataSize);
+// typedef char *(*LoadFileTextCallback)(const char *fileName);
+// typedef bool (*SaveFileTextCallback)(const char *fileName, char *text);
+// typedef void (*AudioCallback)(void *bufferData, unsigned int frames);
 )

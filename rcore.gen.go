@@ -9,402 +9,402 @@ func InitWindow(width int, height int, title string) {
 	a0 := int64(width)
 	a1 := int64(height)
 	a2 := tocstring(title)
-	initWindow.void(unsafe.Pointer(&a0), unsafe.Pointer(&a1), unsafe.Pointer(&a2))
+	initWindow.Void(unsafe.Pointer(&a0), unsafe.Pointer(&a1), unsafe.Pointer(&a2))
 }
 
 // Close window and unload OpenGL context
 func CloseWindow() {
-	closeWindow.void()
+	closeWindow.Void()
 }
 
 // Check if application should close (KEY_ESCAPE pressed or windows close icon clicked)
 func WindowShouldClose() (res bool) {
-	res = windowShouldClose.bool()
+	res = windowShouldClose.Bool()
 	return res
 }
 
 // Check if window has been initialized successfully
 func IsWindowReady() (res bool) {
-	res = isWindowReady.bool()
+	res = isWindowReady.Bool()
 	return res
 }
 
 // Check if window is currently fullscreen
 func IsWindowFullscreen() (res bool) {
-	res = isWindowFullscreen.bool()
+	res = isWindowFullscreen.Bool()
 	return res
 }
 
 // Check if window is currently hidden
 func IsWindowHidden() (res bool) {
-	res = isWindowHidden.bool()
+	res = isWindowHidden.Bool()
 	return res
 }
 
 // Check if window is currently minimized
 func IsWindowMinimized() (res bool) {
-	res = isWindowMinimized.bool()
+	res = isWindowMinimized.Bool()
 	return res
 }
 
 // Check if window is currently maximized
 func IsWindowMaximized() (res bool) {
-	res = isWindowMaximized.bool()
+	res = isWindowMaximized.Bool()
 	return res
 }
 
 // Check if window is currently focused
 func IsWindowFocused() (res bool) {
-	res = isWindowFocused.bool()
+	res = isWindowFocused.Bool()
 	return res
 }
 
 // Check if window has been resized last frame
 func IsWindowResized() (res bool) {
-	res = isWindowResized.bool()
+	res = isWindowResized.Bool()
 	return res
 }
 
 // Check if one specific window flag is enabled
 func IsWindowState(flag ConfigFlags) (res bool) {
 	a0 := uint64(flag)
-	res = isWindowState.bool(unsafe.Pointer(&a0))
+	res = isWindowState.Bool(unsafe.Pointer(&a0))
 	return res
 }
 
 // Set window configuration state using flags
 func SetWindowState(flags ConfigFlags) {
 	a0 := uint64(flags)
-	setWindowState.void(unsafe.Pointer(&a0))
+	setWindowState.Void(unsafe.Pointer(&a0))
 }
 
 // Clear window configuration state flags
 func ClearWindowState(flags ConfigFlags) {
 	a0 := uint64(flags)
-	clearWindowState.void(unsafe.Pointer(&a0))
+	clearWindowState.Void(unsafe.Pointer(&a0))
 }
 
 // Toggle window state: fullscreen/windowed, resizes monitor to match window resolution
 func ToggleFullscreen() {
-	toggleFullscreen.void()
+	toggleFullscreen.Void()
 }
 
 // Toggle window state: borderless windowed, resizes window to match monitor resolution
 func ToggleBorderlessWindowed() {
-	toggleBorderlessWindowed.void()
+	toggleBorderlessWindowed.Void()
 }
 
 // Set window state: maximized, if resizable
 func MaximizeWindow() {
-	maximizeWindow.void()
+	maximizeWindow.Void()
 }
 
 // Set window state: minimized, if resizable
 func MinimizeWindow() {
-	minimizeWindow.void()
+	minimizeWindow.Void()
 }
 
 // Set window state: not minimized/maximized
 func RestoreWindow() {
-	restoreWindow.void()
+	restoreWindow.Void()
 }
 
 // Set icon for window (single image, RGBA 32bit)
 func SetWindowIcon(image Image) {
 	a0 := Image(image)
-	setWindowIcon.void(unsafe.Pointer(&a0))
+	setWindowIcon.Void(unsafe.Pointer(&a0))
 }
 
 // Set icon for window (multiple images, RGBA 32bit)
 func SetWindowIcons(images *Image, count int) {
 	a0 := (*Image)(images)
 	a1 := int64(count)
-	setWindowIcons.void(unsafe.Pointer(&a0), unsafe.Pointer(&a1))
+	setWindowIcons.Void(unsafe.Pointer(&a0), unsafe.Pointer(&a1))
 }
 
 // Set title for window
 func SetWindowTitle(title string) {
 	a0 := tocstring(title)
-	setWindowTitle.void(unsafe.Pointer(&a0))
+	setWindowTitle.Void(unsafe.Pointer(&a0))
 }
 
 // Set window position on screen
 func SetWindowPosition(x int, y int) {
 	a0 := int64(x)
 	a1 := int64(y)
-	setWindowPosition.void(unsafe.Pointer(&a0), unsafe.Pointer(&a1))
+	setWindowPosition.Void(unsafe.Pointer(&a0), unsafe.Pointer(&a1))
 }
 
 // Set monitor for the current window
 func SetWindowMonitor(monitor int) {
 	a0 := int64(monitor)
-	setWindowMonitor.void(unsafe.Pointer(&a0))
+	setWindowMonitor.Void(unsafe.Pointer(&a0))
 }
 
 // Set window minimum dimensions (for FLAG_WINDOW_RESIZABLE)
 func SetWindowMinSize(width int, height int) {
 	a0 := int64(width)
 	a1 := int64(height)
-	setWindowMinSize.void(unsafe.Pointer(&a0), unsafe.Pointer(&a1))
+	setWindowMinSize.Void(unsafe.Pointer(&a0), unsafe.Pointer(&a1))
 }
 
 // Set window maximum dimensions (for FLAG_WINDOW_RESIZABLE)
 func SetWindowMaxSize(width int, height int) {
 	a0 := int64(width)
 	a1 := int64(height)
-	setWindowMaxSize.void(unsafe.Pointer(&a0), unsafe.Pointer(&a1))
+	setWindowMaxSize.Void(unsafe.Pointer(&a0), unsafe.Pointer(&a1))
 }
 
 // Set window dimensions
 func SetWindowSize(width int, height int) {
 	a0 := int64(width)
 	a1 := int64(height)
-	setWindowSize.void(unsafe.Pointer(&a0), unsafe.Pointer(&a1))
+	setWindowSize.Void(unsafe.Pointer(&a0), unsafe.Pointer(&a1))
 }
 
 // Set window opacity [0.0f..1.0f]
 func SetWindowOpacity(opacity float32) {
 	a0 := float32(opacity)
-	setWindowOpacity.void(unsafe.Pointer(&a0))
+	setWindowOpacity.Void(unsafe.Pointer(&a0))
 }
 
 // Set window focused
 func SetWindowFocused() {
-	setWindowFocused.void()
+	setWindowFocused.Void()
 }
 
 // Get native window handle
 func GetWindowHandle() (res unsafe.Pointer) {
-	getWindowHandle.call(unsafe.Pointer(&res))
+	getWindowHandle.Call(unsafe.Pointer(&res))
 	return res
 }
 
 // Get current screen width
 func GetScreenWidth() (res int32) {
-	res = getScreenWidth.int32()
+	res = getScreenWidth.Int32()
 	return res
 }
 
 // Get current screen height
 func GetScreenHeight() (res int32) {
-	res = getScreenHeight.int32()
+	res = getScreenHeight.Int32()
 	return res
 }
 
 // Get current render width (it considers HiDPI)
 func GetRenderWidth() (res int32) {
-	res = getRenderWidth.int32()
+	res = getRenderWidth.Int32()
 	return res
 }
 
 // Get current render height (it considers HiDPI)
 func GetRenderHeight() (res int32) {
-	res = getRenderHeight.int32()
+	res = getRenderHeight.Int32()
 	return res
 }
 
 // Get number of connected monitors
 func GetMonitorCount() (res int32) {
-	res = getMonitorCount.int32()
+	res = getMonitorCount.Int32()
 	return res
 }
 
 // Get current monitor where window is placed
 func GetCurrentMonitor() (res int32) {
-	res = getCurrentMonitor.int32()
+	res = getCurrentMonitor.Int32()
 	return res
 }
 
 // Get specified monitor position
 func GetMonitorPosition(monitor int) (res Vector2) {
 	a0 := int64(monitor)
-	getMonitorPosition.call(unsafe.Pointer(&res), unsafe.Pointer(&a0))
+	getMonitorPosition.Call(unsafe.Pointer(&res), unsafe.Pointer(&a0))
 	return res
 }
 
 // Get specified monitor width (current video mode used by monitor)
 func GetMonitorWidth(monitor int) (res int32) {
 	a0 := int64(monitor)
-	res = getMonitorWidth.int32(unsafe.Pointer(&a0))
+	res = getMonitorWidth.Int32(unsafe.Pointer(&a0))
 	return res
 }
 
 // Get specified monitor height (current video mode used by monitor)
 func GetMonitorHeight(monitor int) (res int32) {
 	a0 := int64(monitor)
-	res = getMonitorHeight.int32(unsafe.Pointer(&a0))
+	res = getMonitorHeight.Int32(unsafe.Pointer(&a0))
 	return res
 }
 
 // Get specified monitor physical width in millimetres
 func GetMonitorPhysicalWidth(monitor int) (res int32) {
 	a0 := int64(monitor)
-	res = getMonitorPhysicalWidth.int32(unsafe.Pointer(&a0))
+	res = getMonitorPhysicalWidth.Int32(unsafe.Pointer(&a0))
 	return res
 }
 
 // Get specified monitor physical height in millimetres
 func GetMonitorPhysicalHeight(monitor int) (res int32) {
 	a0 := int64(monitor)
-	res = getMonitorPhysicalHeight.int32(unsafe.Pointer(&a0))
+	res = getMonitorPhysicalHeight.Int32(unsafe.Pointer(&a0))
 	return res
 }
 
 // Get specified monitor refresh rate
 func GetMonitorRefreshRate(monitor int) (res int32) {
 	a0 := int64(monitor)
-	res = getMonitorRefreshRate.int32(unsafe.Pointer(&a0))
+	res = getMonitorRefreshRate.Int32(unsafe.Pointer(&a0))
 	return res
 }
 
 // Get window position XY on monitor
 func GetWindowPosition() (res Vector2) {
-	getWindowPosition.call(unsafe.Pointer(&res))
+	getWindowPosition.Call(unsafe.Pointer(&res))
 	return res
 }
 
 // Get window scale DPI factor
 func GetWindowScaleDPI() (res Vector2) {
-	getWindowScaleDPI.call(unsafe.Pointer(&res))
+	getWindowScaleDPI.Call(unsafe.Pointer(&res))
 	return res
 }
 
 // Get the human-readable, UTF-8 encoded name of the specified monitor
 func GetMonitorName(monitor int) (res *byte) {
 	a0 := int64(monitor)
-	getMonitorName.call(unsafe.Pointer(&res), unsafe.Pointer(&a0))
+	getMonitorName.Call(unsafe.Pointer(&res), unsafe.Pointer(&a0))
 	return res
 }
 
 // Set clipboard text content
 func SetClipboardText(text string) {
 	a0 := tocstring(text)
-	setClipboardText.void(unsafe.Pointer(&a0))
+	setClipboardText.Void(unsafe.Pointer(&a0))
 }
 
 // Get clipboard text content
 func GetClipboardText() (res *byte) {
-	getClipboardText.call(unsafe.Pointer(&res))
+	getClipboardText.Call(unsafe.Pointer(&res))
 	return res
 }
 
 // Get clipboard image
 func GetClipboardImage() (res Image) {
-	getClipboardImage.call(unsafe.Pointer(&res))
+	getClipboardImage.Call(unsafe.Pointer(&res))
 	return res
 }
 
 // Enable waiting for events on EndDrawing(), no automatic event polling
 func EnableEventWaiting() {
-	enableEventWaiting.void()
+	enableEventWaiting.Void()
 }
 
 // Disable waiting for events on EndDrawing(), automatic events polling
 func DisableEventWaiting() {
-	disableEventWaiting.void()
+	disableEventWaiting.Void()
 }
 
 // Shows cursor
 func ShowCursor() {
-	showCursor.void()
+	showCursor.Void()
 }
 
 // Hides cursor
 func HideCursor() {
-	hideCursor.void()
+	hideCursor.Void()
 }
 
 // Check if cursor is not visible
 func IsCursorHidden() (res bool) {
-	res = isCursorHidden.bool()
+	res = isCursorHidden.Bool()
 	return res
 }
 
 // Enables cursor (unlock cursor)
 func EnableCursor() {
-	enableCursor.void()
+	enableCursor.Void()
 }
 
 // Disables cursor (lock cursor)
 func DisableCursor() {
-	disableCursor.void()
+	disableCursor.Void()
 }
 
 // Check if cursor is on the screen
 func IsCursorOnScreen() (res bool) {
-	res = isCursorOnScreen.bool()
+	res = isCursorOnScreen.Bool()
 	return res
 }
 
 // Set background color (framebuffer clear color)
 func ClearBackground(color Color) {
 	a0 := Color(color)
-	clearBackground.void(unsafe.Pointer(&a0))
+	clearBackground.Void(unsafe.Pointer(&a0))
 }
 
 // Setup canvas (framebuffer) to start drawing
 func BeginDrawing() {
-	beginDrawing.void()
+	beginDrawing.Void()
 }
 
 // End canvas drawing and swap buffers (double buffering)
 func EndDrawing() {
-	endDrawing.void()
+	endDrawing.Void()
 }
 
 // Begin 2D mode with custom camera (2D)
 func BeginMode2D(camera Camera2D) {
 	a0 := Camera2D(camera)
-	beginMode2D.void(unsafe.Pointer(&a0))
+	beginMode2D.Void(unsafe.Pointer(&a0))
 }
 
 // Ends 2D mode with custom camera
 func EndMode2D() {
-	endMode2D.void()
+	endMode2D.Void()
 }
 
 // Begin 3D mode with custom camera (3D)
 func BeginMode3D(camera Camera3D) {
 	a0 := Camera3D(camera)
-	beginMode3D.void(unsafe.Pointer(&a0))
+	beginMode3D.Void(unsafe.Pointer(&a0))
 }
 
 // Ends 3D mode and returns to default 2D orthographic mode
 func EndMode3D() {
-	endMode3D.void()
+	endMode3D.Void()
 }
 
 // Begin drawing to render texture
 func BeginTextureMode(target RenderTexture2D) {
 	a0 := RenderTexture2D(target)
-	beginTextureMode.void(unsafe.Pointer(&a0))
+	beginTextureMode.Void(unsafe.Pointer(&a0))
 }
 
 // Ends drawing to render texture
 func EndTextureMode() {
-	endTextureMode.void()
+	endTextureMode.Void()
 }
 
 // Begin custom shader drawing
 func BeginShaderMode(shader Shader) {
 	a0 := Shader(shader)
-	beginShaderMode.void(unsafe.Pointer(&a0))
+	beginShaderMode.Void(unsafe.Pointer(&a0))
 }
 
 // End custom shader drawing (use default shader)
 func EndShaderMode() {
-	endShaderMode.void()
+	endShaderMode.Void()
 }
 
 // Begin blending mode (alpha, additive, multiplied, subtract, custom)
 func BeginBlendMode(mode int) {
 	a0 := int64(mode)
-	beginBlendMode.void(unsafe.Pointer(&a0))
+	beginBlendMode.Void(unsafe.Pointer(&a0))
 }
 
 // End blending mode (reset to default: alpha blending)
 func EndBlendMode() {
-	endBlendMode.void()
+	endBlendMode.Void()
 }
 
 // Begin scissor mode (define screen area for following drawing)
@@ -413,43 +413,43 @@ func BeginScissorMode(x int, y int, width int, height int) {
 	a1 := int64(y)
 	a2 := int64(width)
 	a3 := int64(height)
-	beginScissorMode.void(unsafe.Pointer(&a0), unsafe.Pointer(&a1), unsafe.Pointer(&a2), unsafe.Pointer(&a3))
+	beginScissorMode.Void(unsafe.Pointer(&a0), unsafe.Pointer(&a1), unsafe.Pointer(&a2), unsafe.Pointer(&a3))
 }
 
 // End scissor mode
 func EndScissorMode() {
-	endScissorMode.void()
+	endScissorMode.Void()
 }
 
 // Begin stereo rendering (requires VR simulator)
 func BeginVrStereoMode(config VrStereoConfig) {
 	a0 := VrStereoConfig(config)
-	beginVrStereoMode.void(unsafe.Pointer(&a0))
+	beginVrStereoMode.Void(unsafe.Pointer(&a0))
 }
 
 // End stereo rendering (requires VR simulator)
 func EndVrStereoMode() {
-	endVrStereoMode.void()
+	endVrStereoMode.Void()
 }
 
 // Load VR stereo config for VR simulator device parameters
 func LoadVrStereoConfig(device VrDeviceInfo) (res VrStereoConfig) {
 	a0 := VrDeviceInfo(device)
-	loadVrStereoConfig.call(unsafe.Pointer(&res), unsafe.Pointer(&a0))
+	loadVrStereoConfig.Call(unsafe.Pointer(&res), unsafe.Pointer(&a0))
 	return res
 }
 
 // Unload VR stereo config
 func UnloadVrStereoConfig(config VrStereoConfig) {
 	a0 := VrStereoConfig(config)
-	unloadVrStereoConfig.void(unsafe.Pointer(&a0))
+	unloadVrStereoConfig.Void(unsafe.Pointer(&a0))
 }
 
 // Load shader from files and bind default locations
 func LoadShader(vsFileName string, fsFileName string) (res Shader) {
 	a0 := tocstring(vsFileName)
 	a1 := tocstring(fsFileName)
-	loadShader.call(unsafe.Pointer(&res), unsafe.Pointer(&a0), unsafe.Pointer(&a1))
+	loadShader.Call(unsafe.Pointer(&res), unsafe.Pointer(&a0), unsafe.Pointer(&a1))
 	return res
 }
 
@@ -457,14 +457,14 @@ func LoadShader(vsFileName string, fsFileName string) (res Shader) {
 func LoadShaderFromMemory(vsCode string, fsCode string) (res Shader) {
 	a0 := tocstring(vsCode)
 	a1 := tocstring(fsCode)
-	loadShaderFromMemory.call(unsafe.Pointer(&res), unsafe.Pointer(&a0), unsafe.Pointer(&a1))
+	loadShaderFromMemory.Call(unsafe.Pointer(&res), unsafe.Pointer(&a0), unsafe.Pointer(&a1))
 	return res
 }
 
 // Check if a shader is valid (loaded on GPU)
 func IsShaderValid(shader Shader) (res bool) {
 	a0 := Shader(shader)
-	res = isShaderValid.bool(unsafe.Pointer(&a0))
+	res = isShaderValid.Bool(unsafe.Pointer(&a0))
 	return res
 }
 
@@ -472,7 +472,7 @@ func IsShaderValid(shader Shader) (res bool) {
 func GetShaderLocation(shader Shader, uniformName string) (res int32) {
 	a0 := Shader(shader)
 	a1 := tocstring(uniformName)
-	res = getShaderLocation.int32(unsafe.Pointer(&a0), unsafe.Pointer(&a1))
+	res = getShaderLocation.Int32(unsafe.Pointer(&a0), unsafe.Pointer(&a1))
 	return res
 }
 
@@ -480,7 +480,7 @@ func GetShaderLocation(shader Shader, uniformName string) (res int32) {
 func GetShaderLocationAttrib(shader Shader, attribName string) (res int32) {
 	a0 := Shader(shader)
 	a1 := tocstring(attribName)
-	res = getShaderLocationAttrib.int32(unsafe.Pointer(&a0), unsafe.Pointer(&a1))
+	res = getShaderLocationAttrib.Int32(unsafe.Pointer(&a0), unsafe.Pointer(&a1))
 	return res
 }
 
@@ -490,7 +490,7 @@ func SetShaderValue(shader Shader, locIndex int, value unsafe.Pointer, uniformTy
 	a1 := int64(locIndex)
 	a2 := unsafe.Pointer(value)
 	a3 := int64(uniformType)
-	setShaderValue.void(unsafe.Pointer(&a0), unsafe.Pointer(&a1), unsafe.Pointer(&a2), unsafe.Pointer(&a3))
+	setShaderValue.Void(unsafe.Pointer(&a0), unsafe.Pointer(&a1), unsafe.Pointer(&a2), unsafe.Pointer(&a3))
 }
 
 // Set shader uniform value vector
@@ -500,7 +500,7 @@ func SetShaderValueV(shader Shader, locIndex int, value unsafe.Pointer, uniformT
 	a2 := unsafe.Pointer(value)
 	a3 := int64(uniformType)
 	a4 := int64(count)
-	setShaderValueV.void(unsafe.Pointer(&a0), unsafe.Pointer(&a1), unsafe.Pointer(&a2), unsafe.Pointer(&a3), unsafe.Pointer(&a4))
+	setShaderValueV.Void(unsafe.Pointer(&a0), unsafe.Pointer(&a1), unsafe.Pointer(&a2), unsafe.Pointer(&a3), unsafe.Pointer(&a4))
 }
 
 // Set shader uniform value (matrix 4x4)
@@ -508,7 +508,7 @@ func SetShaderValueMatrix(shader Shader, locIndex int, mat Matrix) {
 	a0 := Shader(shader)
 	a1 := int64(locIndex)
 	a2 := Matrix(mat)
-	setShaderValueMatrix.void(unsafe.Pointer(&a0), unsafe.Pointer(&a1), unsafe.Pointer(&a2))
+	setShaderValueMatrix.Void(unsafe.Pointer(&a0), unsafe.Pointer(&a1), unsafe.Pointer(&a2))
 }
 
 // Set shader uniform value for texture (sampler2d)
@@ -516,20 +516,20 @@ func SetShaderValueTexture(shader Shader, locIndex int, texture Texture2D) {
 	a0 := Shader(shader)
 	a1 := int64(locIndex)
 	a2 := Texture2D(texture)
-	setShaderValueTexture.void(unsafe.Pointer(&a0), unsafe.Pointer(&a1), unsafe.Pointer(&a2))
+	setShaderValueTexture.Void(unsafe.Pointer(&a0), unsafe.Pointer(&a1), unsafe.Pointer(&a2))
 }
 
 // Unload shader from GPU memory (VRAM)
 func UnloadShader(shader Shader) {
 	a0 := Shader(shader)
-	unloadShader.void(unsafe.Pointer(&a0))
+	unloadShader.Void(unsafe.Pointer(&a0))
 }
 
 // Get a ray trace from screen position (i.e mouse)
 func GetScreenToWorldRay(position Vector2, camera Camera) (res Ray) {
 	a0 := Vector2(position)
 	a1 := Camera(camera)
-	getScreenToWorldRay.call(unsafe.Pointer(&res), unsafe.Pointer(&a0), unsafe.Pointer(&a1))
+	getScreenToWorldRay.Call(unsafe.Pointer(&res), unsafe.Pointer(&a0), unsafe.Pointer(&a1))
 	return res
 }
 
@@ -539,7 +539,7 @@ func GetScreenToWorldRayEx(position Vector2, camera Camera, width int, height in
 	a1 := Camera(camera)
 	a2 := int64(width)
 	a3 := int64(height)
-	getScreenToWorldRayEx.call(unsafe.Pointer(&res), unsafe.Pointer(&a0), unsafe.Pointer(&a1), unsafe.Pointer(&a2), unsafe.Pointer(&a3))
+	getScreenToWorldRayEx.Call(unsafe.Pointer(&res), unsafe.Pointer(&a0), unsafe.Pointer(&a1), unsafe.Pointer(&a2), unsafe.Pointer(&a3))
 	return res
 }
 
@@ -547,7 +547,7 @@ func GetScreenToWorldRayEx(position Vector2, camera Camera, width int, height in
 func GetWorldToScreen(position Vector3, camera Camera) (res Vector2) {
 	a0 := Vector3(position)
 	a1 := Camera(camera)
-	getWorldToScreen.call(unsafe.Pointer(&res), unsafe.Pointer(&a0), unsafe.Pointer(&a1))
+	getWorldToScreen.Call(unsafe.Pointer(&res), unsafe.Pointer(&a0), unsafe.Pointer(&a1))
 	return res
 }
 
@@ -557,7 +557,7 @@ func GetWorldToScreenEx(position Vector3, camera Camera, width int, height int) 
 	a1 := Camera(camera)
 	a2 := int64(width)
 	a3 := int64(height)
-	getWorldToScreenEx.call(unsafe.Pointer(&res), unsafe.Pointer(&a0), unsafe.Pointer(&a1), unsafe.Pointer(&a2), unsafe.Pointer(&a3))
+	getWorldToScreenEx.Call(unsafe.Pointer(&res), unsafe.Pointer(&a0), unsafe.Pointer(&a1), unsafe.Pointer(&a2), unsafe.Pointer(&a3))
 	return res
 }
 
@@ -565,7 +565,7 @@ func GetWorldToScreenEx(position Vector3, camera Camera, width int, height int) 
 func GetWorldToScreen2D(position Vector2, camera Camera2D) (res Vector2) {
 	a0 := Vector2(position)
 	a1 := Camera2D(camera)
-	getWorldToScreen2D.call(unsafe.Pointer(&res), unsafe.Pointer(&a0), unsafe.Pointer(&a1))
+	getWorldToScreen2D.Call(unsafe.Pointer(&res), unsafe.Pointer(&a0), unsafe.Pointer(&a1))
 	return res
 }
 
@@ -573,75 +573,75 @@ func GetWorldToScreen2D(position Vector2, camera Camera2D) (res Vector2) {
 func GetScreenToWorld2D(position Vector2, camera Camera2D) (res Vector2) {
 	a0 := Vector2(position)
 	a1 := Camera2D(camera)
-	getScreenToWorld2D.call(unsafe.Pointer(&res), unsafe.Pointer(&a0), unsafe.Pointer(&a1))
+	getScreenToWorld2D.Call(unsafe.Pointer(&res), unsafe.Pointer(&a0), unsafe.Pointer(&a1))
 	return res
 }
 
 // Get camera transform matrix (view matrix)
 func GetCameraMatrix(camera Camera) (res Matrix) {
 	a0 := Camera(camera)
-	getCameraMatrix.call(unsafe.Pointer(&res), unsafe.Pointer(&a0))
+	getCameraMatrix.Call(unsafe.Pointer(&res), unsafe.Pointer(&a0))
 	return res
 }
 
 // Get camera 2d transform matrix
 func GetCameraMatrix2D(camera Camera2D) (res Matrix) {
 	a0 := Camera2D(camera)
-	getCameraMatrix2D.call(unsafe.Pointer(&res), unsafe.Pointer(&a0))
+	getCameraMatrix2D.Call(unsafe.Pointer(&res), unsafe.Pointer(&a0))
 	return res
 }
 
 // Set target FPS (maximum)
 func SetTargetFPS(fps int) {
 	a0 := int64(fps)
-	setTargetFPS.void(unsafe.Pointer(&a0))
+	setTargetFPS.Void(unsafe.Pointer(&a0))
 }
 
 // Get time in seconds for last frame drawn (delta time)
 func GetFrameTime() (res float32) {
-	getFrameTime.call(unsafe.Pointer(&res))
+	getFrameTime.Call(unsafe.Pointer(&res))
 	return res
 }
 
 // Get elapsed time in seconds since InitWindow()
 func GetTime() (res float64) {
-	getTime.call(unsafe.Pointer(&res))
+	getTime.Call(unsafe.Pointer(&res))
 	return res
 }
 
 // Get current FPS
 func GetFPS() (res int32) {
-	res = getFPS.int32()
+	res = getFPS.Int32()
 	return res
 }
 
 // Swap back buffer with front buffer (screen drawing)
 func SwapScreenBuffer() {
-	swapScreenBuffer.void()
+	swapScreenBuffer.Void()
 }
 
 // Register all input events
 func PollInputEvents() {
-	pollInputEvents.void()
+	pollInputEvents.Void()
 }
 
 // Wait for some time (halt program execution)
 func WaitTime(seconds float64) {
 	a0 := float64(seconds)
-	waitTime.void(unsafe.Pointer(&a0))
+	waitTime.Void(unsafe.Pointer(&a0))
 }
 
 // Set the seed for the random number generator
 func SetRandomSeed(seed uint) {
 	a0 := uint64(seed)
-	setRandomSeed.void(unsafe.Pointer(&a0))
+	setRandomSeed.Void(unsafe.Pointer(&a0))
 }
 
 // Get a random value between min and max (both included)
 func GetRandomValue(min int, max int) (res int32) {
 	a0 := int64(min)
 	a1 := int64(max)
-	res = getRandomValue.int32(unsafe.Pointer(&a0), unsafe.Pointer(&a1))
+	res = getRandomValue.Int32(unsafe.Pointer(&a0), unsafe.Pointer(&a1))
 	return res
 }
 
@@ -650,30 +650,691 @@ func LoadRandomSequence(count uint, min int, max int) (res int32) {
 	a0 := uint64(count)
 	a1 := int64(min)
 	a2 := int64(max)
-	res = loadRandomSequence.int32(unsafe.Pointer(&a0), unsafe.Pointer(&a1), unsafe.Pointer(&a2))
+	res = loadRandomSequence.Int32(unsafe.Pointer(&a0), unsafe.Pointer(&a1), unsafe.Pointer(&a2))
 	return res
 }
 
 // Unload random values sequence
 func UnloadRandomSequence(sequence unsafe.Pointer) {
 	a0 := unsafe.Pointer(sequence)
-	unloadRandomSequence.void(unsafe.Pointer(&a0))
+	unloadRandomSequence.Void(unsafe.Pointer(&a0))
 }
 
 // Takes a screenshot of current screen (filename extension defines format)
 func TakeScreenshot(fileName string) {
 	a0 := tocstring(fileName)
-	takeScreenshot.void(unsafe.Pointer(&a0))
+	takeScreenshot.Void(unsafe.Pointer(&a0))
 }
 
 // Setup init configuration flags (view FLAGS)
 func SetConfigFlags(flags ConfigFlags) {
 	a0 := uint64(flags)
-	setConfigFlags.void(unsafe.Pointer(&a0))
+	setConfigFlags.Void(unsafe.Pointer(&a0))
 }
 
 // Open URL with default system browser (if available)
 func OpenURL(url string) {
 	a0 := tocstring(url)
-	openURL.void(unsafe.Pointer(&a0))
+	openURL.Void(unsafe.Pointer(&a0))
+}
+
+// Set the current threshold (minimum) log level
+func SetTraceLogLevel(logLevel int) {
+	a0 := int64(logLevel)
+	setTraceLogLevel.Void(unsafe.Pointer(&a0))
+}
+
+// Internal memory allocator
+func MemAlloc(size uint) {
+	a0 := uint64(size)
+	memAlloc.Void(unsafe.Pointer(&a0))
+}
+
+// Internal memory reallocator
+func MemRealloc(ptr unsafe.Pointer, size int) {
+	a0 := unsafe.Pointer(ptr)
+	a1 := int64(size)
+	memRealloc.Void(unsafe.Pointer(&a0), unsafe.Pointer(&a1))
+}
+
+// Internal memory free
+func MemFree(arg0 unsafe.Pointer) {
+	a0 := unsafe.Pointer(arg0)
+	memFree.Void(unsafe.Pointer(&a0))
+}
+
+// Load file data as byte array (read)
+func LoadFileData(fileName string, dataSize *int32) (res *byte) {
+	a0 := tocstring(fileName)
+	a1 := (*int32)(dataSize)
+	loadFileData.Call(unsafe.Pointer(&res), unsafe.Pointer(&a0), unsafe.Pointer(&a1))
+	return res
+}
+
+// Unload file data allocated by LoadFileData()
+func UnloadFileData(data string) {
+	a0 := tocstring(data)
+	unloadFileData.Void(unsafe.Pointer(&a0))
+}
+
+// Save data to file from byte array (write), returns true on success
+func SaveFileData(fileName string, data unsafe.Pointer, dataSize int) (res bool) {
+	a0 := tocstring(fileName)
+	a1 := unsafe.Pointer(data)
+	a2 := int64(dataSize)
+	res = saveFileData.Bool(unsafe.Pointer(&a0), unsafe.Pointer(&a1), unsafe.Pointer(&a2))
+	return res
+}
+
+// Export data to code (.h), returns true on success
+func ExportDataAsCode(data string, dataSize int, fileName string) (res bool) {
+	a0 := tocstring(data)
+	a1 := int64(dataSize)
+	a2 := tocstring(fileName)
+	res = exportDataAsCode.Bool(unsafe.Pointer(&a0), unsafe.Pointer(&a1), unsafe.Pointer(&a2))
+	return res
+}
+
+// Load text data from file (read), returns a '\0' terminated string
+func LoadFileText(fileName string) (res *byte) {
+	a0 := tocstring(fileName)
+	loadFileText.Call(unsafe.Pointer(&res), unsafe.Pointer(&a0))
+	return res
+}
+
+// Unload file text data allocated by LoadFileText()
+func UnloadFileText(text string) {
+	a0 := tocstring(text)
+	unloadFileText.Void(unsafe.Pointer(&a0))
+}
+
+// Save text data to file (write), string must be '\0' terminated, returns true on success
+func SaveFileText(fileName string, text string) (res bool) {
+	a0 := tocstring(fileName)
+	a1 := tocstring(text)
+	res = saveFileText.Bool(unsafe.Pointer(&a0), unsafe.Pointer(&a1))
+	return res
+}
+
+// Check if file exists
+func FileExists(fileName string) (res bool) {
+	a0 := tocstring(fileName)
+	res = fileExists.Bool(unsafe.Pointer(&a0))
+	return res
+}
+
+// Check if a directory path exists
+func DirectoryExists(dirPath string) (res bool) {
+	a0 := tocstring(dirPath)
+	res = directoryExists.Bool(unsafe.Pointer(&a0))
+	return res
+}
+
+// Check file extension (including point: .png, .wav)
+func IsFileExtension(fileName string, ext string) (res bool) {
+	a0 := tocstring(fileName)
+	a1 := tocstring(ext)
+	res = isFileExtension.Bool(unsafe.Pointer(&a0), unsafe.Pointer(&a1))
+	return res
+}
+
+// Get file length in bytes (NOTE: GetFileSize() conflicts with windows.h)
+func GetFileLength(fileName string) (res int32) {
+	a0 := tocstring(fileName)
+	res = getFileLength.Int32(unsafe.Pointer(&a0))
+	return res
+}
+
+// Get pointer to extension for a filename string (includes dot: '.png')
+func GetFileExtension(fileName string) (res *byte) {
+	a0 := tocstring(fileName)
+	getFileExtension.Call(unsafe.Pointer(&res), unsafe.Pointer(&a0))
+	return res
+}
+
+// Get pointer to filename for a path string
+func GetFileName(filePath string) (res *byte) {
+	a0 := tocstring(filePath)
+	getFileName.Call(unsafe.Pointer(&res), unsafe.Pointer(&a0))
+	return res
+}
+
+// Get filename string without extension (uses static string)
+func GetFileNameWithoutExt(filePath string) (res *byte) {
+	a0 := tocstring(filePath)
+	getFileNameWithoutExt.Call(unsafe.Pointer(&res), unsafe.Pointer(&a0))
+	return res
+}
+
+// Get full path for a given fileName with path (uses static string)
+func GetDirectoryPath(filePath string) (res *byte) {
+	a0 := tocstring(filePath)
+	getDirectoryPath.Call(unsafe.Pointer(&res), unsafe.Pointer(&a0))
+	return res
+}
+
+// Get previous directory path for a given path (uses static string)
+func GetPrevDirectoryPath(dirPath string) (res *byte) {
+	a0 := tocstring(dirPath)
+	getPrevDirectoryPath.Call(unsafe.Pointer(&res), unsafe.Pointer(&a0))
+	return res
+}
+
+// Get current working directory (uses static string)
+func GetWorkingDirectory() (res *byte) {
+	getWorkingDirectory.Call(unsafe.Pointer(&res))
+	return res
+}
+
+// Get the directory of the running application (uses static string)
+func GetApplicationDirectory() (res *byte) {
+	getApplicationDirectory.Call(unsafe.Pointer(&res))
+	return res
+}
+
+// Create directories (including full path requested), returns 0 on success
+func MakeDirectory(dirPath string) (res int32) {
+	a0 := tocstring(dirPath)
+	res = makeDirectory.Int32(unsafe.Pointer(&a0))
+	return res
+}
+
+// Change working directory, return true on success
+func ChangeDirectory(dir string) (res bool) {
+	a0 := tocstring(dir)
+	res = changeDirectory.Bool(unsafe.Pointer(&a0))
+	return res
+}
+
+// Check if a given path is a file or a directory
+func IsPathFile(path string) (res bool) {
+	a0 := tocstring(path)
+	res = isPathFile.Bool(unsafe.Pointer(&a0))
+	return res
+}
+
+// Check if fileName is valid for the platform/OS
+func IsFileNameValid(fileName string) (res bool) {
+	a0 := tocstring(fileName)
+	res = isFileNameValid.Bool(unsafe.Pointer(&a0))
+	return res
+}
+
+// Load directory filepaths
+func LoadDirectoryFiles(dirPath string) (res FilePathList) {
+	a0 := tocstring(dirPath)
+	loadDirectoryFiles.Call(unsafe.Pointer(&res), unsafe.Pointer(&a0))
+	return res
+}
+
+// Load directory filepaths with extension filtering and recursive directory scan. Use 'DIR' in the filter string to include directories in the result
+func LoadDirectoryFilesEx(basePath string, filter string, scanSubdirs bool) (res FilePathList) {
+	a0 := tocstring(basePath)
+	a1 := tocstring(filter)
+	a2 := bool(scanSubdirs)
+	loadDirectoryFilesEx.Call(unsafe.Pointer(&res), unsafe.Pointer(&a0), unsafe.Pointer(&a1), unsafe.Pointer(&a2))
+	return res
+}
+
+// Unload filepaths
+func UnloadDirectoryFiles(files FilePathList) {
+	a0 := FilePathList(files)
+	unloadDirectoryFiles.Void(unsafe.Pointer(&a0))
+}
+
+// Check if a file has been dropped into window
+func IsFileDropped() (res bool) {
+	res = isFileDropped.Bool()
+	return res
+}
+
+// Load dropped filepaths
+func LoadDroppedFiles() (res FilePathList) {
+	loadDroppedFiles.Call(unsafe.Pointer(&res))
+	return res
+}
+
+// Unload dropped filepaths
+func UnloadDroppedFiles(files FilePathList) {
+	a0 := FilePathList(files)
+	unloadDroppedFiles.Void(unsafe.Pointer(&a0))
+}
+
+// Get file modification time (last write time)
+func GetFileModTime(fileName string) (res int64) {
+	a0 := tocstring(fileName)
+	res = getFileModTime.Int64(unsafe.Pointer(&a0))
+	return res
+}
+
+// Compress data (DEFLATE algorithm), memory must be MemFree()
+func CompressData(data string, dataSize int, compDataSize *int32) (res *byte) {
+	a0 := tocstring(data)
+	a1 := int64(dataSize)
+	a2 := (*int32)(compDataSize)
+	compressData.Call(unsafe.Pointer(&res), unsafe.Pointer(&a0), unsafe.Pointer(&a1), unsafe.Pointer(&a2))
+	return res
+}
+
+// Decompress data (DEFLATE algorithm), memory must be MemFree()
+func DecompressData(compData string, compDataSize int, dataSize *int32) (res *byte) {
+	a0 := tocstring(compData)
+	a1 := int64(compDataSize)
+	a2 := (*int32)(dataSize)
+	decompressData.Call(unsafe.Pointer(&res), unsafe.Pointer(&a0), unsafe.Pointer(&a1), unsafe.Pointer(&a2))
+	return res
+}
+
+// Encode data to Base64 string, memory must be MemFree()
+func EncodeDataBase64(data string, dataSize int, outputSize *int32) (res *byte) {
+	a0 := tocstring(data)
+	a1 := int64(dataSize)
+	a2 := (*int32)(outputSize)
+	encodeDataBase64.Call(unsafe.Pointer(&res), unsafe.Pointer(&a0), unsafe.Pointer(&a1), unsafe.Pointer(&a2))
+	return res
+}
+
+// Decode Base64 string data, memory must be MemFree()
+func DecodeDataBase64(data string, outputSize *int32) (res *byte) {
+	a0 := tocstring(data)
+	a1 := (*int32)(outputSize)
+	decodeDataBase64.Call(unsafe.Pointer(&res), unsafe.Pointer(&a0), unsafe.Pointer(&a1))
+	return res
+}
+
+// Compute CRC32 hash code
+func ComputeCRC32(data string, dataSize int) (res uint32) {
+	a0 := tocstring(data)
+	a1 := int64(dataSize)
+	res = computeCRC32.Uint32(unsafe.Pointer(&a0), unsafe.Pointer(&a1))
+	return res
+}
+
+// Compute MD5 hash code, returns static int[4] (16 bytes)
+func ComputeMD5(data string, dataSize int) (res *uint32) {
+	a0 := tocstring(data)
+	a1 := int64(dataSize)
+	computeMD5.Call(unsafe.Pointer(&res), unsafe.Pointer(&a0), unsafe.Pointer(&a1))
+	return res
+}
+
+// Compute SHA1 hash code, returns static int[5] (20 bytes)
+func ComputeSHA1(data string, dataSize int) (res *uint32) {
+	a0 := tocstring(data)
+	a1 := int64(dataSize)
+	computeSHA1.Call(unsafe.Pointer(&res), unsafe.Pointer(&a0), unsafe.Pointer(&a1))
+	return res
+}
+
+// Load automation events list from file, NULL for empty list, capacity = MAX_AUTOMATION_EVENTS
+func LoadAutomationEventList(fileName string) (res AutomationEventList) {
+	a0 := tocstring(fileName)
+	loadAutomationEventList.Call(unsafe.Pointer(&res), unsafe.Pointer(&a0))
+	return res
+}
+
+// Unload automation events list from file
+func UnloadAutomationEventList(list AutomationEventList) {
+	a0 := AutomationEventList(list)
+	unloadAutomationEventList.Void(unsafe.Pointer(&a0))
+}
+
+// Export automation events list as text file
+func ExportAutomationEventList(list AutomationEventList, fileName string) (res bool) {
+	a0 := AutomationEventList(list)
+	a1 := tocstring(fileName)
+	res = exportAutomationEventList.Bool(unsafe.Pointer(&a0), unsafe.Pointer(&a1))
+	return res
+}
+
+// Set automation event list to record to
+func SetAutomationEventList(list *AutomationEventList) {
+	a0 := (*AutomationEventList)(list)
+	setAutomationEventList.Void(unsafe.Pointer(&a0))
+}
+
+// Set automation event internal base frame to start recording
+func SetAutomationEventBaseFrame(frame int) {
+	a0 := int64(frame)
+	setAutomationEventBaseFrame.Void(unsafe.Pointer(&a0))
+}
+
+// Start recording automation events (AutomationEventList must be set)
+func StartAutomationEventRecording() {
+	startAutomationEventRecording.Void()
+}
+
+// Stop recording automation events
+func StopAutomationEventRecording() {
+	stopAutomationEventRecording.Void()
+}
+
+// Play a recorded automation event
+func PlayAutomationEvent(event AutomationEvent) {
+	a0 := AutomationEvent(event)
+	playAutomationEvent.Void(unsafe.Pointer(&a0))
+}
+
+// Check if a key has been pressed once
+func IsKeyPressed(key KeyboardKey) (res bool) {
+	a0 := uint64(key)
+	res = isKeyPressed.Bool(unsafe.Pointer(&a0))
+	return res
+}
+
+// Check if a key has been pressed again
+func IsKeyPressedRepeat(key KeyboardKey) (res bool) {
+	a0 := uint64(key)
+	res = isKeyPressedRepeat.Bool(unsafe.Pointer(&a0))
+	return res
+}
+
+// Check if a key is being pressed
+func IsKeyDown(key KeyboardKey) (res bool) {
+	a0 := uint64(key)
+	res = isKeyDown.Bool(unsafe.Pointer(&a0))
+	return res
+}
+
+// Check if a key has been released once
+func IsKeyReleased(key KeyboardKey) (res bool) {
+	a0 := uint64(key)
+	res = isKeyReleased.Bool(unsafe.Pointer(&a0))
+	return res
+}
+
+// Check if a key is NOT being pressed
+func IsKeyUp(key KeyboardKey) (res bool) {
+	a0 := uint64(key)
+	res = isKeyUp.Bool(unsafe.Pointer(&a0))
+	return res
+}
+
+// Get key pressed (keycode), call it multiple times for keys queued, returns 0 when the queue is empty
+func GetKeyPressed() (res KeyboardKey) {
+	getKeyPressed.Call(unsafe.Pointer(&res))
+	return res
+}
+
+// Get char pressed (unicode), call it multiple times for chars queued, returns 0 when the queue is empty
+func GetCharPressed() (res KeyboardKey) {
+	getCharPressed.Call(unsafe.Pointer(&res))
+	return res
+}
+
+// Set a custom key to exit program (default is ESC)
+func SetExitKey(key KeyboardKey) {
+	a0 := uint64(key)
+	setExitKey.Void(unsafe.Pointer(&a0))
+}
+
+// Check if a gamepad is available
+func IsGamepadAvailable(gamepad int) (res bool) {
+	a0 := int64(gamepad)
+	res = isGamepadAvailable.Bool(unsafe.Pointer(&a0))
+	return res
+}
+
+// Get gamepad internal name id
+func GetGamepadName(gamepad int) (res *byte) {
+	a0 := int64(gamepad)
+	getGamepadName.Call(unsafe.Pointer(&res), unsafe.Pointer(&a0))
+	return res
+}
+
+// Check if a gamepad button has been pressed once
+func IsGamepadButtonPressed(gamepad int, button GamepadButton) (res bool) {
+	a0 := int64(gamepad)
+	a1 := uint64(button)
+	res = isGamepadButtonPressed.Bool(unsafe.Pointer(&a0), unsafe.Pointer(&a1))
+	return res
+}
+
+// Check if a gamepad button is being pressed
+func IsGamepadButtonDown(gamepad int, button GamepadButton) (res bool) {
+	a0 := int64(gamepad)
+	a1 := uint64(button)
+	res = isGamepadButtonDown.Bool(unsafe.Pointer(&a0), unsafe.Pointer(&a1))
+	return res
+}
+
+// Check if a gamepad button has been released once
+func IsGamepadButtonReleased(gamepad int, button GamepadButton) (res bool) {
+	a0 := int64(gamepad)
+	a1 := uint64(button)
+	res = isGamepadButtonReleased.Bool(unsafe.Pointer(&a0), unsafe.Pointer(&a1))
+	return res
+}
+
+// Check if a gamepad button is NOT being pressed
+func IsGamepadButtonUp(gamepad int, button GamepadButton) (res bool) {
+	a0 := int64(gamepad)
+	a1 := uint64(button)
+	res = isGamepadButtonUp.Bool(unsafe.Pointer(&a0), unsafe.Pointer(&a1))
+	return res
+}
+
+// Get the last gamepad button pressed
+func GetGamepadButtonPressed() (res int32) {
+	res = getGamepadButtonPressed.Int32()
+	return res
+}
+
+// Get gamepad axis count for a gamepad
+func GetGamepadAxisCount(gamepad int) (res int32) {
+	a0 := int64(gamepad)
+	res = getGamepadAxisCount.Int32(unsafe.Pointer(&a0))
+	return res
+}
+
+// Get axis movement value for a gamepad axis
+func GetGamepadAxisMovement(gamepad int, axis GamepadAxis) (res float32) {
+	a0 := int64(gamepad)
+	a1 := uint64(axis)
+	getGamepadAxisMovement.Call(unsafe.Pointer(&res), unsafe.Pointer(&a0), unsafe.Pointer(&a1))
+	return res
+}
+
+// Set internal gamepad mappings (SDL_GameControllerDB)
+func SetGamepadMappings(mappings string) (res int32) {
+	a0 := tocstring(mappings)
+	res = setGamepadMappings.Int32(unsafe.Pointer(&a0))
+	return res
+}
+
+// Set gamepad vibration for both motors (duration in seconds)
+func SetGamepadVibration(gamepad int, leftMotor float32, rightMotor float32, duration float32) {
+	a0 := int64(gamepad)
+	a1 := float32(leftMotor)
+	a2 := float32(rightMotor)
+	a3 := float32(duration)
+	setGamepadVibration.Void(unsafe.Pointer(&a0), unsafe.Pointer(&a1), unsafe.Pointer(&a2), unsafe.Pointer(&a3))
+}
+
+// Check if a mouse button has been pressed once
+func IsMouseButtonPressed(button MouseButton) (res bool) {
+	a0 := uint64(button)
+	res = isMouseButtonPressed.Bool(unsafe.Pointer(&a0))
+	return res
+}
+
+// Check if a mouse button is being pressed
+func IsMouseButtonDown(button MouseButton) (res bool) {
+	a0 := uint64(button)
+	res = isMouseButtonDown.Bool(unsafe.Pointer(&a0))
+	return res
+}
+
+// Check if a mouse button has been released once
+func IsMouseButtonReleased(button MouseButton) (res bool) {
+	a0 := uint64(button)
+	res = isMouseButtonReleased.Bool(unsafe.Pointer(&a0))
+	return res
+}
+
+// Check if a mouse button is NOT being pressed
+func IsMouseButtonUp(button MouseButton) (res bool) {
+	a0 := uint64(button)
+	res = isMouseButtonUp.Bool(unsafe.Pointer(&a0))
+	return res
+}
+
+// Get mouse position X
+func GetMouseX() (res int32) {
+	res = getMouseX.Int32()
+	return res
+}
+
+// Get mouse position Y
+func GetMouseY() (res int32) {
+	res = getMouseY.Int32()
+	return res
+}
+
+// Get mouse position XY
+func GetMousePosition() (res Vector2) {
+	getMousePosition.Call(unsafe.Pointer(&res))
+	return res
+}
+
+// Get mouse delta between frames
+func GetMouseDelta() (res Vector2) {
+	getMouseDelta.Call(unsafe.Pointer(&res))
+	return res
+}
+
+// Set mouse position XY
+func SetMousePosition(x int, y int) {
+	a0 := int64(x)
+	a1 := int64(y)
+	setMousePosition.Void(unsafe.Pointer(&a0), unsafe.Pointer(&a1))
+}
+
+// Set mouse offset
+func SetMouseOffset(offsetX int, offsetY int) {
+	a0 := int64(offsetX)
+	a1 := int64(offsetY)
+	setMouseOffset.Void(unsafe.Pointer(&a0), unsafe.Pointer(&a1))
+}
+
+// Set mouse scaling
+func SetMouseScale(scaleX float32, scaleY float32) {
+	a0 := float32(scaleX)
+	a1 := float32(scaleY)
+	setMouseScale.Void(unsafe.Pointer(&a0), unsafe.Pointer(&a1))
+}
+
+// Get mouse wheel movement for X or Y, whichever is larger
+func GetMouseWheelMove() (res float32) {
+	getMouseWheelMove.Call(unsafe.Pointer(&res))
+	return res
+}
+
+// Get mouse wheel movement for both X and Y
+func GetMouseWheelMoveV() (res Vector2) {
+	getMouseWheelMoveV.Call(unsafe.Pointer(&res))
+	return res
+}
+
+// Set mouse cursor
+func SetMouseCursor(cursor MouseCursor) {
+	a0 := uint64(cursor)
+	setMouseCursor.Void(unsafe.Pointer(&a0))
+}
+
+// Get touch position X for touch point 0 (relative to screen size)
+func GetTouchX() (res int32) {
+	res = getTouchX.Int32()
+	return res
+}
+
+// Get touch position Y for touch point 0 (relative to screen size)
+func GetTouchY() (res int32) {
+	res = getTouchY.Int32()
+	return res
+}
+
+// Get touch position XY for a touch point index (relative to screen size)
+func GetTouchPosition(index int) (res Vector2) {
+	a0 := int64(index)
+	getTouchPosition.Call(unsafe.Pointer(&res), unsafe.Pointer(&a0))
+	return res
+}
+
+// Get touch point identifier for given index
+func GetTouchPointId(index int) (res int32) {
+	a0 := int64(index)
+	res = getTouchPointId.Int32(unsafe.Pointer(&a0))
+	return res
+}
+
+// Get number of touch points
+func GetTouchPointCount() (res int32) {
+	res = getTouchPointCount.Int32()
+	return res
+}
+
+// Enable a set of gestures using flags
+func SetGesturesEnabled(flags Gesture) {
+	a0 := uint64(flags)
+	setGesturesEnabled.Void(unsafe.Pointer(&a0))
+}
+
+// Check if a gesture have been detected
+func IsGestureDetected(gesture Gesture) (res bool) {
+	a0 := uint64(gesture)
+	res = isGestureDetected.Bool(unsafe.Pointer(&a0))
+	return res
+}
+
+// Get latest detected gesture
+func GetGestureDetected() (res int32) {
+	res = getGestureDetected.Int32()
+	return res
+}
+
+// Get gesture hold time in seconds
+func GetGestureHoldDuration() (res float32) {
+	getGestureHoldDuration.Call(unsafe.Pointer(&res))
+	return res
+}
+
+// Get gesture drag vector
+func GetGestureDragVector() (res Vector2) {
+	getGestureDragVector.Call(unsafe.Pointer(&res))
+	return res
+}
+
+// Get gesture drag angle
+func GetGestureDragAngle() (res float32) {
+	getGestureDragAngle.Call(unsafe.Pointer(&res))
+	return res
+}
+
+// Get gesture pinch delta
+func GetGesturePinchVector() (res Vector2) {
+	getGesturePinchVector.Call(unsafe.Pointer(&res))
+	return res
+}
+
+// Get gesture pinch angle
+func GetGesturePinchAngle() (res float32) {
+	getGesturePinchAngle.Call(unsafe.Pointer(&res))
+	return res
+}
+
+// Update camera position for selected mode
+func UpdateCamera(camera *Camera, mode CameraMode) {
+	a0 := (*Camera)(camera)
+	a1 := uint64(mode)
+	updateCamera.Void(unsafe.Pointer(&a0), unsafe.Pointer(&a1))
+}
+
+// Update camera movement/rotation
+func UpdateCameraPro(camera *Camera, movement Vector3, rotation Vector3, zoom float32) {
+	a0 := (*Camera)(camera)
+	a1 := Vector3(movement)
+	a2 := Vector3(rotation)
+	a3 := float32(zoom)
+	updateCameraPro.Void(unsafe.Pointer(&a0), unsafe.Pointer(&a1), unsafe.Pointer(&a2), unsafe.Pointer(&a3))
 }

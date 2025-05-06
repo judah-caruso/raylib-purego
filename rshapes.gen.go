@@ -8,18 +8,18 @@ import "unsafe"
 func SetShapesTexture(texture Texture2D, source Rectangle) {
 	a0 := Texture2D(texture)
 	a1 := Rectangle(source)
-	setShapesTexture.void(unsafe.Pointer(&a0), unsafe.Pointer(&a1))
+	setShapesTexture.Void(unsafe.Pointer(&a0), unsafe.Pointer(&a1))
 }
 
 // Get texture that is used for shapes drawing
 func GetShapesTexture() (res Texture2D) {
-	getShapesTexture.call(unsafe.Pointer(&res))
+	getShapesTexture.Call(unsafe.Pointer(&res))
 	return res
 }
 
 // Get texture source rectangle that is used for shapes drawing
 func GetShapesTextureRectangle() (res Rectangle) {
-	getShapesTextureRectangle.call(unsafe.Pointer(&res))
+	getShapesTextureRectangle.Call(unsafe.Pointer(&res))
 	return res
 }
 
@@ -28,14 +28,14 @@ func DrawPixel(posX int, posY int, color Color) {
 	a0 := int64(posX)
 	a1 := int64(posY)
 	a2 := Color(color)
-	drawPixel.void(unsafe.Pointer(&a0), unsafe.Pointer(&a1), unsafe.Pointer(&a2))
+	drawPixel.Void(unsafe.Pointer(&a0), unsafe.Pointer(&a1), unsafe.Pointer(&a2))
 }
 
 // Draw a pixel using geometry (Vector version) [Can be slow, use with care]
 func DrawPixelV(position Vector2, color Color) {
 	a0 := Vector2(position)
 	a1 := Color(color)
-	drawPixelV.void(unsafe.Pointer(&a0), unsafe.Pointer(&a1))
+	drawPixelV.Void(unsafe.Pointer(&a0), unsafe.Pointer(&a1))
 }
 
 // Draw a line
@@ -45,7 +45,7 @@ func DrawLine(startPosX int, startPosY int, endPosX int, endPosY int, color Colo
 	a2 := int64(endPosX)
 	a3 := int64(endPosY)
 	a4 := Color(color)
-	drawLine.void(unsafe.Pointer(&a0), unsafe.Pointer(&a1), unsafe.Pointer(&a2), unsafe.Pointer(&a3), unsafe.Pointer(&a4))
+	drawLine.Void(unsafe.Pointer(&a0), unsafe.Pointer(&a1), unsafe.Pointer(&a2), unsafe.Pointer(&a3), unsafe.Pointer(&a4))
 }
 
 // Draw a line (using gl lines)
@@ -53,7 +53,7 @@ func DrawLineV(startPos Vector2, endPos Vector2, color Color) {
 	a0 := Vector2(startPos)
 	a1 := Vector2(endPos)
 	a2 := Color(color)
-	drawLineV.void(unsafe.Pointer(&a0), unsafe.Pointer(&a1), unsafe.Pointer(&a2))
+	drawLineV.Void(unsafe.Pointer(&a0), unsafe.Pointer(&a1), unsafe.Pointer(&a2))
 }
 
 // Draw a line (using triangles/quads)
@@ -62,7 +62,7 @@ func DrawLineEx(startPos Vector2, endPos Vector2, thick float32, color Color) {
 	a1 := Vector2(endPos)
 	a2 := float32(thick)
 	a3 := Color(color)
-	drawLineEx.void(unsafe.Pointer(&a0), unsafe.Pointer(&a1), unsafe.Pointer(&a2), unsafe.Pointer(&a3))
+	drawLineEx.Void(unsafe.Pointer(&a0), unsafe.Pointer(&a1), unsafe.Pointer(&a2), unsafe.Pointer(&a3))
 }
 
 // Draw lines sequence (using gl lines)
@@ -70,7 +70,7 @@ func DrawLineStrip(points *Vector2, pointCount int, color Color) {
 	a0 := (*Vector2)(points)
 	a1 := int64(pointCount)
 	a2 := Color(color)
-	drawLineStrip.void(unsafe.Pointer(&a0), unsafe.Pointer(&a1), unsafe.Pointer(&a2))
+	drawLineStrip.Void(unsafe.Pointer(&a0), unsafe.Pointer(&a1), unsafe.Pointer(&a2))
 }
 
 // Draw line segment cubic-bezier in-out interpolation
@@ -79,7 +79,7 @@ func DrawLineBezier(startPos Vector2, endPos Vector2, thick float32, color Color
 	a1 := Vector2(endPos)
 	a2 := float32(thick)
 	a3 := Color(color)
-	drawLineBezier.void(unsafe.Pointer(&a0), unsafe.Pointer(&a1), unsafe.Pointer(&a2), unsafe.Pointer(&a3))
+	drawLineBezier.Void(unsafe.Pointer(&a0), unsafe.Pointer(&a1), unsafe.Pointer(&a2), unsafe.Pointer(&a3))
 }
 
 // Draw a color-filled circle
@@ -88,7 +88,7 @@ func DrawCircle(centerX int, centerY int, radius float32, color Color) {
 	a1 := int64(centerY)
 	a2 := float32(radius)
 	a3 := Color(color)
-	drawCircle.void(unsafe.Pointer(&a0), unsafe.Pointer(&a1), unsafe.Pointer(&a2), unsafe.Pointer(&a3))
+	drawCircle.Void(unsafe.Pointer(&a0), unsafe.Pointer(&a1), unsafe.Pointer(&a2), unsafe.Pointer(&a3))
 }
 
 // Draw a piece of a circle
@@ -99,7 +99,7 @@ func DrawCircleSector(center Vector2, radius float32, startAngle float32, endAng
 	a3 := float32(endAngle)
 	a4 := int64(segments)
 	a5 := Color(color)
-	drawCircleSector.void(unsafe.Pointer(&a0), unsafe.Pointer(&a1), unsafe.Pointer(&a2), unsafe.Pointer(&a3), unsafe.Pointer(&a4), unsafe.Pointer(&a5))
+	drawCircleSector.Void(unsafe.Pointer(&a0), unsafe.Pointer(&a1), unsafe.Pointer(&a2), unsafe.Pointer(&a3), unsafe.Pointer(&a4), unsafe.Pointer(&a5))
 }
 
 // Draw circle sector outline
@@ -110,7 +110,7 @@ func DrawCircleSectorLines(center Vector2, radius float32, startAngle float32, e
 	a3 := float32(endAngle)
 	a4 := int64(segments)
 	a5 := Color(color)
-	drawCircleSectorLines.void(unsafe.Pointer(&a0), unsafe.Pointer(&a1), unsafe.Pointer(&a2), unsafe.Pointer(&a3), unsafe.Pointer(&a4), unsafe.Pointer(&a5))
+	drawCircleSectorLines.Void(unsafe.Pointer(&a0), unsafe.Pointer(&a1), unsafe.Pointer(&a2), unsafe.Pointer(&a3), unsafe.Pointer(&a4), unsafe.Pointer(&a5))
 }
 
 // Draw a gradient-filled circle
@@ -120,7 +120,7 @@ func DrawCircleGradient(centerX int, centerY int, radius float32, inner Color, o
 	a2 := float32(radius)
 	a3 := Color(inner)
 	a4 := Color(outer)
-	drawCircleGradient.void(unsafe.Pointer(&a0), unsafe.Pointer(&a1), unsafe.Pointer(&a2), unsafe.Pointer(&a3), unsafe.Pointer(&a4))
+	drawCircleGradient.Void(unsafe.Pointer(&a0), unsafe.Pointer(&a1), unsafe.Pointer(&a2), unsafe.Pointer(&a3), unsafe.Pointer(&a4))
 }
 
 // Draw a color-filled circle (Vector version)
@@ -128,7 +128,7 @@ func DrawCircleV(center Vector2, radius float32, color Color) {
 	a0 := Vector2(center)
 	a1 := float32(radius)
 	a2 := Color(color)
-	drawCircleV.void(unsafe.Pointer(&a0), unsafe.Pointer(&a1), unsafe.Pointer(&a2))
+	drawCircleV.Void(unsafe.Pointer(&a0), unsafe.Pointer(&a1), unsafe.Pointer(&a2))
 }
 
 // Draw circle outline
@@ -137,7 +137,7 @@ func DrawCircleLines(centerX int, centerY int, radius float32, color Color) {
 	a1 := int64(centerY)
 	a2 := float32(radius)
 	a3 := Color(color)
-	drawCircleLines.void(unsafe.Pointer(&a0), unsafe.Pointer(&a1), unsafe.Pointer(&a2), unsafe.Pointer(&a3))
+	drawCircleLines.Void(unsafe.Pointer(&a0), unsafe.Pointer(&a1), unsafe.Pointer(&a2), unsafe.Pointer(&a3))
 }
 
 // Draw circle outline (Vector version)
@@ -145,7 +145,7 @@ func DrawCircleLinesV(center Vector2, radius float32, color Color) {
 	a0 := Vector2(center)
 	a1 := float32(radius)
 	a2 := Color(color)
-	drawCircleLinesV.void(unsafe.Pointer(&a0), unsafe.Pointer(&a1), unsafe.Pointer(&a2))
+	drawCircleLinesV.Void(unsafe.Pointer(&a0), unsafe.Pointer(&a1), unsafe.Pointer(&a2))
 }
 
 // Draw ellipse
@@ -155,7 +155,7 @@ func DrawEllipse(centerX int, centerY int, radiusH float32, radiusV float32, col
 	a2 := float32(radiusH)
 	a3 := float32(radiusV)
 	a4 := Color(color)
-	drawEllipse.void(unsafe.Pointer(&a0), unsafe.Pointer(&a1), unsafe.Pointer(&a2), unsafe.Pointer(&a3), unsafe.Pointer(&a4))
+	drawEllipse.Void(unsafe.Pointer(&a0), unsafe.Pointer(&a1), unsafe.Pointer(&a2), unsafe.Pointer(&a3), unsafe.Pointer(&a4))
 }
 
 // Draw ellipse outline
@@ -165,7 +165,7 @@ func DrawEllipseLines(centerX int, centerY int, radiusH float32, radiusV float32
 	a2 := float32(radiusH)
 	a3 := float32(radiusV)
 	a4 := Color(color)
-	drawEllipseLines.void(unsafe.Pointer(&a0), unsafe.Pointer(&a1), unsafe.Pointer(&a2), unsafe.Pointer(&a3), unsafe.Pointer(&a4))
+	drawEllipseLines.Void(unsafe.Pointer(&a0), unsafe.Pointer(&a1), unsafe.Pointer(&a2), unsafe.Pointer(&a3), unsafe.Pointer(&a4))
 }
 
 // Draw ring
@@ -177,7 +177,7 @@ func DrawRing(center Vector2, innerRadius float32, outerRadius float32, startAng
 	a4 := float32(endAngle)
 	a5 := int64(segments)
 	a6 := Color(color)
-	drawRing.void(unsafe.Pointer(&a0), unsafe.Pointer(&a1), unsafe.Pointer(&a2), unsafe.Pointer(&a3), unsafe.Pointer(&a4), unsafe.Pointer(&a5), unsafe.Pointer(&a6))
+	drawRing.Void(unsafe.Pointer(&a0), unsafe.Pointer(&a1), unsafe.Pointer(&a2), unsafe.Pointer(&a3), unsafe.Pointer(&a4), unsafe.Pointer(&a5), unsafe.Pointer(&a6))
 }
 
 // Draw ring outline
@@ -189,7 +189,7 @@ func DrawRingLines(center Vector2, innerRadius float32, outerRadius float32, sta
 	a4 := float32(endAngle)
 	a5 := int64(segments)
 	a6 := Color(color)
-	drawRingLines.void(unsafe.Pointer(&a0), unsafe.Pointer(&a1), unsafe.Pointer(&a2), unsafe.Pointer(&a3), unsafe.Pointer(&a4), unsafe.Pointer(&a5), unsafe.Pointer(&a6))
+	drawRingLines.Void(unsafe.Pointer(&a0), unsafe.Pointer(&a1), unsafe.Pointer(&a2), unsafe.Pointer(&a3), unsafe.Pointer(&a4), unsafe.Pointer(&a5), unsafe.Pointer(&a6))
 }
 
 // Draw a color-filled rectangle
@@ -199,7 +199,7 @@ func DrawRectangle(posX int, posY int, width int, height int, color Color) {
 	a2 := int64(width)
 	a3 := int64(height)
 	a4 := Color(color)
-	drawRectangle.void(unsafe.Pointer(&a0), unsafe.Pointer(&a1), unsafe.Pointer(&a2), unsafe.Pointer(&a3), unsafe.Pointer(&a4))
+	drawRectangle.Void(unsafe.Pointer(&a0), unsafe.Pointer(&a1), unsafe.Pointer(&a2), unsafe.Pointer(&a3), unsafe.Pointer(&a4))
 }
 
 // Draw a color-filled rectangle (Vector version)
@@ -207,14 +207,14 @@ func DrawRectangleV(position Vector2, size Vector2, color Color) {
 	a0 := Vector2(position)
 	a1 := Vector2(size)
 	a2 := Color(color)
-	drawRectangleV.void(unsafe.Pointer(&a0), unsafe.Pointer(&a1), unsafe.Pointer(&a2))
+	drawRectangleV.Void(unsafe.Pointer(&a0), unsafe.Pointer(&a1), unsafe.Pointer(&a2))
 }
 
 // Draw a color-filled rectangle
 func DrawRectangleRec(rec Rectangle, color Color) {
 	a0 := Rectangle(rec)
 	a1 := Color(color)
-	drawRectangleRec.void(unsafe.Pointer(&a0), unsafe.Pointer(&a1))
+	drawRectangleRec.Void(unsafe.Pointer(&a0), unsafe.Pointer(&a1))
 }
 
 // Draw a color-filled rectangle with pro parameters
@@ -223,7 +223,7 @@ func DrawRectanglePro(rec Rectangle, origin Vector2, rotation float32, color Col
 	a1 := Vector2(origin)
 	a2 := float32(rotation)
 	a3 := Color(color)
-	drawRectanglePro.void(unsafe.Pointer(&a0), unsafe.Pointer(&a1), unsafe.Pointer(&a2), unsafe.Pointer(&a3))
+	drawRectanglePro.Void(unsafe.Pointer(&a0), unsafe.Pointer(&a1), unsafe.Pointer(&a2), unsafe.Pointer(&a3))
 }
 
 // Draw a vertical-gradient-filled rectangle
@@ -234,7 +234,7 @@ func DrawRectangleGradientV(posX int, posY int, width int, height int, top Color
 	a3 := int64(height)
 	a4 := Color(top)
 	a5 := Color(bottom)
-	drawRectangleGradientV.void(unsafe.Pointer(&a0), unsafe.Pointer(&a1), unsafe.Pointer(&a2), unsafe.Pointer(&a3), unsafe.Pointer(&a4), unsafe.Pointer(&a5))
+	drawRectangleGradientV.Void(unsafe.Pointer(&a0), unsafe.Pointer(&a1), unsafe.Pointer(&a2), unsafe.Pointer(&a3), unsafe.Pointer(&a4), unsafe.Pointer(&a5))
 }
 
 // Draw a horizontal-gradient-filled rectangle
@@ -245,7 +245,7 @@ func DrawRectangleGradientH(posX int, posY int, width int, height int, left Colo
 	a3 := int64(height)
 	a4 := Color(left)
 	a5 := Color(right)
-	drawRectangleGradientH.void(unsafe.Pointer(&a0), unsafe.Pointer(&a1), unsafe.Pointer(&a2), unsafe.Pointer(&a3), unsafe.Pointer(&a4), unsafe.Pointer(&a5))
+	drawRectangleGradientH.Void(unsafe.Pointer(&a0), unsafe.Pointer(&a1), unsafe.Pointer(&a2), unsafe.Pointer(&a3), unsafe.Pointer(&a4), unsafe.Pointer(&a5))
 }
 
 // Draw a gradient-filled rectangle with custom vertex colors
@@ -255,7 +255,7 @@ func DrawRectangleGradientEx(rec Rectangle, topLeft Color, bottomLeft Color, top
 	a2 := Color(bottomLeft)
 	a3 := Color(topRight)
 	a4 := Color(bottomRight)
-	drawRectangleGradientEx.void(unsafe.Pointer(&a0), unsafe.Pointer(&a1), unsafe.Pointer(&a2), unsafe.Pointer(&a3), unsafe.Pointer(&a4))
+	drawRectangleGradientEx.Void(unsafe.Pointer(&a0), unsafe.Pointer(&a1), unsafe.Pointer(&a2), unsafe.Pointer(&a3), unsafe.Pointer(&a4))
 }
 
 // Draw rectangle outline
@@ -265,7 +265,7 @@ func DrawRectangleLines(posX int, posY int, width int, height int, color Color) 
 	a2 := int64(width)
 	a3 := int64(height)
 	a4 := Color(color)
-	drawRectangleLines.void(unsafe.Pointer(&a0), unsafe.Pointer(&a1), unsafe.Pointer(&a2), unsafe.Pointer(&a3), unsafe.Pointer(&a4))
+	drawRectangleLines.Void(unsafe.Pointer(&a0), unsafe.Pointer(&a1), unsafe.Pointer(&a2), unsafe.Pointer(&a3), unsafe.Pointer(&a4))
 }
 
 // Draw rectangle outline with extended parameters
@@ -273,7 +273,7 @@ func DrawRectangleLinesEx(rec Rectangle, lineThick float32, color Color) {
 	a0 := Rectangle(rec)
 	a1 := float32(lineThick)
 	a2 := Color(color)
-	drawRectangleLinesEx.void(unsafe.Pointer(&a0), unsafe.Pointer(&a1), unsafe.Pointer(&a2))
+	drawRectangleLinesEx.Void(unsafe.Pointer(&a0), unsafe.Pointer(&a1), unsafe.Pointer(&a2))
 }
 
 // Draw rectangle with rounded edges
@@ -282,7 +282,7 @@ func DrawRectangleRounded(rec Rectangle, roundness float32, segments int, color 
 	a1 := float32(roundness)
 	a2 := int64(segments)
 	a3 := Color(color)
-	drawRectangleRounded.void(unsafe.Pointer(&a0), unsafe.Pointer(&a1), unsafe.Pointer(&a2), unsafe.Pointer(&a3))
+	drawRectangleRounded.Void(unsafe.Pointer(&a0), unsafe.Pointer(&a1), unsafe.Pointer(&a2), unsafe.Pointer(&a3))
 }
 
 // Draw rectangle lines with rounded edges
@@ -291,7 +291,7 @@ func DrawRectangleRoundedLines(rec Rectangle, roundness float32, segments int, c
 	a1 := float32(roundness)
 	a2 := int64(segments)
 	a3 := Color(color)
-	drawRectangleRoundedLines.void(unsafe.Pointer(&a0), unsafe.Pointer(&a1), unsafe.Pointer(&a2), unsafe.Pointer(&a3))
+	drawRectangleRoundedLines.Void(unsafe.Pointer(&a0), unsafe.Pointer(&a1), unsafe.Pointer(&a2), unsafe.Pointer(&a3))
 }
 
 // Draw rectangle with rounded edges outline
@@ -301,7 +301,7 @@ func DrawRectangleRoundedLinesEx(rec Rectangle, roundness float32, segments int,
 	a2 := int64(segments)
 	a3 := float32(lineThick)
 	a4 := Color(color)
-	drawRectangleRoundedLinesEx.void(unsafe.Pointer(&a0), unsafe.Pointer(&a1), unsafe.Pointer(&a2), unsafe.Pointer(&a3), unsafe.Pointer(&a4))
+	drawRectangleRoundedLinesEx.Void(unsafe.Pointer(&a0), unsafe.Pointer(&a1), unsafe.Pointer(&a2), unsafe.Pointer(&a3), unsafe.Pointer(&a4))
 }
 
 // Draw a color-filled triangle (vertex in counter-clockwise order!)
@@ -310,7 +310,7 @@ func DrawTriangle(v1 Vector2, v2 Vector2, v3 Vector2, color Color) {
 	a1 := Vector2(v2)
 	a2 := Vector2(v3)
 	a3 := Color(color)
-	drawTriangle.void(unsafe.Pointer(&a0), unsafe.Pointer(&a1), unsafe.Pointer(&a2), unsafe.Pointer(&a3))
+	drawTriangle.Void(unsafe.Pointer(&a0), unsafe.Pointer(&a1), unsafe.Pointer(&a2), unsafe.Pointer(&a3))
 }
 
 // Draw triangle outline (vertex in counter-clockwise order!)
@@ -319,7 +319,7 @@ func DrawTriangleLines(v1 Vector2, v2 Vector2, v3 Vector2, color Color) {
 	a1 := Vector2(v2)
 	a2 := Vector2(v3)
 	a3 := Color(color)
-	drawTriangleLines.void(unsafe.Pointer(&a0), unsafe.Pointer(&a1), unsafe.Pointer(&a2), unsafe.Pointer(&a3))
+	drawTriangleLines.Void(unsafe.Pointer(&a0), unsafe.Pointer(&a1), unsafe.Pointer(&a2), unsafe.Pointer(&a3))
 }
 
 // Draw a triangle fan defined by points (first vertex is the center)
@@ -327,7 +327,7 @@ func DrawTriangleFan(points *Vector2, pointCount int, color Color) {
 	a0 := (*Vector2)(points)
 	a1 := int64(pointCount)
 	a2 := Color(color)
-	drawTriangleFan.void(unsafe.Pointer(&a0), unsafe.Pointer(&a1), unsafe.Pointer(&a2))
+	drawTriangleFan.Void(unsafe.Pointer(&a0), unsafe.Pointer(&a1), unsafe.Pointer(&a2))
 }
 
 // Draw a triangle strip defined by points
@@ -335,7 +335,7 @@ func DrawTriangleStrip(points *Vector2, pointCount int, color Color) {
 	a0 := (*Vector2)(points)
 	a1 := int64(pointCount)
 	a2 := Color(color)
-	drawTriangleStrip.void(unsafe.Pointer(&a0), unsafe.Pointer(&a1), unsafe.Pointer(&a2))
+	drawTriangleStrip.Void(unsafe.Pointer(&a0), unsafe.Pointer(&a1), unsafe.Pointer(&a2))
 }
 
 // Draw a regular polygon (Vector version)
@@ -345,7 +345,7 @@ func DrawPoly(center Vector2, sides int, radius float32, rotation float32, color
 	a2 := float32(radius)
 	a3 := float32(rotation)
 	a4 := Color(color)
-	drawPoly.void(unsafe.Pointer(&a0), unsafe.Pointer(&a1), unsafe.Pointer(&a2), unsafe.Pointer(&a3), unsafe.Pointer(&a4))
+	drawPoly.Void(unsafe.Pointer(&a0), unsafe.Pointer(&a1), unsafe.Pointer(&a2), unsafe.Pointer(&a3), unsafe.Pointer(&a4))
 }
 
 // Draw a polygon outline of n sides
@@ -355,7 +355,7 @@ func DrawPolyLines(center Vector2, sides int, radius float32, rotation float32, 
 	a2 := float32(radius)
 	a3 := float32(rotation)
 	a4 := Color(color)
-	drawPolyLines.void(unsafe.Pointer(&a0), unsafe.Pointer(&a1), unsafe.Pointer(&a2), unsafe.Pointer(&a3), unsafe.Pointer(&a4))
+	drawPolyLines.Void(unsafe.Pointer(&a0), unsafe.Pointer(&a1), unsafe.Pointer(&a2), unsafe.Pointer(&a3), unsafe.Pointer(&a4))
 }
 
 // Draw a polygon outline of n sides with extended parameters
@@ -366,7 +366,7 @@ func DrawPolyLinesEx(center Vector2, sides int, radius float32, rotation float32
 	a3 := float32(rotation)
 	a4 := float32(lineThick)
 	a5 := Color(color)
-	drawPolyLinesEx.void(unsafe.Pointer(&a0), unsafe.Pointer(&a1), unsafe.Pointer(&a2), unsafe.Pointer(&a3), unsafe.Pointer(&a4), unsafe.Pointer(&a5))
+	drawPolyLinesEx.Void(unsafe.Pointer(&a0), unsafe.Pointer(&a1), unsafe.Pointer(&a2), unsafe.Pointer(&a3), unsafe.Pointer(&a4), unsafe.Pointer(&a5))
 }
 
 // Draw spline: Linear, minimum 2 points
@@ -375,7 +375,7 @@ func DrawSplineLinear(points *Vector2, pointCount int, thick float32, color Colo
 	a1 := int64(pointCount)
 	a2 := float32(thick)
 	a3 := Color(color)
-	drawSplineLinear.void(unsafe.Pointer(&a0), unsafe.Pointer(&a1), unsafe.Pointer(&a2), unsafe.Pointer(&a3))
+	drawSplineLinear.Void(unsafe.Pointer(&a0), unsafe.Pointer(&a1), unsafe.Pointer(&a2), unsafe.Pointer(&a3))
 }
 
 // Draw spline: B-Spline, minimum 4 points
@@ -384,7 +384,7 @@ func DrawSplineBasis(points *Vector2, pointCount int, thick float32, color Color
 	a1 := int64(pointCount)
 	a2 := float32(thick)
 	a3 := Color(color)
-	drawSplineBasis.void(unsafe.Pointer(&a0), unsafe.Pointer(&a1), unsafe.Pointer(&a2), unsafe.Pointer(&a3))
+	drawSplineBasis.Void(unsafe.Pointer(&a0), unsafe.Pointer(&a1), unsafe.Pointer(&a2), unsafe.Pointer(&a3))
 }
 
 // Draw spline: Catmull-Rom, minimum 4 points
@@ -393,7 +393,7 @@ func DrawSplineCatmullRom(points *Vector2, pointCount int, thick float32, color 
 	a1 := int64(pointCount)
 	a2 := float32(thick)
 	a3 := Color(color)
-	drawSplineCatmullRom.void(unsafe.Pointer(&a0), unsafe.Pointer(&a1), unsafe.Pointer(&a2), unsafe.Pointer(&a3))
+	drawSplineCatmullRom.Void(unsafe.Pointer(&a0), unsafe.Pointer(&a1), unsafe.Pointer(&a2), unsafe.Pointer(&a3))
 }
 
 // Draw spline: Quadratic Bezier, minimum 3 points (1 control point): [p1, c2, p3, c4...]
@@ -402,7 +402,7 @@ func DrawSplineBezierQuadratic(points *Vector2, pointCount int, thick float32, c
 	a1 := int64(pointCount)
 	a2 := float32(thick)
 	a3 := Color(color)
-	drawSplineBezierQuadratic.void(unsafe.Pointer(&a0), unsafe.Pointer(&a1), unsafe.Pointer(&a2), unsafe.Pointer(&a3))
+	drawSplineBezierQuadratic.Void(unsafe.Pointer(&a0), unsafe.Pointer(&a1), unsafe.Pointer(&a2), unsafe.Pointer(&a3))
 }
 
 // Draw spline: Cubic Bezier, minimum 4 points (2 control points): [p1, c2, c3, p4, c5, c6...]
@@ -411,7 +411,7 @@ func DrawSplineBezierCubic(points *Vector2, pointCount int, thick float32, color
 	a1 := int64(pointCount)
 	a2 := float32(thick)
 	a3 := Color(color)
-	drawSplineBezierCubic.void(unsafe.Pointer(&a0), unsafe.Pointer(&a1), unsafe.Pointer(&a2), unsafe.Pointer(&a3))
+	drawSplineBezierCubic.Void(unsafe.Pointer(&a0), unsafe.Pointer(&a1), unsafe.Pointer(&a2), unsafe.Pointer(&a3))
 }
 
 // Draw spline segment: Linear, 2 points
@@ -420,7 +420,7 @@ func DrawSplineSegmentLinear(p1 Vector2, p2 Vector2, thick float32, color Color)
 	a1 := Vector2(p2)
 	a2 := float32(thick)
 	a3 := Color(color)
-	drawSplineSegmentLinear.void(unsafe.Pointer(&a0), unsafe.Pointer(&a1), unsafe.Pointer(&a2), unsafe.Pointer(&a3))
+	drawSplineSegmentLinear.Void(unsafe.Pointer(&a0), unsafe.Pointer(&a1), unsafe.Pointer(&a2), unsafe.Pointer(&a3))
 }
 
 // Draw spline segment: B-Spline, 4 points
@@ -431,7 +431,7 @@ func DrawSplineSegmentBasis(p1 Vector2, p2 Vector2, p3 Vector2, p4 Vector2, thic
 	a3 := Vector2(p4)
 	a4 := float32(thick)
 	a5 := Color(color)
-	drawSplineSegmentBasis.void(unsafe.Pointer(&a0), unsafe.Pointer(&a1), unsafe.Pointer(&a2), unsafe.Pointer(&a3), unsafe.Pointer(&a4), unsafe.Pointer(&a5))
+	drawSplineSegmentBasis.Void(unsafe.Pointer(&a0), unsafe.Pointer(&a1), unsafe.Pointer(&a2), unsafe.Pointer(&a3), unsafe.Pointer(&a4), unsafe.Pointer(&a5))
 }
 
 // Draw spline segment: Catmull-Rom, 4 points
@@ -442,7 +442,7 @@ func DrawSplineSegmentCatmullRom(p1 Vector2, p2 Vector2, p3 Vector2, p4 Vector2,
 	a3 := Vector2(p4)
 	a4 := float32(thick)
 	a5 := Color(color)
-	drawSplineSegmentCatmullRom.void(unsafe.Pointer(&a0), unsafe.Pointer(&a1), unsafe.Pointer(&a2), unsafe.Pointer(&a3), unsafe.Pointer(&a4), unsafe.Pointer(&a5))
+	drawSplineSegmentCatmullRom.Void(unsafe.Pointer(&a0), unsafe.Pointer(&a1), unsafe.Pointer(&a2), unsafe.Pointer(&a3), unsafe.Pointer(&a4), unsafe.Pointer(&a5))
 }
 
 // Draw spline segment: Quadratic Bezier, 2 points, 1 control point
@@ -452,7 +452,7 @@ func DrawSplineSegmentBezierQuadratic(p1 Vector2, c2 Vector2, p3 Vector2, thick 
 	a2 := Vector2(p3)
 	a3 := float32(thick)
 	a4 := Color(color)
-	drawSplineSegmentBezierQuadratic.void(unsafe.Pointer(&a0), unsafe.Pointer(&a1), unsafe.Pointer(&a2), unsafe.Pointer(&a3), unsafe.Pointer(&a4))
+	drawSplineSegmentBezierQuadratic.Void(unsafe.Pointer(&a0), unsafe.Pointer(&a1), unsafe.Pointer(&a2), unsafe.Pointer(&a3), unsafe.Pointer(&a4))
 }
 
 // Draw spline segment: Cubic Bezier, 2 points, 2 control points
@@ -463,7 +463,7 @@ func DrawSplineSegmentBezierCubic(p1 Vector2, c2 Vector2, c3 Vector2, p4 Vector2
 	a3 := Vector2(p4)
 	a4 := float32(thick)
 	a5 := Color(color)
-	drawSplineSegmentBezierCubic.void(unsafe.Pointer(&a0), unsafe.Pointer(&a1), unsafe.Pointer(&a2), unsafe.Pointer(&a3), unsafe.Pointer(&a4), unsafe.Pointer(&a5))
+	drawSplineSegmentBezierCubic.Void(unsafe.Pointer(&a0), unsafe.Pointer(&a1), unsafe.Pointer(&a2), unsafe.Pointer(&a3), unsafe.Pointer(&a4), unsafe.Pointer(&a5))
 }
 
 // Get (evaluate) spline point: Linear
@@ -471,7 +471,7 @@ func GetSplinePointLinear(startPos Vector2, endPos Vector2, t float32) (res Vect
 	a0 := Vector2(startPos)
 	a1 := Vector2(endPos)
 	a2 := float32(t)
-	getSplinePointLinear.call(unsafe.Pointer(&res), unsafe.Pointer(&a0), unsafe.Pointer(&a1), unsafe.Pointer(&a2))
+	getSplinePointLinear.Call(unsafe.Pointer(&res), unsafe.Pointer(&a0), unsafe.Pointer(&a1), unsafe.Pointer(&a2))
 	return res
 }
 
@@ -482,7 +482,7 @@ func GetSplinePointBasis(p1 Vector2, p2 Vector2, p3 Vector2, p4 Vector2, t float
 	a2 := Vector2(p3)
 	a3 := Vector2(p4)
 	a4 := float32(t)
-	getSplinePointBasis.call(unsafe.Pointer(&res), unsafe.Pointer(&a0), unsafe.Pointer(&a1), unsafe.Pointer(&a2), unsafe.Pointer(&a3), unsafe.Pointer(&a4))
+	getSplinePointBasis.Call(unsafe.Pointer(&res), unsafe.Pointer(&a0), unsafe.Pointer(&a1), unsafe.Pointer(&a2), unsafe.Pointer(&a3), unsafe.Pointer(&a4))
 	return res
 }
 
@@ -493,7 +493,7 @@ func GetSplinePointCatmullRom(p1 Vector2, p2 Vector2, p3 Vector2, p4 Vector2, t 
 	a2 := Vector2(p3)
 	a3 := Vector2(p4)
 	a4 := float32(t)
-	getSplinePointCatmullRom.call(unsafe.Pointer(&res), unsafe.Pointer(&a0), unsafe.Pointer(&a1), unsafe.Pointer(&a2), unsafe.Pointer(&a3), unsafe.Pointer(&a4))
+	getSplinePointCatmullRom.Call(unsafe.Pointer(&res), unsafe.Pointer(&a0), unsafe.Pointer(&a1), unsafe.Pointer(&a2), unsafe.Pointer(&a3), unsafe.Pointer(&a4))
 	return res
 }
 
@@ -503,7 +503,7 @@ func GetSplinePointBezierQuad(p1 Vector2, c2 Vector2, p3 Vector2, t float32) (re
 	a1 := Vector2(c2)
 	a2 := Vector2(p3)
 	a3 := float32(t)
-	getSplinePointBezierQuad.call(unsafe.Pointer(&res), unsafe.Pointer(&a0), unsafe.Pointer(&a1), unsafe.Pointer(&a2), unsafe.Pointer(&a3))
+	getSplinePointBezierQuad.Call(unsafe.Pointer(&res), unsafe.Pointer(&a0), unsafe.Pointer(&a1), unsafe.Pointer(&a2), unsafe.Pointer(&a3))
 	return res
 }
 
@@ -514,7 +514,7 @@ func GetSplinePointBezierCubic(p1 Vector2, c2 Vector2, c3 Vector2, p4 Vector2, t
 	a2 := Vector2(c3)
 	a3 := Vector2(p4)
 	a4 := float32(t)
-	getSplinePointBezierCubic.call(unsafe.Pointer(&res), unsafe.Pointer(&a0), unsafe.Pointer(&a1), unsafe.Pointer(&a2), unsafe.Pointer(&a3), unsafe.Pointer(&a4))
+	getSplinePointBezierCubic.Call(unsafe.Pointer(&res), unsafe.Pointer(&a0), unsafe.Pointer(&a1), unsafe.Pointer(&a2), unsafe.Pointer(&a3), unsafe.Pointer(&a4))
 	return res
 }
 
@@ -522,7 +522,7 @@ func GetSplinePointBezierCubic(p1 Vector2, c2 Vector2, c3 Vector2, p4 Vector2, t
 func CheckCollisionRecs(rec1 Rectangle, rec2 Rectangle) (res bool) {
 	a0 := Rectangle(rec1)
 	a1 := Rectangle(rec2)
-	res = checkCollisionRecs.bool(unsafe.Pointer(&a0), unsafe.Pointer(&a1))
+	res = checkCollisionRecs.Bool(unsafe.Pointer(&a0), unsafe.Pointer(&a1))
 	return res
 }
 
@@ -532,7 +532,7 @@ func CheckCollisionCircles(center1 Vector2, radius1 float32, center2 Vector2, ra
 	a1 := float32(radius1)
 	a2 := Vector2(center2)
 	a3 := float32(radius2)
-	res = checkCollisionCircles.bool(unsafe.Pointer(&a0), unsafe.Pointer(&a1), unsafe.Pointer(&a2), unsafe.Pointer(&a3))
+	res = checkCollisionCircles.Bool(unsafe.Pointer(&a0), unsafe.Pointer(&a1), unsafe.Pointer(&a2), unsafe.Pointer(&a3))
 	return res
 }
 
@@ -541,7 +541,7 @@ func CheckCollisionCircleRec(center Vector2, radius float32, rec Rectangle) (res
 	a0 := Vector2(center)
 	a1 := float32(radius)
 	a2 := Rectangle(rec)
-	res = checkCollisionCircleRec.bool(unsafe.Pointer(&a0), unsafe.Pointer(&a1), unsafe.Pointer(&a2))
+	res = checkCollisionCircleRec.Bool(unsafe.Pointer(&a0), unsafe.Pointer(&a1), unsafe.Pointer(&a2))
 	return res
 }
 
@@ -551,7 +551,7 @@ func CheckCollisionCircleLine(center Vector2, radius float32, p1 Vector2, p2 Vec
 	a1 := float32(radius)
 	a2 := Vector2(p1)
 	a3 := Vector2(p2)
-	res = checkCollisionCircleLine.bool(unsafe.Pointer(&a0), unsafe.Pointer(&a1), unsafe.Pointer(&a2), unsafe.Pointer(&a3))
+	res = checkCollisionCircleLine.Bool(unsafe.Pointer(&a0), unsafe.Pointer(&a1), unsafe.Pointer(&a2), unsafe.Pointer(&a3))
 	return res
 }
 
@@ -559,7 +559,7 @@ func CheckCollisionCircleLine(center Vector2, radius float32, p1 Vector2, p2 Vec
 func CheckCollisionPointRec(point Vector2, rec Rectangle) (res bool) {
 	a0 := Vector2(point)
 	a1 := Rectangle(rec)
-	res = checkCollisionPointRec.bool(unsafe.Pointer(&a0), unsafe.Pointer(&a1))
+	res = checkCollisionPointRec.Bool(unsafe.Pointer(&a0), unsafe.Pointer(&a1))
 	return res
 }
 
@@ -568,7 +568,7 @@ func CheckCollisionPointCircle(point Vector2, center Vector2, radius float32) (r
 	a0 := Vector2(point)
 	a1 := Vector2(center)
 	a2 := float32(radius)
-	res = checkCollisionPointCircle.bool(unsafe.Pointer(&a0), unsafe.Pointer(&a1), unsafe.Pointer(&a2))
+	res = checkCollisionPointCircle.Bool(unsafe.Pointer(&a0), unsafe.Pointer(&a1), unsafe.Pointer(&a2))
 	return res
 }
 
@@ -578,7 +578,7 @@ func CheckCollisionPointTriangle(point Vector2, p1 Vector2, p2 Vector2, p3 Vecto
 	a1 := Vector2(p1)
 	a2 := Vector2(p2)
 	a3 := Vector2(p3)
-	res = checkCollisionPointTriangle.bool(unsafe.Pointer(&a0), unsafe.Pointer(&a1), unsafe.Pointer(&a2), unsafe.Pointer(&a3))
+	res = checkCollisionPointTriangle.Bool(unsafe.Pointer(&a0), unsafe.Pointer(&a1), unsafe.Pointer(&a2), unsafe.Pointer(&a3))
 	return res
 }
 
@@ -588,7 +588,7 @@ func CheckCollisionPointLine(point Vector2, p1 Vector2, p2 Vector2, threshold in
 	a1 := Vector2(p1)
 	a2 := Vector2(p2)
 	a3 := int64(threshold)
-	res = checkCollisionPointLine.bool(unsafe.Pointer(&a0), unsafe.Pointer(&a1), unsafe.Pointer(&a2), unsafe.Pointer(&a3))
+	res = checkCollisionPointLine.Bool(unsafe.Pointer(&a0), unsafe.Pointer(&a1), unsafe.Pointer(&a2), unsafe.Pointer(&a3))
 	return res
 }
 
@@ -597,7 +597,7 @@ func CheckCollisionPointPoly(point Vector2, points *Vector2, pointCount int) (re
 	a0 := Vector2(point)
 	a1 := (*Vector2)(points)
 	a2 := int64(pointCount)
-	res = checkCollisionPointPoly.bool(unsafe.Pointer(&a0), unsafe.Pointer(&a1), unsafe.Pointer(&a2))
+	res = checkCollisionPointPoly.Bool(unsafe.Pointer(&a0), unsafe.Pointer(&a1), unsafe.Pointer(&a2))
 	return res
 }
 
@@ -608,7 +608,7 @@ func CheckCollisionLines(startPos1 Vector2, endPos1 Vector2, startPos2 Vector2, 
 	a2 := Vector2(startPos2)
 	a3 := Vector2(endPos2)
 	a4 := (*Vector2)(collisionPoint)
-	res = checkCollisionLines.bool(unsafe.Pointer(&a0), unsafe.Pointer(&a1), unsafe.Pointer(&a2), unsafe.Pointer(&a3), unsafe.Pointer(&a4))
+	res = checkCollisionLines.Bool(unsafe.Pointer(&a0), unsafe.Pointer(&a1), unsafe.Pointer(&a2), unsafe.Pointer(&a3), unsafe.Pointer(&a4))
 	return res
 }
 
@@ -616,6 +616,6 @@ func CheckCollisionLines(startPos1 Vector2, endPos1 Vector2, startPos2 Vector2, 
 func GetCollisionRec(rec1 Rectangle, rec2 Rectangle) (res Rectangle) {
 	a0 := Rectangle(rec1)
 	a1 := Rectangle(rec2)
-	getCollisionRec.call(unsafe.Pointer(&res), unsafe.Pointer(&a0), unsafe.Pointer(&a1))
+	getCollisionRec.Call(unsafe.Pointer(&res), unsafe.Pointer(&a0), unsafe.Pointer(&a1))
 	return res
 }

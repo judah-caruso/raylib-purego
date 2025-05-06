@@ -17,6 +17,7 @@ func main() {
 
 		rl.BeginDrawing()
 		rl.ClearBackground(rl.Black)
+		rl.DrawFPS(10, 10)
 		rl.DrawRectangleV(pos, rl.Vector2{X: 50, Y: 50}, rl.Red)
 		rl.EndDrawing()
 	}
