@@ -14,7 +14,7 @@ import (
 
 func main() {
 	generateFFITypes()
-	generateGoFunctions("rcore.go", "rshapes.go", "rtext.go", "raudio.go", "rmodels.go", "rtextures.go")
+	generateGoFunctions("ffi_rcore.go", "ffi_rshapes.go", "ffi_rtext.go", "ffi_raudio.go", "ffi_rmodels.go", "ffi_rtextures.go")
 	generateInitFile("windows.go", "raylib.dll", "windows && amd64")
 	generateInitFile("darwin.go", "libraylib.5.5.0.dylib", "darwin && (amd64 || arm64)")
 	generateInitFile("unix.go", "libraylib.so.5.5.0", "(unix && !darwin) && amd64")
@@ -306,8 +306,7 @@ func generateGoFunctions(filenames ...string) {
 				panic(err)
 			}
 
-			outpath := fmt.Sprintf("%s.gen.go", inpath[:len(inpath)-len(filepath.Ext(inpath))])
-			if err := os.WriteFile(outpath, src, 0664); err != nil {
+			if err := os.WriteFile(inpath[4:], src, 0664); err != nil {
 				panic(err)
 			}
 
@@ -412,7 +411,7 @@ func generateFFITypes() {
 		panic(err)
 	}
 
-	if err := os.WriteFile("ffi.gen.go", src, 0664); err != nil {
+	if err := os.WriteFile("ffi_types.go", src, 0664); err != nil {
 		panic(err)
 	}
 }
