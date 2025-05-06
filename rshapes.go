@@ -3,8 +3,9 @@
 package raylib
 
 import (
-	"github.com/judah-caruso/raylib-purego/internal"
 	"unsafe"
+
+	"github.com/judah-caruso/raylib-purego/internal"
 )
 
 // Set texture and rectangle to be used on shapes drawing

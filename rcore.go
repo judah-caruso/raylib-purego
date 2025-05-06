@@ -3,8 +3,9 @@
 package raylib
 
 import (
-	"github.com/judah-caruso/raylib-purego/internal"
 	"unsafe"
+
+	"github.com/judah-caruso/raylib-purego/internal"
 )
 
 // Initialize window and OpenGL context

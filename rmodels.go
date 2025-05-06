@@ -3,8 +3,9 @@
 package raylib
 
 import (
-	"github.com/judah-caruso/raylib-purego/internal"
 	"unsafe"
+
+	"github.com/judah-caruso/raylib-purego/internal"
 )
 
 // Draw a line in 3D world space

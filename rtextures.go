@@ -3,8 +3,9 @@
 package raylib
 
 import (
-	"github.com/judah-caruso/raylib-purego/internal"
 	"unsafe"
+
+	"github.com/judah-caruso/raylib-purego/internal"
 )
 
 // Load image from file into CPU memory (RAM)
