@@ -14,7 +14,7 @@ import (
 
 func main() {
 	generateFFITypes()
-	generateGoFunctions("rcore.go", "rshapes.go", "rtext.go", "raudio.go")
+	generateGoFunctions("rcore.go", "rshapes.go", "rtext.go", "raudio.go", "rmodels.go", "rtextures.go")
 	generateInitFile("windows.go", "raylib.dll", "windows && amd64")
 	generateInitFile("darwin.go", "libraylib.5.5.0.dylib", "darwin && (amd64 || arm64)")
 	generateInitFile("unix.go", "libraylib.so.5.5.0", "(unix && !darwin) && amd64")
